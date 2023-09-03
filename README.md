@@ -14,11 +14,11 @@ Este proyecto consiste en una página web que muestra los resultados electorales
 
 ## Requisitos
 
-- Navegador web moderno que admita HTML5, CSS3 y JavaScript.
+- Navegador web moderno que admita HTML, CSS y JavaScript.
 
 ## Instalación y Uso
 
 1. Clona este repositorio en tu máquina local:
 
    ```bash
-   git clone https://github.com/TuUsuario/nombre-del-repo.git
+   git clone https://github.com/ginolanese/tup-lc2-votacion-app.git
