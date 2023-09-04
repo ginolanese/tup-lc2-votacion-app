@@ -91,4 +91,27 @@ body {
 
 }
 
+#sec-titulo {
+  font-weight: bold;
+  margin-top: 50px; 
+  margin-left: 20px;
+  font-size: 30px;
+}
+
+#sec-titulo p {
+  font-weight: lighter;
+  font-size: 16px; 
+  line-height: 1.2; 
+  text-align: left; 
+  max-width: 600px; 
+  margin-left: 2px;
+}
+
+
+img{
+  float: right; 
+  margin-left: 20px; 
+  top: 1px;
+  right: 300px;
+}
 /**/
