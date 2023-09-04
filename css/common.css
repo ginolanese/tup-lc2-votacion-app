@@ -1,1 +1,90 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(240, 240, 240);
+}
+
+/* header {
+} */
+
+.header-page {
+  background-color: #3399ff;
+  padding-top: 2%;
+  margin-bottom: 0%;
+  padding-bottom: 1%;
+
+}
+
+.p-head {
+  border-left: 18px;
+  font-size: x-small;
+  color: rgb(203, 199, 199);
+  margin-top: 4px;
+  margin-bottom: 0px;
+
+}
+
+.logo {
+  float: left;
+  color: white;
+  filter: contrast(200%) saturate(30%);
+  height: 40px;
+  margin-right: 5px;
+  margin-bottom: 0px;
+ margin-top:-8px;
+ margin-left:40px;
+}
+
+.menu {
+  display: flex;
+  margin-top: -1px;
+  margin-bottom: 0px;
+  padding: 0px;
+  width: auto;
+  height: 30px;
+  list-style: none;
+  flex-direction: column-reverse;
+  background-color: #3a3838;
+
+}
+
+
+.btn-li {
+  background-color: #3a3838;
+  flex-grow: 1;
+}
+
+.btn-li {
+  float: right;
+  padding: 0px 7px;
+  margin-bottom: -1%;
+  margin-right: 20px;
+  border: 1px solid rgb(203, 199, 199);
+  border-radius: 25px;
+  cursor: pointer;
+  text-align: center;
+  font-size: small;
+  text-decoration: none;
+  list-style-type: none;
+  width: auto;
+  height: 15px;
+}
+
+.btn-li:hover {
+  background-color: #0056b3;
+}
+
+.active {
+  color:rgb(203, 199, 199);
+  text-decoration: none;
+
+}
+
+/**/
