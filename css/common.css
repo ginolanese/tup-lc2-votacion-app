@@ -8,7 +8,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(240, 240, 240);
+  /* background-color: rgb(240, 240, 240); */
+  background-color: #ffffff;
 }
 
 /* header {
@@ -19,7 +20,6 @@ body {
   padding-top: 2%;
   margin-bottom: 0%;
   padding-bottom: 1%;
-
 
 }
 
@@ -39,79 +39,149 @@ body {
   height: 40px;
   margin-right: 5px;
   margin-bottom: 0px;
-  margin-top:-8px;
-  margin-left:40px;
+  margin-top: -8px;
+  margin-left: 40px;
 }
 
 .menu {
   display: flex;
-  justify-content: flex-end; /* Alinea los elementos del menú a la derecha */
   margin-top: -1px;
   margin-bottom: 0px;
   padding: 0px;
   width: auto;
-  height: 40px;
+  height: 30px;
   list-style: none;
+  flex-direction: column-reverse;
   background-color: #3a3838;
 
-  }
+}
 
-  .btn-li {
-    float: right;
-    display: flex;
-    align-items: center;
-    margin-left: auto; 
-  }
+.btn-li {
+  background-color: #3a3838;
+  flex-grow: 1;
+}
 
-  .btn-li a {
-    background-color: #3a3838;
-    border: 1px solid rgb(203, 199, 199);
-    border-radius: 15px;
-    cursor: pointer;
-    text-align: center;
-    font-size: small;
-    text-decoration: none;
-    color: rgb(203, 199, 199);
-    padding: 5px 10px;
-    display: flex;
-    align-items: center;
-    margin-top: -9px;
-    margin-left: -180px;
-  } 
+.btn-li {
+  float: right;
+  padding: 0px 7px;
+  margin-bottom: -1%;
+  margin-top: -8px;
+  margin-right: 20px;
+  border: 1px solid rgb(203, 199, 199);
+  border-radius: 25px;
+  cursor: pointer;
+  text-align: center;
+  font-size: small;
+  text-decoration: none;
+  list-style-type: none;
+  width: auto;
+  height: 15px;
+}
 
-  .btn-li a:hover {
-    background-color: #0056b3;
-    color: white;
-    text-decoration: none;
-  }
+.btn-li:hover {
+  background-color: #0056b3;
+}
 
 .active {
-  color:rgb(203, 199, 199);
+  color: rgb(203, 199, 199);
   text-decoration: none;
 
 }
 
+/**/
+/* --------Seccion prinsipal--------- */
 #sec-titulo {
-  font-weight: bold;
-  margin-top: 50px; 
-  margin-left: 20px;
-  font-size: 30px;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 1px;
+  /* margin: top rigth bottom left */
+  margin: -40px 40px 0px 40px;
+}
+
+#sec-titulo h2 {
+  display: block;
+  font-size: 60px;
+  text-align: left;
+  margin-bottom: 0px;
+
 }
 
 #sec-titulo p {
-  font-weight: lighter;
-  font-size: 16px; 
-  line-height: 1.2; 
-  text-align: left; 
-  max-width: 600px; 
-  margin-left: 2px;
+  color: #3a3838;
+  display: block;
+  font-size: large;
+  grid-row: 2;
+}
+
+/* #sec-titulo h2 p{
+} */
+
+#sec-titulo img {
+  display: block;
+  width: 600px;
+  height: 460px;
+
+  grid-row: 2;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: -60px;
 }
 
 
-img{
-  float: right; 
-  margin-left: 20px; 
-  top: 1px;
-  right: 300px;
+/* ----------seccion botones paso / generales------ */
+#sec-contenido {
+  background-color: #f4f8ff;
+  display: flex;
+  flex-direction: column;
 }
-/**/
+
+#sec-contenido p {
+  color: #3a3838;
+  margin-top: -20px;
+  padding-bottom: 10px;
+}
+.pasoGenerales{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+  justify-content: space-around;
+}
+
+
+.paso, .generales{
+  color: white;
+  margin:10px;
+  padding: 20px 590px 20px 10px;
+  border: 1px solid white;
+  border-radius: 20px 20px 0px 0px;
+  font-size: 40px;
+  
+  font-weight: bold; 
+  cursor: pointer;
+}
+
+
+.paso {
+  background-color: #ee3d8f;
+
+}
+.paso:hover {
+  background-color: #c93479;
+}
+
+.generales {
+  background-color: #37bbed;
+  
+}
+.generales:hover{
+  background-color: #30a2cc;
+  
+}
+
+
+/* --------seccion footer--------- */
+.footer{
+  background-color: #333333;
+}
+
+
