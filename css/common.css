@@ -2,6 +2,8 @@
 
 * {
   font-family: 'Roboto', sans-serif;
+  background-color: rgb(255, 216, 216)
+
 }
 
 html,
@@ -11,4 +13,16 @@ body {
   background-color: rgb(240, 240, 240);
 }
 
-*{background-color: rgb(255, 216, 216)}
+p{
+  font-size: 12px;
+}
+h1{
+  font-size: 26px;
+  padding-bottom:20px;
+}
+h2{
+  font-size: 22px;
+}
+h3{
+  font-size: 18px;
+}
