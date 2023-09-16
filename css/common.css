@@ -63,9 +63,12 @@ h3{
 .header-page{
   padding: 0.5em;
   background-color: var(--fondo-Cabecera);
-  color:white;
   width:90%;
   margin: 0px auto auto;
+}
+.header-page a{
+  color:white;
+  text-decoration: none;
 }
 
 .barra-menu{
@@ -75,4 +78,30 @@ h3{
   background-color: var(--fondo-Menu);
   width:100%
 }
+
+footer{
+  background-color: var(--fondo-Footer);
+  color: var(--texto-footer)
+}
+footer img{
+  width:150px;
+  height: 40px;
+}
+
+.active{
+  border-radius: 15px;
+  border: solid 1px #fff;
+  padding: 5px;
+  color:#fff;
+  font-size: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+ul,ol{
+  list-style-type: none;
+}
+.active:hover{
+  background-color: var(--gris-claro);
+}
+
 

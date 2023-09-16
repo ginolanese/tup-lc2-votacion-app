@@ -1,0 +1,32 @@
+@import "/css/common.css";
+
+.paso {
+  background-color: var(--magenta);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.generales {
+  background-color: var(--celeste);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.paso a, .generales a {
+  text-decoration: none;
+  color: #fff;
+}
+.paso:hover,
+.generales:hover{
+    background-color: var(--gris-claro);
+}
+
+.imagen{
+    margin: 15px;
+    width: 350px;
+}
