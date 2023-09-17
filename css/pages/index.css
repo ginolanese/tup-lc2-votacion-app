@@ -3,10 +3,9 @@
 .paso,.generales{
   border-radius: 10px;
   margin: 25px;
-  height: 400px;
-  width: 100px;
+  height: 100px;
+  width: 500px;
   padding: 1rem;
-  font-size: 10px;
   text-align: center;
   text-transform: uppercase;
 }
@@ -19,10 +18,17 @@
   background-color: var(--celeste);
 }
 .paso a, .generales a {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+
   text-decoration: none;
   color: #fff;
-  font-size:28px;
 }
+.paso span, .generales span{
+  font-size: 28px;
+}
+
 .paso:hover,
 .generales:hover{
     background-color: var(--gris-claro);
@@ -31,4 +37,19 @@
 .imagen{
     margin: 15px;
     width: 350px;
+}
+
+.paso-gen{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+
+#sec-titulo{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap:500px
+ 
+
 }

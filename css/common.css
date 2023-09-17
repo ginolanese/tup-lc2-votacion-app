@@ -60,13 +60,22 @@ h3{
   font-size: 18px;
 }
 
+.current-page{
+  display: flex;
+  flex-direction: column;
+}
+
 .header-page{
+  display:block;
   padding: 0.5em;
   background-color: var(--fondo-Cabecera);
   width:90%;
   margin: 0px auto auto;
 }
 .header-page a{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   color:white;
   text-decoration: none;
 }
@@ -78,8 +87,15 @@ h3{
   background-color: var(--fondo-Menu);
   width:100%
 }
+.barra-menu ul{
+  display: flex;
+  flex-direction: row;
+}
 
 footer{
+  display: flex;
+  flex-direction: row;
+
   background-color: var(--fondo-Footer);
   color: var(--texto-footer)
 }
