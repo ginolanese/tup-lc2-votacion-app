@@ -1,0 +1,44 @@
+@import "/css/common.css";
+
+
+.agregar-informe{
+    background-color: var(--textos);
+    color: white !important;
+    font-size: 10px;
+    text-align: center;
+    padding:5px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+.agregar-informe:hover{
+    color:var(--textos)
+}
+
+.mesa-comp, .electores, .escrutado{
+    border-radius: 10px;
+    margin:15;
+    height: 70px;
+    width: 184px;
+    padding: 0.5 rem, 1 rem;
+    font:#fff, 12px;
+}
+
+.mesa-comp{
+background-color: var(--celeste);
+
+}
+
+.electores{
+background-color: var(--magenta);
+}
+
+.escrutado{
+    background-color: var(--morado);
+
+}
+
+.btn-votacion{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
