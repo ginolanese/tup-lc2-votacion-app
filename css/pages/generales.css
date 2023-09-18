@@ -1,2 +1,15 @@
 
 @import "/css/common.css";
+
+button{
+    background-color: var(--gris-claro);
+    color: white;
+    font-size: 10;
+    text-align: center;
+    padding:5px;
+    border-radius: 5px;
+    text-transform: uppercase;
+}
+button:hover{
+    color:var(--textos)
+}

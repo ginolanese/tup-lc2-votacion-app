@@ -62,6 +62,6 @@ main{
 
 
 
-.active:nth-child(1){
+/* .active:nth-child(1){
     background-color: var(--magenta);
-  }
+  } */
