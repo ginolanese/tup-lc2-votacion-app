@@ -33,3 +33,20 @@ button:hover{
         flex-direction: row;
         justify-content: space-around;
     }
+
+#carteles{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#exito{
+    background-color: var(--mensaje-usuario-verde);
+
+}
+#error{
+    background-color: var(--mensaje-usuario-rojo);
+}
+#adver{
+    background-color: var(--mensaje-usuario-amarillo);
+
+}
