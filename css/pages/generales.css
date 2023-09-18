@@ -51,6 +51,7 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  border-radius: 10px
 }
 #exito{
     background-color: var(--mensaje-usuario-verde);
