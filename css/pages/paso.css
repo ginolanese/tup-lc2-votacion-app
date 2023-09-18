@@ -13,3 +13,23 @@ button{
 button:hover{
     color:var(--textos)
 }
+
+.mesa-comp{
+    background-color: var(--celeste);
+    
+    }
+    
+    .electores{
+    background-color: var(--magenta);
+    }
+    
+    .escrutado{
+        background-color: var(--morado);
+    
+    }
+    
+    .btn-votacion{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
