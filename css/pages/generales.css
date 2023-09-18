@@ -56,10 +56,19 @@ button:hover {
     background-color: var(--mensaje-usuario-verde);
 
 }
+#exito::before {
+    content: "👍"; /* Puedes utilizar cualquier emoji o símbolo que desees */
+  }
 #error{
     background-color: var(--mensaje-usuario-rojo);
+}
+#error::before {
+  content: "⚠️"; /* Puedes utilizar cualquier emoji o símbolo que desees */
 }
 #adver{
     background-color: var(--mensaje-usuario-amarillo);
 
+}
+#adver::before {
+  content: "❕"; /* Puedes utilizar cualquier emoji o símbolo que desees */
 }
