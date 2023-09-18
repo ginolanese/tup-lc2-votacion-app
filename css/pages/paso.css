@@ -1,8 +1,6 @@
 
 @import "/css/common.css";
 
-/* ! no funciona */
-
 button{
     background-color: var(--gris-claro);
     color: white;
