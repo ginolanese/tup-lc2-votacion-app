@@ -25,11 +25,32 @@ button:hover {
   background-color: var(--morado);
 }
 
-.btn-votacion {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+/*.btn-votacion {
+ 
+  display:grid;
+  grid-template-columns: repeat(9,auto);
+  grid-template-areas: "agregar  . . . . . mesa-comp electores escrutado";
 }
+.agregar-informe{
+  grid-area: agregar;
+  margin-bottom: 50px;
+}
+.mesa-comp{
+  grid-area: mesa-comp;
+}
+.electores{
+  grid-area: electores;
+}
+.escrutado
+{
+  grid-area: escrutado;
+}
+
+.mesa-comp,.electores,.escrutado{
+  border-radius: 14px;
+  margin: 10px;
+}
+*/
 
 #carteles {
   display: flex;
@@ -39,7 +60,7 @@ button:hover {
   margin: 20px auto;
   padding: 15px;
   color: #ffffff;
-  font-size: 200;
+  font-size: 200px;
   text-align: center;
 }
 #carteles div {
