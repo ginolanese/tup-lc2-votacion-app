@@ -51,7 +51,7 @@
  
   display: grid;
   grid-template-columns: auto auto;
-  gap:500px;
+  gap:50px;
   margin-top: 15px;
 
 }
