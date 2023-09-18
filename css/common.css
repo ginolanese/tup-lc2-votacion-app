@@ -92,17 +92,20 @@ h3{
 
 
 .barra-menu{
+  display: flex;
   margin-left: 0px;
   margin-right: 0px;
   padding-top: 20px;
   background-color: var(--fondo-Menu);
   width:100%;
-
+  height: 50px;
 }
+
 .barra-menu ul{
   display: flex;
   flex-direction: row; 
   align-items: center;
+  
 }
 
 footer{
@@ -128,7 +131,7 @@ footer img{
 
 .active{
   border-radius: 15px;
-  border: solid 1px #fff;
+  border: solid 1px #ffffff;
   padding: 5px;
   color:#fff;
   font-size: 10px;
@@ -143,6 +146,7 @@ footer img{
 }
 
 
+
 #filtrar::before {
   content: "🔍"; /* Puedes utilizar cualquier emoji o símbolo que desees */
 }
@@ -150,6 +154,7 @@ footer img{
 #inicio{
   background-color: var(--gris-claro);
   border-radius: 5px;
+  justify-content: right;
 }
 #inicio:hover{
   color: var(--textos);
@@ -157,7 +162,9 @@ footer img{
 
 ul,ol{
   list-style-type: none;
+
 }
+
 .active:hover{
   background-color: var(--gris-claro);
 }
