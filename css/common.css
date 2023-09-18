@@ -43,10 +43,14 @@
 
 html,
 body {
+  display: inline-flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
   background-color: rgb(240, 240, 240);
   width:100%;
+  flex: 1;
+  border: #ffc107 solid 3px;
 }
 
 p{
@@ -110,6 +114,11 @@ footer{
   padding-right: 150px;
   padding-top: 30px;
   padding-bottom: 30px ;
+}
+footer{
+  height: auto;
+  box-sizing:content-box;
+  flex: 1;
 }
 footer img{
   width:150px;
@@ -182,6 +191,7 @@ select{
 }
 
 main{
+  flex: 2;
   min-height: 33vw;
 }
 .logo{
