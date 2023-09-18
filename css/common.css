@@ -67,6 +67,10 @@ h3{
   font-size: 18px;
 }
 
+a{
+  text-decoration: none;
+}
+
 .current-page{
   display: flex;
   flex-direction: column;
@@ -93,6 +97,7 @@ h3{
 
 .barra-menu{
   display: flex;
+  justify-content: space-between;
   margin-left: 0px;
   margin-right: 0px;
   padding-top: 20px;
@@ -140,6 +145,7 @@ footer img{
   text-decoration: none;
 }
 
+
 #filtrar{
   background-color: white;
   color: var(--textos);
@@ -152,9 +158,12 @@ footer img{
 }
 
 #inicio{
+  display: flex;
   background-color: var(--gris-claro);
   border-radius: 5px;
-  justify-content: right;
+}
+#inicio a{
+  color: white;
 }
 #inicio:hover{
   color: var(--textos);
@@ -196,6 +205,7 @@ select{
   padding-bottom: 10px;
   margin-left: 5px;
 }
+
 
 main{
   flex: 2;
