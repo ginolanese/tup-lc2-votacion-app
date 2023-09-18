@@ -1,35 +1,74 @@
-
 @import "/css/common.css";
 
-button{
-    background-color: var(--gris-claro);
-    color: white;
-    font-size: 10;
-    text-align: center;
-    padding:5px;
-    border-radius: 5px;
-    text-transform: uppercase;
+button {
+  background-color: var(--gris-claro);
+  color: white;
+  font-size: 10;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  text-transform: uppercase;
 }
-button:hover{
-    color:var(--textos)
+button:hover {
+  color: var(--textos);
 }
 
-.mesa-comp{
-    background-color: var(--celeste);
-    
-    }
-    
-    .electores{
-    background-color: var(--magenta);
-    }
-    
-    .escrutado{
-        background-color: var(--morado);
-    
-    }
-    
-    .btn-votacion{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-    }
+.mesa-comp {
+  background-color: var(--celeste);
+}
+
+.electores {
+  background-color: var(--magenta);
+}
+
+.escrutado {
+  background-color: var(--morado);
+}
+
+.btn-votacion {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#carteles {
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 200;
+  text-align: center;
+}
+#carteles div {
+  margin: 10px;
+}
+#exito,
+#error,
+#adver {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+#exito {
+  background-color: var(--mensaje-usuario-verde);
+  border-radius: 10px;
+}
+
+#error {
+  background-color: var(--mensaje-usuario-rojo);
+  border-radius: 10px;
+}
+
+#adver {
+  background-color: var(--mensaje-usuario-amarillo);
+  border-radius: 10px;
+}
+#exito i,
+#error i,
+#adver i {
+  font-size: 24px;
+  margin-right: 10px;
+}
