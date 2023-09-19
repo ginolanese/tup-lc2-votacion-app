@@ -42,33 +42,6 @@ button {
 
   }
 
-/*.btn-votacion {
- 
-  display:grid;
-  grid-template-columns: repeat(9,auto);
-  grid-template-areas: "agregar  . . . . . mesa-comp electores escrutado";
-}
-.agregar-informe{
-  grid-area: agregar;
-  margin-bottom: 50px;
-}
-.mesa-comp{
-  grid-area: mesa-comp;
-}
-.electores{
-  grid-area: electores;
-}
-.escrutado
-{
-  grid-area: escrutado;
-}
-
-.mesa-comp,.electores,.escrutado{
-  border-radius: 14px;
-  margin: 10px;
-}
-*/
-
 #carteles {
   display: flex;
   flex-direction: column;
@@ -121,10 +94,6 @@ button {
     background-color: rgb(250, 250, 250) ;
     
 }
-table{
-    display: flex;
-    flex-direction: column;
-}
 
 tr th{
     text-align: center;
@@ -149,8 +118,14 @@ tbody tr td{
     background-color: rgb(255, 255, 255);
     border-bottom: 1px  solid var(--borde-inferior-Grilla);
     padding: 15px 0px;
-
     width: 25%;
 }
-
-
+table{
+    display: grid;
+    grid: 100px 100px;
+    overflow-y: auto;
+    height: 325px;
+    padding: 5px;
+    font-size: 10px;
+    color: var(--textos);
+}

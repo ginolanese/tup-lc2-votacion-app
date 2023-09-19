@@ -212,7 +212,7 @@ select{
 
 main{
   flex: 2;
-  min-height: 34vw;
+  min-height: 33vw;
 }
 .logo{
   width: 200px;
