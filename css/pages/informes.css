@@ -24,6 +24,23 @@ button {
   .escrutado {
     background-color: var(--morado);
   }
+  .mesa-comp,.electores,.escrutado{
+
+    border-radius: 5px;
+    margin: 2px;
+    width: 70px;
+    height: 120px;
+    font-style: #FFF;
+    font-size: 10px;
+  }
+  .mesa-comp p,.electores p,.escrutado p{
+    color: #FFF;
+  }
+
+  .paso-gen{
+    display: flex;
+
+  }
 
 /*.btn-votacion {
  
@@ -132,6 +149,7 @@ tbody tr td{
     background-color: rgb(255, 255, 255);
     border-bottom: 1px  solid var(--borde-inferior-Grilla);
     padding: 15px 0px;
+
     width: 25%;
 }
 
