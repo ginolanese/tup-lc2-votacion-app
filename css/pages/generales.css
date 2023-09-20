@@ -89,65 +89,69 @@ button:hover {
   margin-right: 10px;
 }
 
-.cuadros{
+/*!-----------------Cuadros Datos/Mapa/barras-----------------------*/
+
+.cuadros {
   display: flex;
-  
+  flex-direction: row;
+  justify-content: center;
 }
-.cuadro-Agrupaciones{
-  flex: 2;
-}
-.cuadro-Mapa{
- justify-self: center;
-  max-width: 600px ;
+.cuadro-Agrupaciones {
   flex: 1;
 }
-.cuadro-Resumen{
-  flex: 2;
+.cuadro-Mapa {
+  justify-self: center;
+  max-width: 600px;
+  flex: 0;
+}
+.cuadro-Resumen {
+  flex: 1;
 }
 
-.cuadro-Agrupaciones,.cuadro-Mapa,.cuadro-Resumen{
+.cuadro-Agrupaciones,
+.cuadro-Mapa,
+.cuadro-Resumen {
   border-radius: 25px;
   border: 1px var(--borde-Grilla) solid;
-  box-shadow: 2px 2px 2px 1px black;
-  margin: 10px;
-
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
+  margin: 5px 10px;
 }
-.cuadros p{
+
+
+.cuadros p {
   font-weight: Bold;
-  Padding: 1.8em 0 0 0 ; 
+  padding: 1.8em 0 0 0;
   text-align: center;
-  White-space: nowrap; 
+  white-space: nowrap;
 }
 
-.cuadro-Agrupaciones{
+.cuadro-Agrupaciones {
   overflow: scroll;
   height: 325px;
 }
 
-.cuadros p{
+.cuadros p {
   color: var(--textos);
   font-size: 11px;
   padding: 5px;
-  text-transform: uppercase;  
+  text-transform: uppercase;
   font-weight: bold;
-  
 }
-.Agrupacion p{
-  text-align:left;
+.Agrupacion p {
+  text-align: left;
   margin-left: 10px;
   margin-right: 10px;
 }
-.Agrupacion p:first-child{
-  border-bottom: 1px solid var(--borde-Grilla) ;
+.Agrupacion p:first-child {
+  border-bottom: 1px solid var(--borde-Grilla);
 }
 
-/* -------------------------barra de progreso*--------------------------------------------*/ 
+/* -------------------------barra de progreso*--------------------------------------------*/
 .progress {
   height: 35px;
   width: 100%;
   border-radius: 5px;
   margin-bottom: 15px;
-  
 }
 
 .progress-bar {
@@ -156,8 +160,37 @@ button:hover {
   align-items: center;
   transition: width 0.25s;
   border-radius: 5px;
-  background: var(--graficaamarillo)
+  background-color: var(--grafica-amarillo);
+  
 }
+
+/* colores Barras */
+#partido-uno{
+  background-color: var(--grafica-amarillo);
+}
+#partido-dos{
+  background-color: var(--grafica-lila2);
+}
+#partido-tres{
+  background-color: var(--grafica-bordo);
+}
+#partido-cuatro{
+  background-color: var(--grafica-celeste);
+}
+#partido-cinco{
+  background-color: var(--grafica-lila);
+}
+#partido-seis{
+  background-color: var(--grafica-bordo-claro);
+}
+#partido-siete{
+  background-color: var(--grafica-verde);
+}
+#otros{
+  background-color: var(--grafica-gris);
+}
+/* ---- */
+
 
 .progress-bar-text {
   margin-left: 10px;
