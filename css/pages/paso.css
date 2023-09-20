@@ -39,9 +39,13 @@ button:hover {
 .mesa-comp,
 .electores,
 .escrutado {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   border-radius: 14px;
-  margin: 30px 20px;
+  margin: 40px 20px;
   display: grid;
   grid-template-columns: auto auto;
 }
@@ -92,14 +96,16 @@ button:hover {
 }
 .cuadro-Agrupaciones {
   flex: 2;
+  min-width: 200px;
 }
 .cuadro-Mapa {
   justify-self: center;
-  max-width: 600px;
+  max-width: 500px;
   flex: 1;
 }
 .cuadro-Resumen {
   flex: 2;
+  min-width: 350px;
 }
 
 .cuadro-Agrupaciones,
@@ -245,4 +251,21 @@ button:hover {
   padding: 10px;
   display: inline-block;
   white-space: nowrap;
+}
+
+main{
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+svg{
+  height:200px;
+  width:300px;
+}
+
+@media  (max-width:1200px) {
+  .cuadros{
+    flex-direction: column;
+    
+  }
 }
