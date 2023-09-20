@@ -148,3 +148,13 @@ table {
   background-color: var(--gris-claro);
 }
 
+.texto-elecciones-chico{
+  color: var(--textos);
+  font-weight: bold;
+  font-size: 12px;
+}
+.texto-path-chico{
+  font-size:11px;
+  color:var(--celeste)
+}
+
