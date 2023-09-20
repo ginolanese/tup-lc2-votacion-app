@@ -86,22 +86,22 @@ button:hover {
   font-size: 24px;
   margin-right: 10px;
 }
-/*-----------------Cuadros Datos/Mapa/barras-----------------------*/
+/*!-----------------Cuadros Datos/Mapa/barras-----------------------*/
 .cuadros {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
 }
 .cuadro-Agrupaciones {
-  flex: 3;
+  flex: 1;
 }
 .cuadro-Mapa {
   justify-self: center;
   max-width: 600px;
-  flex: 1;
+  flex: 0;
 }
 .cuadro-Resumen {
-  flex: 3;
+  flex: 1;
 }
 
 .cuadro-Agrupaciones,
@@ -110,8 +110,10 @@ button:hover {
   border-radius: 25px;
   border: 1px var(--borde-Grilla) solid;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
-  margin: 10px;
+  margin: 5px 10px;
 }
+
+
 .cuadros p {
   font-weight: Bold;
   padding: 1.8em 0 0 0;
@@ -154,8 +156,37 @@ button:hover {
   align-items: center;
   transition: width 0.25s;
   border-radius: 5px;
-  background: var(--graficaamarillo);
+  background-color: var(--grafica-amarillo);
+  
 }
+
+/* colores Barras */
+#partido-uno{
+  background-color: var(--grafica-amarillo);
+}
+#partido-dos{
+  background-color: var(--grafica-lila2);
+}
+#partido-tres{
+  background-color: var(--grafica-bordo);
+}
+#partido-cuatro{
+  background-color: var(--grafica-celeste);
+}
+#partido-cinco{
+  background-color: var(--grafica-lila);
+}
+#partido-seis{
+  background-color: var(--grafica-bordo-claro);
+}
+#partido-siete{
+  background-color: var(--grafica-verde);
+}
+#otros{
+  background-color: var(--grafica-gris);
+}
+/* ---- */
+
 
 .progress-bar-text {
   margin-left: 10px;
