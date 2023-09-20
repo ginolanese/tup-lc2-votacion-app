@@ -1,5 +1,14 @@
 @import "/css/common.css";
 
+
+/* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
+
+.btn-votacion {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr );
+  gap: 15px;
+}
+
 button {
   background-color: var(--gris-claro);
   color: white;
@@ -8,6 +17,8 @@ button {
   padding: 5px;
   border-radius: 5px;
   text-transform: uppercase;
+  margin: 20%;
+
 }
 button:hover {
   color: var(--textos);
@@ -25,33 +36,16 @@ button:hover {
   background-color: var(--morado);
 }
 
-.btn-votacion {
- 
-  display:grid;
-  grid-template-columns: repeat(9,auto);
-  grid-template-areas: "agregar  . . . . . mesa-comp electores escrutado";
-  
-}
-.agregar-informe{
-  grid-area: agregar;
-  margin-bottom: 50px;
-}
-.mesa-comp{
-  grid-area: mesa-comp;
-}
-.electores{
-  grid-area: electores;
-}
-.escrutado
-{
-  grid-area: escrutado;
-}
-
-.mesa-comp,.electores,.escrutado{
+.mesa-comp,
+.electores,
+.escrutado {
+  color: white;
   border-radius: 14px;
-  margin: 10px;
+  margin: 30px 20px;
+  display: grid;
+  grid-template-columns: auto auto;
 }
-
+/* _________________Fin Botones______________________ */
 /* Carteles para el usuario */
 #carteles {
   display: flex;
@@ -73,88 +67,83 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border-radius: 10px
+  border-radius: 10px;
 }
-#exito{
-    background-color: var(--mensaje-usuario-verde);
-
-}
-
-#error{
-    background-color: var(--mensaje-usuario-rojo);
+#exito {
+  background-color: var(--mensaje-usuario-verde);
 }
 
-#adver{
-    background-color: var(--mensaje-usuario-amarillo);
+#error {
+  background-color: var(--mensaje-usuario-rojo);
+}
 
+#adver {
+  background-color: var(--mensaje-usuario-amarillo);
 }
 #exito i,
 #error i,
 #adver i {
   font-size: 24px;
   margin-right: 10px;
-
 }
 /*----------------------------------------*/
-.cuadros{
+.cuadros {
   display: flex;
-  
 }
-.cuadro-Agrupaciones{
+.cuadro-Agrupaciones {
   flex: 2;
 }
-.cuadro-Mapa{
- justify-self: center;
-  max-width: 600px ;
+.cuadro-Mapa {
+  justify-self: center;
+  max-width: 600px;
   flex: 1;
 }
-.cuadro-Resumen{
+.cuadro-Resumen {
   flex: 2;
 }
 
-.cuadro-Agrupaciones,.cuadro-Mapa,.cuadro-Resumen{
+.cuadro-Agrupaciones,
+.cuadro-Mapa,
+.cuadro-Resumen {
   border-radius: 25px;
   border: 1px var(--borde-Grilla) solid;
   box-shadow: 2px 2px 2px 1px black;
   margin: 10px;
-
 }
-.cuadros p{
+.cuadros p {
   font-weight: Bold;
-  Padding: 1.8em 0 0 0 ; 
+  padding: 1.8em 0 0 0;
   text-align: center;
-  White-space: nowrap; 
+  white-space: nowrap;
 }
 
-.cuadro-Agrupaciones{
+.cuadro-Agrupaciones {
   overflow: scroll;
   height: 325px;
 }
 
-.cuadros p{
+.cuadros p {
   color: var(--textos);
   font-size: 11px;
   padding: 5px;
-  text-transform: uppercase;  
+  text-transform: uppercase;
   font-weight: bold;
-  
 }
-.Agrupacion p{
-  text-align:left;
+.Agrupacion p {
+  text-align: left;
   margin-left: 10px;
   margin-right: 10px;
 }
-.Agrupacion p:first-child{
-  border-bottom: 1px solid var(--borde-Grilla) ;
+.Agrupacion p:first-child {
+  border-bottom: 1px solid var(--borde-Grilla);
 }
 
-/* -------------------------barra de progreso*--------------------------------------------*/ 
+/* -------------------------barra de progreso*--------------------------------------------*/
 .progress {
   height: 35px;
   width: 100%;
   border-radius: 5px;
   margin-bottom: 15px;
-  
 }
 
 .progress-bar {
@@ -163,7 +152,7 @@ button:hover {
   align-items: center;
   transition: width 0.25s;
   border-radius: 5px;
-  background: var(--graficaamarillo)
+  background: var(--graficaamarillo);
 }
 
 .progress-bar-text {
@@ -172,8 +161,6 @@ button:hover {
   color: var(--textos);
   font-size: 9px;
 }
-
-
 
 /*-------------------------Resumen de Votos:-------------------------*/
 .chart-wrap {
@@ -219,7 +206,7 @@ button:hover {
 .chart-wrap .grid::before {
   font-size: 0.8em;
   font-weight: bold;
-  content: '0%';
+  content: "0%";
   position: absolute;
   left: -0.5em;
   top: -1.5em;
@@ -228,7 +215,7 @@ button:hover {
 .chart-wrap .grid::after {
   font-size: 0.8em;
   font-weight: bold;
-  content: '100%';
+  content: "100%";
   position: absolute;
   right: -1.5em;
   top: -1.5em;

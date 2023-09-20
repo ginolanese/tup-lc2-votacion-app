@@ -1,54 +1,55 @@
 @import "/css/common.css";
 
 button {
-    background-color: var(--gris-claro);
-    color: white;
-    font-size: 10;
-    text-align: center;
-    padding: 5px;
-    border-radius: 5px;
-    text-transform: uppercase;
-  }
-  button:hover {
-    color: var(--textos);
-  }
-  
-  #consultar{
-    text-decoration: none;
-    border: none;
-  }
-  #consultar:hover{
-    background-color: transparent;
-  
-  }
-  .mesa-comp {
-    background-color: var(--celeste);
-  }
-  
-  .electores {
-    background-color: var(--magenta);
-  }
-  
-  .escrutado {
-    background-color: var(--morado);
-  }
-  .mesa-comp,.electores,.escrutado{
+  background-color: var(--gris-claro);
+  color: white;
+  font-size: 10;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+button:hover {
+  color: var(--textos);
+}
 
-    border-radius: 5px;
-    margin: 2px;
-    width: 70px;
-    height: 120px;
-    font-style: #FFF;
-    font-size: 10px;
-  }
-  .mesa-comp p,.electores p,.escrutado p{
-    color: #FFF;
-  }
+#consultar {
+  text-decoration: none;
+  border: none;
+}
+#consultar:hover {
+  background-color: transparent;
+}
+.mesa-comp {
+  background-color: var(--celeste);
+}
 
-  .paso-gen{
-    display: flex;
+.electores {
+  background-color: var(--magenta);
+}
 
-  }
+.escrutado {
+  background-color: var(--morado);
+}
+.mesa-comp,
+.electores,
+.escrutado {
+  border-radius: 5px;
+  margin: 2px;
+  width: 70px;
+  height: 120px;
+  font-style: #fff;
+  font-size: 10px;
+}
+.mesa-comp p,
+.electores p,
+.escrutado p {
+  color: #fff;
+}
+
+.paso-gen {
+  display: flex;
+}
 
 #carteles {
   display: flex;
@@ -70,20 +71,18 @@ button {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border-radius: 10px
+  border-radius: 10px;
 }
-#exito{
-    background-color: var(--mensaje-usuario-verde);
-
-}
-
-#error{
-    background-color: var(--mensaje-usuario-rojo);
+#exito {
+  background-color: var(--mensaje-usuario-verde);
 }
 
-#adver{
-    background-color: var(--mensaje-usuario-amarillo);
+#error {
+  background-color: var(--mensaje-usuario-rojo);
+}
 
+#adver {
+  background-color: var(--mensaje-usuario-amarillo);
 }
 #exito i,
 #error i,
@@ -92,48 +91,57 @@ button {
   margin-right: 10px;
 }
 
-
-#sec-contenido{
-    border: solid var(--borde-Grilla) 1px;
-    width: 1024px;
-    margin: 0px auto 50px auto;
-    border-radius: 15px;
-    border-collapse: collapse;
-    background-color: rgb(250, 250, 250) ;
-    
+#sec-contenido {
+  border: solid var(--borde-Grilla) 1px;
+  width: 1024px;
+  margin: 0px auto 50px auto;
+  border-radius: 15px;
+  border-collapse: collapse;
+  background-color: rgb(250, 250, 250);
 }
 
-tr th{
-    text-align: center;
-    color:var(--titulo-Grilla);
-    padding: 10px 20px;
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: capitalize;
-    border-bottom: 1px solid var(--borde-inferior-Grilla);
-    width: 20%;
+tr th {
+  text-align: center;
+  color: var(--titulo-Grilla);
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-bottom: 1px solid var(--borde-inferior-Grilla);
+  width: 20%;
 }
-svg{
-    width: 200px;
-}
-
-tbody tr{
-    background-color: rgb(250, 250, 250);
-
+svg {
+  width: 200px;
 }
 
-tbody tr td{
-    background-color: rgb(255, 255, 255);
-    border-bottom: 1px  solid var(--borde-inferior-Grilla);
-    padding: 15px 0px;
-    width: 25%;
+tbody tr {
+  background-color: rgb(250, 250, 250);
 }
-table{
-    display: grid;
-    grid: 100px 100px;
-    overflow-y: auto;
-    height: 325px;
-    padding: 5px;
-    font-size: 10px;
-    color: var(--textos);
+
+tbody tr td {
+  background-color: rgb(255, 255, 255);
+  border-bottom: 1px solid var(--borde-inferior-Grilla);
+  padding: 15px 0px;
+  width: 25%;
 }
+table {
+  display: grid;
+  grid: 100px 100px;
+  overflow-y: auto;
+  height: 325px;
+  padding: 5px;
+  font-size: 10px;
+  color: var(--textos);
+}
+
+#btn-paso{
+  background-color: var(--magenta);
+}
+
+#btn-generales{
+  background-color: var(--celeste);
+}
+#btn-paso:hover,#btn-generales:hover{
+  background-color: var(--gris-claro);
+}
+

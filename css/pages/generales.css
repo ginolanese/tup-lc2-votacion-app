@@ -1,5 +1,13 @@
 @import "/css/common.css";
 
+/* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
+
+.btn-votacion {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr );
+  gap: 15px;
+}
+
 button {
   background-color: var(--gris-claro);
   color: white;
@@ -8,6 +16,8 @@ button {
   padding: 5px;
   border-radius: 5px;
   text-transform: uppercase;
+  margin: 20%;
+
 }
 button:hover {
   color: var(--textos);
@@ -25,32 +35,16 @@ button:hover {
   background-color: var(--morado);
 }
 
-/*.btn-votacion {
- 
-  display:grid;
-  grid-template-columns: repeat(9,auto);
-  grid-template-areas: "agregar  . . . . . mesa-comp electores escrutado";
-}
-.agregar-informe{
-  grid-area: agregar;
-  margin-bottom: 50px;
-}
-.mesa-comp{
-  grid-area: mesa-comp;
-}
-.electores{
-  grid-area: electores;
-}
-.escrutado
-{
-  grid-area: escrutado;
-}
-
-.mesa-comp,.electores,.escrutado{
+.mesa-comp,
+.electores,
+.escrutado {
+  color: white;
   border-radius: 14px;
-  margin: 10px;
+  margin: 30px 20px;
+  display: grid;
+  grid-template-columns: auto auto;
 }
-*/
+/* _________________Fin Botones______________________ */
 
 /* Carteles para el usuario */
 #carteles {

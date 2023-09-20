@@ -65,3 +65,23 @@ main {
 #informes:last-child {
   justify-content: right;
 }
+
+#consultar{
+  text-decoration: none;
+  border: none;
+}
+#consultar:hover{
+  background-color: transparent;
+
+}
+
+#btn-paso{
+  background-color: var(--magenta);
+}
+
+#btn-generales{
+  background-color: var(--celeste);
+}
+#btn-paso:hover,#btn-generales:hover{
+  background-color: var(--gris-claro);
+}
