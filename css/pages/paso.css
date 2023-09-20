@@ -86,12 +86,14 @@ button:hover {
   font-size: 24px;
   margin-right: 10px;
 }
-/*----------------------------------------*/
+/*-----------------Cuadros Datos/Mapa/barras-----------------------*/
 .cuadros {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .cuadro-Agrupaciones {
-  flex: 2;
+  flex: 3;
 }
 .cuadro-Mapa {
   justify-self: center;
@@ -99,7 +101,7 @@ button:hover {
   flex: 1;
 }
 .cuadro-Resumen {
-  flex: 2;
+  flex: 3;
 }
 
 .cuadro-Agrupaciones,
@@ -107,7 +109,7 @@ button:hover {
 .cuadro-Resumen {
   border-radius: 25px;
   border: 1px var(--borde-Grilla) solid;
-  box-shadow: 2px 2px 2px 1px black;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
   margin: 10px;
 }
 .cuadros p {
@@ -246,3 +248,5 @@ button:hover {
   display: inline-block;
   white-space: nowrap;
 }
+
+/* _________________________________ */
