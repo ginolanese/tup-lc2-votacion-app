@@ -52,6 +52,7 @@ button:hover {
 }
 */
 
+/* Carteles para el usuario */
 #carteles {
   display: flex;
   flex-direction: column;

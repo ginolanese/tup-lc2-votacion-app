@@ -13,6 +13,14 @@ button {
     color: var(--textos);
   }
   
+  #consultar{
+    text-decoration: none;
+    border: none;
+  }
+  #consultar:hover{
+    background-color: transparent;
+  
+  }
   .mesa-comp {
     background-color: var(--celeste);
   }

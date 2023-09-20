@@ -52,8 +52,11 @@ button:hover {
   margin: 10px;
 }
 
-
+/* Carteles para el usuario */
 #carteles {
+  display: flex;
+  flex-direction: column;
+
   width: 400px;
   margin: 20px auto;
   padding: 15px;
@@ -66,7 +69,12 @@ button:hover {
 }
 #exito,
 #error,
-
+#adver {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 10px
+}
 #exito{
     background-color: var(--mensaje-usuario-verde);
 
@@ -85,6 +93,7 @@ button:hover {
 #adver i {
   font-size: 24px;
   margin-right: 10px;
+
 }
 /*----------------------------------------*/
 .cuadros{
