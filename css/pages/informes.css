@@ -20,6 +20,8 @@ button:hover {
 #consultar:hover {
   background-color: transparent;
 }
+
+
 .mesa-comp {
   background-color: var(--celeste);
 }
@@ -36,10 +38,11 @@ button:hover {
 .escrutado {
   border-radius: 5px;
   margin: 2px;
-  width: 70px;
-  height: 120px;
-  font-style: #fff;
+  width: 160px;
+  height: 80px;
   font-size: 10px;
+  display: grid;
+  grid-template-columns: auto auto;
 }
 .mesa-comp p,
 .electores p,
@@ -55,7 +58,7 @@ button:hover {
   display: flex;
   flex-direction: column;
 
-  width: 400px;
+  width: 500px;
   margin: 20px auto;
   padding: 15px;
   color: #ffffff;
