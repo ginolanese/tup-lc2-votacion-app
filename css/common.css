@@ -220,3 +220,7 @@ select{
   border: solid 1px #ffffff;
   border-radius: 15px;
 }
+
+.barra-menu li{
+  margin-left: 5px;
+}
