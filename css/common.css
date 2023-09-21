@@ -177,7 +177,7 @@ ul,ol{
 
 }
 
-.active:hover{
+.active:hover,#btn-paso:hover,#btn-generales:hover{
   background-color: var(--gris-claro);
 }
 
