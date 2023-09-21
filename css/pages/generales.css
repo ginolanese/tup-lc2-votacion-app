@@ -38,14 +38,17 @@ button:hover {
 .mesa-comp,
 .electores,
 .escrutado {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   border-radius: 14px;
-  margin: 30px 20px;
+  margin: 40px 20px;
   display: grid;
   grid-template-columns: auto auto;
 }
 /* _________________Fin Botones______________________ */
-
 /* Carteles para el usuario */
 #carteles {
   display: flex;
@@ -67,20 +70,18 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border-radius: 10px
+  border-radius: 10px;
 }
-#exito{
-    background-color: var(--mensaje-usuario-verde);
-
-}
-
-#error{
-    background-color: var(--mensaje-usuario-rojo);
+#exito {
+  background-color: var(--mensaje-usuario-verde);
 }
 
-#adver{
-    background-color: var(--mensaje-usuario-amarillo);
+#error {
+  background-color: var(--mensaje-usuario-rojo);
+}
 
+#adver {
+  background-color: var(--mensaje-usuario-amarillo);
 }
 #exito i,
 #error i,
@@ -88,58 +89,60 @@ button:hover {
   font-size: 24px;
   margin-right: 10px;
 }
-
-.cuadros{
+/*----------------------------------------*/
+.cuadros {
   display: flex;
-  
 }
-.cuadro-Agrupaciones{
+.cuadro-Agrupaciones {
   flex: 2;
+  min-width: 200px;
 }
-.cuadro-Mapa{
- justify-self: center;
-  max-width: 600px ;
+.cuadro-Mapa {
+  justify-self: center;
+  max-width: 500px;
   flex: 1;
 }
-.cuadro-Resumen{
+.cuadro-Resumen {
   flex: 2;
+  min-width: 350px;
 }
 
-.cuadro-Agrupaciones,.cuadro-Mapa,.cuadro-Resumen{
+.cuadro-Agrupaciones,
+.cuadro-Mapa,
+.cuadro-Resumen {
   border-radius: 25px;
   border: 1px var(--borde-Grilla) solid;
   box-shadow: 2px 2px 2px 1px black;
   margin: 10px;
-
 }
-.cuadros p{
+.cuadros p {
   font-weight: Bold;
-  Padding: 1.8em 0 0 0 ; 
+  padding: 1.8em 0 0 0;
   text-align: center;
-  White-space: nowrap; 
+  white-space: nowrap;
 }
 
-.cuadro-Agrupaciones{
+.cuadro-Agrupaciones {
   overflow: scroll;
   height: 325px;
 }
 
-.cuadros p{
+.cuadros p {
   color: var(--textos);
   font-size: 11px;
   padding: 5px;
-  text-transform: uppercase;  
+  text-transform: uppercase;
   font-weight: bold;
-  
 }
-.Agrupacion p{
-  text-align:left;
+.Agrupacion p {
+  text-align: left;
   margin-left: 10px;
   margin-right: 10px;
 }
-.Agrupacion p:first-child{
-  border-bottom: 1px solid var(--borde-Grilla) ;
+.Agrupacion p:first-child {
+  border-bottom: 1px solid var(--borde-Grilla);
 }
+
 
 /* -------------------------barra de progreso*--------------------------------------------*/ 
 .progress {
