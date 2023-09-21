@@ -239,7 +239,7 @@ button:hover {
 .chart-wrap .bar {
   width: var(--bar-value);
   height: var(--bar-thickness);
-  margin: var(--bar-spacing) 0;
+  margin: var(--bar-spacing) ;
   background-color: var(--bar-color);
   border-radius: 0 var(--bar-rounded) var(--bar-rounded) 0;
 }
