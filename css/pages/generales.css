@@ -45,6 +45,8 @@ button:hover {
   margin: 30px 20px;
   display: grid;
   grid-template-columns: auto auto;
+  align-items: center;
+  width:180px
 }
 /* _________________Fin Botones______________________ */
 
