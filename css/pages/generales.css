@@ -46,8 +46,6 @@ button:hover {
   color: white;
   border-radius: 14px;
   margin: 40px 20px;
-  display: grid;
-  grid-template-columns: auto auto;
 }
 /* _________________Fin Botones______________________ */
 /* Carteles para el usuario */
@@ -123,7 +121,7 @@ button:hover {
 }
 
 .cuadro-Agrupaciones {
-  overflow: scroll;
+  overflow: auto;
   height: 350px;
 }
 
