@@ -5,6 +5,7 @@
 .btn-votacion {
   display: grid;
   grid-template-columns: repeat(5, 1fr );
+
   gap: 15px;
 }
 
@@ -53,7 +54,6 @@ button:hover {
 #carteles {
   display: flex;
   flex-direction: column;
-
   width: 400px;
   margin: 20px auto;
   padding: 15px;
@@ -291,6 +291,11 @@ main{
 svg{
   height:200px;
   width:300px;
+}
+#btn-paso{
+  background-color: var(--magenta);
+  border-radius: 5px;
+  border:  none;
 }
 
 @media  (max-width:1200px) {

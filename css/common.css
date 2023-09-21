@@ -99,7 +99,7 @@ a{
   justify-content: space-between;
   margin-left: 0px;
   margin-right: 0px;
-  padding-top: px;
+  padding-top: 0px;
   background-color: var(--fondo-Menu);
   width:100%;
   height: 40px;
@@ -134,8 +134,7 @@ footer img{
 }
 
 .active{
-  border-radius: 15px;
-  border: solid 1px #ffffff;
+  border-radius: 5px;
   padding: 5px;
   font-size: 10px;
   text-align: center;
@@ -217,4 +216,7 @@ select{
 .logo{
   width: 200px;
 }
-
+#informe{
+  border: solid 1px #ffffff;
+  border-radius: 15px;
+}
