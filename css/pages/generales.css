@@ -124,7 +124,7 @@ button:hover {
 
 .cuadro-Agrupaciones {
   overflow: scroll;
-  height: 325px;
+  height: 350px;
 }
 
 .cuadros p {
@@ -146,12 +146,13 @@ button:hover {
 
 /* -------------------------barra de progreso*--------------------------------------------*/ 
 .progress {
+  margin-left: 10px;
   height: 35px;
-  width: 100%;
+  width: 97%;
   border-radius: 5px;
   margin-bottom: 15px;
-  
 }
+
 
 .progress-bar {
   height: 100%;
@@ -159,7 +160,6 @@ button:hover {
   align-items: center;
   transition: width 0.25s;
   border-radius: 5px;
-  background: var(--graficaamarillo)
 }
 
 .progress-bar-text {
