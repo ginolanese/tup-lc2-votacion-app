@@ -124,7 +124,7 @@ button:hover {
 }
 
 .cuadro-Agrupaciones {
-  overflow: scroll;
+  overflow: auto;
   height: 350px;
 }
 
