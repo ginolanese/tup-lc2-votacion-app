@@ -1,1 +1,87 @@
+@import "/css/common.css";
+.paso,
+.generales {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  justify-items: start;
+  justify-content: start;
+  align-content: center;
+  border-radius: 10px;
+  margin: 25px;
+  height: 100px;
+  width: 400px;
+  padding: 1rem;
+  color: #fff;
+  
+  text-align: center;
+  text-transform: uppercase;
+}
 
+.paso {
+  background-color: var(--magenta);
+}
+
+.generales {
+  background-color: var(--celeste);
+}
+.generales p,.paso p{
+  font-size: 28px;
+}
+
+.paso:hover,
+.generales:hover {
+  background-color: var(--gris-claro);
+}
+
+.imagen {
+  margin: 15px;
+  width: 350px;
+}
+
+.paso-gen {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#sec-titulo {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 50px;
+  margin-top: 15px;
+}
+main {
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
+
+/* _____________menu_______________ */
+#informes {
+  display: flex;
+  flex-direction: row;
+}
+#informes:last-child {
+  justify-content: right;
+}
+
+#consultar{
+  text-decoration: none;
+  border: none;
+}
+#consultar:hover{
+  background-color: transparent;
+
+}
+
+#btn-paso{
+  background-color: var(--magenta);
+}
+
+#btn-generales{
+  background-color: var(--celeste);
+}
+#btn-paso:hover,#btn-generales:hover{
+  background-color: var(--gris-claro);
+}
