@@ -1,11 +1,12 @@
 @import "/css/common.css";
 
+
 /* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
 
 .btn-votacion {
   display: grid;
   grid-template-columns: repeat(5, 1fr );
-  gap: 10px;
+  gap: 15px;
 }
 
 button {
@@ -17,8 +18,6 @@ button {
   border-radius: 5px;
   text-transform: uppercase;
   margin: 20%;
-  width: 170px;
-
 
 }
 button:hover {
@@ -40,16 +39,17 @@ button:hover {
 .mesa-comp,
 .electores,
 .escrutado {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   border-radius: 14px;
-  margin: 30px 20px;
+  margin: 40px 20px;
   display: grid;
   grid-template-columns: auto auto;
-  align-items: center;
-  width:180px
 }
 /* _________________Fin Botones______________________ */
-
 /* Carteles para el usuario */
 #carteles {
   display: flex;
@@ -71,20 +71,18 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  border-radius: 10px
+  border-radius: 10px;
 }
-#exito{
-    background-color: var(--mensaje-usuario-verde);
-
-}
-
-#error{
-    background-color: var(--mensaje-usuario-rojo);
+#exito {
+  background-color: var(--mensaje-usuario-verde);
 }
 
-#adver{
-    background-color: var(--mensaje-usuario-amarillo);
+#error {
+  background-color: var(--mensaje-usuario-rojo);
+}
 
+#adver {
+  background-color: var(--mensaje-usuario-amarillo);
 }
 #exito i,
 #error i,
@@ -92,24 +90,23 @@ button:hover {
   font-size: 24px;
   margin-right: 10px;
 }
-
-/*!-----------------Cuadros Datos/Mapa/barras-----------------------*/
-
+/*----------------------------------------*/
 .cuadros {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
 }
 .cuadro-Agrupaciones {
-  flex: 1;
+  flex: 2;
+  min-width: 350px; 
+  height: 350px;
 }
 .cuadro-Mapa {
   justify-self: center;
-  max-width: 600px;
-  flex: 0;
+  min-width: 350px; 
+  flex: 1;
 }
 .cuadro-Resumen {
-  flex: 1;
+  flex: 2;
+  min-width: 350px;
 }
 
 .cuadro-Agrupaciones,
@@ -117,11 +114,9 @@ button:hover {
 .cuadro-Resumen {
   border-radius: 25px;
   border: 1px var(--borde-Grilla) solid;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
-  margin: 5px 10px;
+  box-shadow: 2px 2px 2px 1px black;
+  margin: 10px;
 }
-
-
 .cuadros p {
   font-weight: Bold;
   padding: 1.8em 0 0 0;
@@ -129,10 +124,11 @@ button:hover {
   white-space: nowrap;
 }
 
-.cuadro-Agrupaciones {
-  overflow: scroll;
-  height: 325px;
+.cuadro-Agrupaciones-centrado{
+  overflow-y: scroll;
+  height: 290px;
 }
+
 
 .cuadros p {
   color: var(--textos);
@@ -152,8 +148,9 @@ button:hover {
 
 /* -------------------------barra de progreso*--------------------------------------------*/
 .progress {
+  margin-left: 10px;
   height: 35px;
-  width: 100%;
+  width: 97%;
   border-radius: 5px;
   margin-bottom: 15px;
 }
@@ -164,37 +161,7 @@ button:hover {
   align-items: center;
   transition: width 0.25s;
   border-radius: 5px;
-  background-color: var(--grafica-amarillo);
-  
 }
-
-/* colores Barras */
-#partido-uno{
-  background-color: var(--grafica-amarillo);
-}
-#partido-dos{
-  background-color: var(--grafica-lila2);
-}
-#partido-tres{
-  background-color: var(--grafica-bordo);
-}
-#partido-cuatro{
-  background-color: var(--grafica-celeste);
-}
-#partido-cinco{
-  background-color: var(--grafica-lila);
-}
-#partido-seis{
-  background-color: var(--grafica-bordo-claro);
-}
-#partido-siete{
-  background-color: var(--grafica-verde);
-}
-#otros{
-  background-color: var(--grafica-gris);
-}
-/* ---- */
-
 
 .progress-bar-text {
   margin-left: 10px;
@@ -203,10 +170,11 @@ button:hover {
   font-size: 9px;
 }
 
-
-
 /*-------------------------Resumen de Votos:-------------------------*/
 .chart-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   --chart-width: 260px;
   --grid-color: #aaa;
   --bar-thickness: 25px;
@@ -214,6 +182,7 @@ button:hover {
   --bar-spacing: 10px;
   font-family: sans-serif;
   width: var(--chart-width);
+  
 }
 
 .chart-wrap .title {
@@ -236,9 +205,9 @@ button:hover {
 }
 
 .chart-wrap .grid {
-  margin-left: 50px;
+  margin-left: 0px;
   position: relative;
-  padding: 5px 0 5px 0;
+  padding: 5px 0px 5px 0;
   height: 100%;
   width: 100%;
   border-left: 2px solid var(--grid-color);
@@ -249,7 +218,7 @@ button:hover {
 .chart-wrap .grid::before {
   font-size: 0.8em;
   font-weight: bold;
-  content: '0%';
+  content: "0%";
   position: absolute;
   left: -0.5em;
   top: -1.5em;
@@ -258,7 +227,7 @@ button:hover {
 .chart-wrap .grid::after {
   font-size: 0.8em;
   font-weight: bold;
-  content: '100%';
+  content: "100%";
   position: absolute;
   right: -1.5em;
   top: -1.5em;
@@ -289,8 +258,85 @@ button:hover {
   display: inline-block;
   white-space: nowrap;
 }
-/* ---------------------------------------- */
+#partido-uno{
+  background-color: var(--grafica-amarillo);
+}
+#partido-dos{
+  background-color: var(--grafica-lila2);
+}
+#partido-tres{
+  background-color: var(--grafica-bordo);
+}
+#partido-cuatro{
+  background-color: var(--grafica-celeste);
+}
+#partido-cinco{
+  background-color: var(--grafica-lila);
+}
+#partido-seis{
+  background-color: var(--grafica-bordo-claro);
+}
+#partido-siete{
+  background-color: var(--grafica-verde);
+}
+#otros{
+  background-color: var(--grafica-gris);
+}
+
+
 main{
   margin-left: 100px;
   margin-right: 100px;
+}
+
+svg{
+  height:200px;
+  width:300px;
+}
+
+#btn-generales{
+  border-radius: 7px;
+  background-color: var(--celeste);
+}
+
+@media  (max-width:1200px) {
+  .cuadros{
+    flex-direction: column;
+    
+  }
+  .cuadro-Agrupaciones {
+    flex: 2;
+  }
+  .cuadro-Mapa {
+    flex: 2;
+  }
+  .cuadro-Resumen {
+    
+    flex: 2;
+    
+  }
+}
+/*----------------- cuadro-Resumen -----------------------*/
+
+.cuadro-Resumen-centrado{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*----------------------------------------*/
+/*----------------- cuadro-Mapa -----------------------*/
+.cuadro-Mapa {
+  display: flex; 
+  flex-direction: column; 
+}
+.cuadro-Mapa p{
+  justify-content: center;
+  align-items: center;
+}
+
+.cuadro-Mapa-centrado{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
