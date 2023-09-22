@@ -125,7 +125,7 @@ button:hover {
 }
 
 .cuadro-Agrupaciones-centrado{
-  overflow: auto;
+  overflow: scroll;
   height: 290px;
 }
 
