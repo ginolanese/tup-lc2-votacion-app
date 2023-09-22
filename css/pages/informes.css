@@ -30,6 +30,10 @@ button:hover {
   background-color: var(--magenta);
 }
 
+.electores:hover,.mesa-comp:hover{
+  background-color: var(--gris-claro);
+}
+
 .escrutado {
   background-color: var(--morado);
 }
@@ -115,14 +119,13 @@ tr th {
   width: 20%;
   
 }
-svg {
-  width :200px;
-}
+
 tbody tr {
   background-color: rgb(250, 250, 250);
 }
 
 tbody tr td {
+  align-self: start;
   background-color: rgb(255, 255, 255);
   border-bottom: 1px solid var(--borde-inferior-Grilla);
   padding: 15px 0px;
@@ -130,23 +133,11 @@ tbody tr td {
 }
 table {  
   grid: 100px 100px;
-  overflow-y: auto;
+
   height: 325px;
   padding: 5px;
   font-size: 10px;
   color: var(--textos);
-  width: 1024px;
-}
-
-#btn-paso{
-  background-color: var(--magenta);
-}
-
-#btn-generales{
-  background-color: var(--celeste);
-}
-#btn-pasohover,#btn-generaleshover{
-  background-color: var(--gris-claro);
 }
 
 .texto-elecciones-chico{
@@ -170,4 +161,8 @@ table {
 
 #sec-titulo h1{
   padding-left: 350px;
+}
+
+span{
+  display: flex;
 }

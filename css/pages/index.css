@@ -45,6 +45,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  text-align: center;
 }
 
 #sec-titulo {
@@ -75,13 +76,7 @@ main {
 
 }
 
-#btn-paso{
-  background-color: var(--magenta);
-}
-
-#btn-generales{
-  background-color: var(--celeste);
-}
-#btn-paso:hover,#btn-generales:hover{
-  background-color: var(--gris-claro);
+span{
+  display: flex;
+  align-items: center;
 }
