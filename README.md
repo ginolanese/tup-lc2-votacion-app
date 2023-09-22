@@ -2,7 +2,7 @@
 
 ## Descripción
 
-Este proyecto consiste en una página web que muestra los resultados electorales de Argentina utilizando HTML, CSS y JavaScript. Proporciona una interfaz intuitiva para que los usuarios puedan ver los resultados de las elecciones en diferentes regiones.
+Este proyecto consiste en una página web que muestra los resultados electorales de Argentina utilizando HTML, CSS y proximamente JavaScript. Proporciona una interfaz intuitiva para que los usuarios puedan ver los resultados de las elecciones en diferentes regiones.
 
 ## Funcionalidades
 
