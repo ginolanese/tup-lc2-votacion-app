@@ -49,8 +49,8 @@
                 </li>
 
                 <li class="active" id="filtrar"><a href="#">FILTRAR</a></li>
-                <li class="active"><a href="generales.html">Generales</a></li>
-                <li class="active"><a href="informes.html">Informes</a></li>
+                <li class="active" id="btn-generales"><a href="generales.html">Generales</a></li>
+                <li class="active" id="informe"><a href="informes.html">Informes</a></li>
 
             </ul>
             <ul class="active" id="inicio">
@@ -75,7 +75,7 @@
         <section id="sec-titulo">
             <!--Seccion para agregar una palicula favorita por codigo-->
             <h1>Elecciones 2021 | Paso</h1>
-            <p class="texto-path">2020 > Generales > Provisorio > Senadores Nacionales > Buenos Aires</p>
+            <p class="texto-path">2020 > Paso > Provisorio > Senadores Nacionales > Buenos Aires</p>
  
         </section>
 
@@ -267,11 +267,14 @@
             </div>
         </section>
             <!--Seccion para contenido de la página-->
-        
+        </section>
 
         <section class="cuadros">
-            <div class="cuadro-Agrupaciones">
+            <div class="cuadro-Agrupaciones">      
+            
                 <p>Agrupaciones Politicas</p>
+                <div class="cuadro-Agrupaciones-centrado">
+                <div></div>
                 <div class="Agrupacion">
                     <p>JUNTOS POR EL CAMBIO</p>
                     <p>JUNTOS</p>
@@ -294,29 +297,33 @@
                         <div class="progress-bar" style="width:75%; background: var(--grafica-verde-claro);">
                             <span class="progress-bar-text">75%</span>
                         </div>
-                    </div>
+                    </div> 
                     <p>EC</p>
                     <div class="progress" style="background: var(--grafica-verde-claro);">
                         <div class="progress-bar" style="width:15%; background: var(--grafica-verde-claro);">
                             <span class="progress-bar-text">15%</span>
                         </div>
                     </div>
-                </div>
+                
             </div>
             </div>
+            </div>
+            
             <div class="cuadro-Mapa">
                 <p>MapaImagen</p>
-                <svg height="210" width="400">  <!--!cambie el whdht="300" para que el mapa no ocupe toda la pagina-->
-                    <path class="leaflet-interactive" stroke="#18a0fb" stroke-opacity="1" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" fill="#18a0fb" fill-opacity="1"
-                        fill-rule="evenodd"
-                        d="M171 55L163 53L150 45L147 50L143 49L133 60L114 60L114 151L116 151L120 155L122 156L126 153L128 149L124 145L126 143L126 138L128 138L129 133L126 129L126 122L134 126L139 126L169 119L179 114L189 97L190 89L189 87L186 87L182 82L185 75L181 69L171 63L170 64L170 58z">
-                    </path>
-                </svg>
+                <div class="cuadro-Mapa-centrado" >
+                    <svg height="210" width="800">
+                        <path class="leaflet-interactive" stroke="#18a0fb" stroke-opacity="1" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" fill="#18a0fb" fill-opacity="1"
+                            fill-rule="evenodd"
+                            d="M171 55L163 53L150 45L147 50L143 49L133 60L114 60L114 151L116 151L120 155L122 156L126 153L128 149L124 145L126 143L126 138L128 138L129 133L126 129L126 122L134 126L139 126L169 119L179 114L189 97L190 89L189 87L186 87L182 82L185 75L181 69L171 63L170 64L170 58z">
+                        </path>
+                    </svg>
+                </div>
             </div>
             <div class="cuadro-Resumen">
                 <p>Resumen de votos</p>
-
+            <div class="cuadro-Resumen-centrado">
                 <div class="chart-wrap horizontal">
                     <div class="grid">
                         <div class="bar" id="partido-uno" style="--bar-value:85%;" data-name="Partido 1" title="Your Blog 85%"></div>
@@ -329,8 +336,7 @@
                         <div class="bar" id="otros" style="--bar-value:20%;" data-name="Otros" title="Other 20%"></div>
                     </div>
                 </div>
-                <div class="bar" style="--bar-value:85%;--bar-color:var(--grafica-amarillo);" data-name="Partido 1"
-                    title="Your Blog 85%"></div>
+            </div>
         </section>
     </main>
     <!--Pie de página-->
