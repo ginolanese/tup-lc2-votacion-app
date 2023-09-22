@@ -96,7 +96,8 @@ button:hover {
 }
 .cuadro-Agrupaciones {
   flex: 2;
-  min-width: 200px;
+  min-width: 350px; 
+  height: 350px;
 }
 .cuadro-Mapa {
   justify-self: center;
@@ -122,9 +123,9 @@ button:hover {
   white-space: nowrap;
 }
 
-.cuadro-Agrupaciones {
+.cuadro-Agrupaciones-centrado{
   overflow: auto;
-  height: 350px;
+  height: 290px;
 }
 
 
@@ -326,7 +327,6 @@ svg{
 .cuadro-Mapa {
   display: flex; 
   flex-direction: column; 
-  min-height: 350px;
 }
 .cuadro-Mapa p{
   justify-content: center;
@@ -336,7 +336,6 @@ svg{
 .cuadro-Mapa-centrado{
   display: flex;
   width: 100%;
-  min-height: 300px;
   justify-content: center;
   align-items: center;
 }
