@@ -1,13 +1,13 @@
-@import "/css/common.css";
+@import "csscommon.css";
 
-button {
-  background-color: var(--gris-claro);
-  color: white;
-  font-size: 10;
+button{
+  background-color:var(--gris-claro);
+  color :white;
+  font-size :10;
   text-align: center;
-  padding: 5px;
+  padding :5px;
   border-radius: 5px;
-  text-transform: uppercase;
+  text-transform :uppercase;
 }
 button:hover {
   color: var(--textos);
@@ -30,6 +30,10 @@ button:hover {
   background-color: var(--magenta);
 }
 
+.electores:hover,.mesa-comp:hover{
+  background-color: var(--gris-claro);
+}
+
 .escrutado {
   background-color: var(--morado);
 }
@@ -42,7 +46,8 @@ button:hover {
   height: 80px;
   font-size: 10px;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns :auto auto;
+  
 }
 .mesa-comp p,
 .electores p,
@@ -51,14 +56,14 @@ button:hover {
 }
 
 .paso-gen {
-  display: flex;
+  display :flex;
 }
 
 #carteles {
-  display: flex;
-  flex-direction: column;
+  display :flex;
+  flex-direction :column;
 
-  width: 500px;
+  width: 400px;
   margin: 20px auto;
   padding: 15px;
   color: #ffffff;
@@ -66,18 +71,18 @@ button:hover {
   text-align: center;
 }
 #carteles div {
-  margin: 10px;
+  margin :10px;
 }
 #exito,
 #error,
 #adver {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  display :flex;
+  flex-direction :row;
+  justify-content :center;
   border-radius: 10px;
 }
 #exito {
-  background-color: var(--mensaje-usuario-verde);
+  background-color :var(--mensaje-usuario-verde);
 }
 
 #error {
@@ -90,31 +95,33 @@ button:hover {
 #exito i,
 #error i,
 #adver i {
-  font-size: 24px;
-  margin-right: 10px;
+  font-size :24px;
+  margin-right :10px;
+}
+#carteles span{
+  display: inline;
 }
 
 #sec-contenido {
   border: solid var(--borde-Grilla) 1px;
-  width: 1024px;
+  width :1024px;
   margin: 0px auto 50px auto;
   border-radius: 15px;
-  border-collapse: collapse;
+  border-collapse :collapse;
   background-color: rgb(250, 250, 250);
+
 }
 
 tr th {
   text-align: center;
   color: var(--titulo-Grilla);
-  padding: 10px 20px;
+  padding:10px 20px 1;
   font-size: 14px;
-  font-weight: bold;
+  font-weight :bold;
   text-transform: capitalize;
-  border-bottom: 1px solid var(--borde-inferior-Grilla);
+  border-bottom :1px solid var(--borde-inferior-Grilla);
   width: 20%;
-}
-svg {
-  width: 200px;
+  
 }
 
 tbody tr {
@@ -122,38 +129,49 @@ tbody tr {
 }
 
 tbody tr td {
+  align-self: start;
   background-color: rgb(255, 255, 255);
   border-bottom: 1px solid var(--borde-inferior-Grilla);
-  /* padding: 15px 0px; */
-  /* width: 25%; */
+  padding: 15px 0px;
+  width: 25%;
 }
-table {
-  /* display: grid; */
-  /* grid: 100px 100px; */
-  /* height: 325px; */
-  overflow-y: auto;
+table {  
+  grid: 100px 100px;
+
+  height: 325px;
   padding: 5px;
   font-size: 10px;
   color: var(--textos);
 }
 
-#btn-paso{
-  background-color: var(--magenta);
-}
-
-#btn-generales{
-  background-color: var(--celeste);
-}
-#btn-paso:hover,#btn-generales:hover{
-  background-color: var(--gris-claro);
-}
-
 .texto-elecciones-chico{
   color: var(--textos);
-  font-weight: bold;
+  font-weight :bold;
   font-size: 12px;
 }
 .texto-path-chico{
   font-size:11px;
   color:var(--celeste)
+}
+.tabla-agrupacion{
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.tabla-por{
+  color: var(--titulo-Grilla);
+  font-weight: normal;
+}
+
+#sec-titulo {
+  display: block;
+  width: 38%;
+  text-align: end;
+  
+}
+
+span {
+  display: flex;
+  text-align: start;
+  align-items: start;
 }
