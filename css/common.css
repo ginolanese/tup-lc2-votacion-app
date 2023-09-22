@@ -47,7 +47,7 @@ body {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  background-color: rgb(240, 240, 240);
+  background-color: rgb(240, 240, 240);/*white*/
   width:100%;
   flex: 1;
 }
@@ -99,7 +99,7 @@ a{
   justify-content: space-between;
   margin-left: 0px;
   margin-right: 0px;
-  padding-top: px;
+  padding-top: 0px;
   background-color: var(--fondo-Menu);
   width:100%;
   height: 40px;
@@ -109,6 +109,7 @@ a{
   display: flex;
   flex-direction: row; 
   align-items: center;
+  
   
 }
 
@@ -134,8 +135,7 @@ footer img{
 }
 
 .active{
-  border-radius: 15px;
-  border: solid 1px #ffffff;
+  border-radius: 5px;
   padding: 5px;
   font-size: 10px;
   text-align: center;
@@ -178,10 +178,15 @@ ul,ol{
 
 }
 
-.active:hover{
+#btn-generales{
+  background-color: var(--celeste);
+}
+#btn-paso{
+  background-color: var(--magenta);
+}
+#btn-paso:hover,#btn-generales:hover{
   background-color: var(--gris-claro);
 }
-
 select{
   background: transparent;
   border: none;
@@ -217,4 +222,11 @@ select{
 .logo{
   width: 200px;
 }
+#informe{
+  border: solid 1px #ffffff;
+  border-radius: 15px;
+}
 
+.barra-menu li{
+  margin-left: 5px;
+}
