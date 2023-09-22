@@ -1,1 +1,296 @@
+@import "/css/common.css";
 
+/* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
+
+.btn-votacion {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr );
+  gap: 10px;
+}
+
+button {
+  background-color: var(--gris-claro);
+  color: white;
+  font-size: 10;
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  margin: 20%;
+  width: 170px;
+
+
+}
+button:hover {
+  color: var(--textos);
+}
+
+.mesa-comp {
+  background-color: var(--celeste);
+}
+
+.electores {
+  background-color: var(--magenta);
+}
+
+.escrutado {
+  background-color: var(--morado);
+}
+
+.mesa-comp,
+.electores,
+.escrutado {
+  color: white;
+  border-radius: 14px;
+  margin: 30px 20px;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  width:180px
+}
+/* _________________Fin Botones______________________ */
+
+/* Carteles para el usuario */
+#carteles {
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+  margin: 20px auto;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 200px;
+  text-align: center;
+}
+#carteles div {
+  margin: 10px;
+}
+#exito,
+#error,
+#adver {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 10px
+}
+#exito{
+    background-color: var(--mensaje-usuario-verde);
+
+}
+
+#error{
+    background-color: var(--mensaje-usuario-rojo);
+}
+
+#adver{
+    background-color: var(--mensaje-usuario-amarillo);
+
+}
+#exito i,
+#error i,
+#adver i {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+/*!-----------------Cuadros Datos/Mapa/barras-----------------------*/
+
+.cuadros {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.cuadro-Agrupaciones {
+  flex: 1;
+}
+.cuadro-Mapa {
+  justify-self: center;
+  max-width: 600px;
+  flex: 0;
+}
+.cuadro-Resumen {
+  flex: 1;
+}
+
+.cuadro-Agrupaciones,
+.cuadro-Mapa,
+.cuadro-Resumen {
+  border-radius: 25px;
+  border: 1px var(--borde-Grilla) solid;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.5);
+  margin: 5px 10px;
+}
+
+
+.cuadros p {
+  font-weight: Bold;
+  padding: 1.8em 0 0 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cuadro-Agrupaciones {
+  overflow: scroll;
+  height: 325px;
+}
+
+.cuadros p {
+  color: var(--textos);
+  font-size: 11px;
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.Agrupacion p {
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.Agrupacion p:first-child {
+  border-bottom: 1px solid var(--borde-Grilla);
+}
+
+/* -------------------------barra de progreso*--------------------------------------------*/
+.progress {
+  height: 35px;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.progress-bar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transition: width 0.25s;
+  border-radius: 5px;
+  background-color: var(--grafica-amarillo);
+  
+}
+
+/* colores Barras */
+#partido-uno{
+  background-color: var(--grafica-amarillo);
+}
+#partido-dos{
+  background-color: var(--grafica-lila2);
+}
+#partido-tres{
+  background-color: var(--grafica-bordo);
+}
+#partido-cuatro{
+  background-color: var(--grafica-celeste);
+}
+#partido-cinco{
+  background-color: var(--grafica-lila);
+}
+#partido-seis{
+  background-color: var(--grafica-bordo-claro);
+}
+#partido-siete{
+  background-color: var(--grafica-verde);
+}
+#otros{
+  background-color: var(--grafica-gris);
+}
+/* ---- */
+
+
+.progress-bar-text {
+  margin-left: 10px;
+  font-weight: bold;
+  color: var(--textos);
+  font-size: 9px;
+}
+
+
+
+/*-------------------------Resumen de Votos:-------------------------*/
+.chart-wrap {
+  --chart-width: 260px;
+  --grid-color: #aaa;
+  --bar-thickness: 25px;
+  --bar-rounded: 3px;
+  --bar-spacing: 10px;
+  font-family: sans-serif;
+  width: var(--chart-width);
+}
+
+.chart-wrap .title {
+  font-weight: bold;
+  padding: 1.8em 0 2.8em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* cuando definimos el gráfico en horizontal, lo giramos 90 grados */
+.chart-wrap.horizontal .grid {
+  transform: rotate(-90deg);
+}
+
+.chart-wrap.horizontal .bar::after {
+  /* giramos las letras para horizontal*/
+  transform: rotate(45deg);
+  padding-top: 0px;
+  display: block;
+}
+
+.chart-wrap .grid {
+  margin-left: 50px;
+  position: relative;
+  padding: 5px 0 5px 0;
+  height: 100%;
+  width: 100%;
+  border-left: 2px solid var(--grid-color);
+  font-size: 10px;
+}
+
+/* posicionamos el % del gráfico*/
+.chart-wrap .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: '0%';
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+
+.chart-wrap .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: '100%';
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* giramos las valores de 0% y 100% para horizontal */
+.chart-wrap.horizontal .grid::before,
+.chart-wrap.horizontal .grid::after {
+  transform: rotate(90deg);
+}
+
+.chart-wrap .bar {
+  width: var(--bar-value);
+  height: var(--bar-thickness);
+  margin: var(--bar-spacing) 0;
+  background-color: var(--bar-color);
+  border-radius: 0 var(--bar-rounded) var(--bar-rounded) 0;
+}
+
+.chart-wrap .bar:hover {
+  opacity: 0.7;
+}
+
+.chart-wrap .bar::after {
+  content: attr(data-name);
+  margin-left: 100%;
+  padding: 10px;
+  display: inline-block;
+  white-space: nowrap;
+}
+/* ---------------------------------------- */
+main{
+  margin-left: 100px;
+  margin-right: 100px;
+}
