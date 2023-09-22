@@ -1,19 +1,11 @@
 @import "/css/common.css";
 .paso,
 .generales {
-  display: grid;
-  grid-template-columns: auto auto;
-  align-items: center;
-  justify-items: start;
-  justify-content: start;
-  align-content: center;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 25px;
   height: 100px;
-  width: 400px;
-  padding: 1rem;
-  color: #fff;
-  
+  width: 500px;
+  padding: 5px;
   text-align: center;
   text-transform: uppercase;
 }
@@ -25,7 +17,17 @@
 .generales {
   background-color: var(--celeste);
 }
-.generales p,.paso p{
+.paso a,
+.generales a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  text-decoration: none;
+  color: #fff;
+}
+.paso span,
+.generales span {
   font-size: 28px;
 }
 
@@ -43,6 +45,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  text-align: center;
 }
 
 #sec-titulo {
@@ -56,8 +59,6 @@ main {
   margin-left: 100px;
 }
 
-
-/* _____________menu_______________ */
 #informes {
   display: flex;
   flex-direction: row;
@@ -75,13 +76,7 @@ main {
 
 }
 
-#btn-paso{
-  background-color: var(--magenta);
-}
-
-#btn-generales{
-  background-color: var(--celeste);
-}
-#btn-paso:hover,#btn-generales:hover{
-  background-color: var(--gris-claro);
+span{
+  display: flex;
+  align-items: center;
 }
