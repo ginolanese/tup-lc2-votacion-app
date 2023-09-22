@@ -163,8 +163,11 @@ table {
   font-weight: normal;
 }
 
-#sec-titulo h1{
-  padding-left: 350px;
+#sec-titulo {
+  display: block;
+  width: 38%;
+  text-align: end;
+  
 }
 
 span {
