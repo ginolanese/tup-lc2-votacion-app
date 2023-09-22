@@ -47,6 +47,7 @@ button:hover {
   font-size: 10px;
   display: grid;
   grid-template-columns :auto auto;
+  
 }
 .mesa-comp p,
 .electores p,
@@ -62,7 +63,7 @@ button:hover {
   display :flex;
   flex-direction :column;
 
-  width: 500px;
+  width: 400px;
   margin: 20px auto;
   padding: 15px;
   color: #ffffff;
@@ -166,10 +167,8 @@ table {
   padding-left: 350px;
 }
 
-span{
+span {
   display: flex;
-}
-.escrutado{
-  display: flex;
-  align-items: flex-end;
+  text-align: start;
+  align-items: start;
 }
