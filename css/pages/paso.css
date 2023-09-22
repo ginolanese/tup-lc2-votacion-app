@@ -101,6 +101,7 @@ button:hover {
 }
 .cuadro-Mapa {
   justify-self: center;
+  min-width: 350px; 
   flex: 1;
 }
 .cuadro-Resumen {
