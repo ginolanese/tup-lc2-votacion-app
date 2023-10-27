@@ -20,7 +20,7 @@ fetch("https://resultados.mininterior.gob.ar/api/menu/periodos")
         periodosSelect = selectAnio;
         periodosSelect.addEventListener("change", function () {
             console.log(periodosSelect.value)
-            fetch("https://resultados.mininterior.gob.ar/api/menu?año=" +   periodosSelect.value)
+            fetch("https://resultados.mininterior.gob.ar/api/menu?año=" +  periodosSelect.value)
             .then(res=> res.json(res))
             .then((datosFiltros) => {
                           const selectCrgo = document.getElementById("cargo");
@@ -38,13 +38,6 @@ fetch("https://resultados.mininterior.gob.ar/api/menu/periodos")
                                 });
                             }
                            
-                            //   const  nuevaOption= document.createElement("option");
-                            //   nuevaOption.textContent = eleccion;
-                            //   selectAnio.appendChild(nuevaOption);
-                            //   nuevaOption.innerHTML = `
-                            //   <option value="${eleccion.Cargos}" >${eleccion.Cargos[1].Cargo}</option> 
-                            //   `;
-                            //   console.log(cargo);
                           });
                     } )  
             
