@@ -10,6 +10,9 @@ fetch("https://resultados.mininterior.gob.ar/api/menu/periodos")
             const nuevaOption = document.createElement("option");
             nuevaOption.textContent = anio;
             nuevaOption.value = anio;
+            nuevaOption.innerHTML = `
+                               ${anio}
+                               `;
             selectAnio.appendChild(nuevaOption);
         });
 
@@ -20,14 +23,21 @@ fetch("https://resultados.mininterior.gob.ar/api/menu/periodos")
             fetch("https://resultados.mininterior.gob.ar/api/menu?año=" +   periodosSelect.value)
             .then(res=> res.json(res))
             .then((datosFiltros) => {
-                          const selectAnio = document.getElementById("cargo");
+                          const selectCrgo = document.getElementById("cargo");
                           datosFiltros.forEach(eleccion => {
                             if (eleccion.IdEleccion == tipoEleccion){
-                                alert("se encontro");
-                                console.log(eleccion.IdEleccion)
-                                
+                                eleccion.Cargos.forEach((cargo) => { 
+                                    const  nuevaOption= document.createElement("option");
+                                    nuevaOption.textContent = cargo.Cargo ;
+                                    nuevaOption.value = cargo.IdCargos;
+                                    selectCrgo.appendChild(nuevaOption);
+                                    nuevaOption.innerHTML = `
+                                    ${cargo.Cargo}
+                                    `;
+                                    console.log(cargo);
+                                });
                             }
-                            console.log(eleccion)
+                           
                             //   const  nuevaOption= document.createElement("option");
                             //   nuevaOption.textContent = eleccion;
                             //   selectAnio.appendChild(nuevaOption);
