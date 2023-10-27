@@ -8,7 +8,6 @@ fetch("https://resultados.mininterior.gob.ar/api/menu/periodos")
         var selectAnio = document.getElementById("anio");
         res.forEach((anio) => {
             const nuevaOption = document.createElement("option");
-            nuevaOption.textContent = anio;
             nuevaOption.value = anio;
             nuevaOption.innerHTML = `
                                ${anio}
@@ -24,16 +23,23 @@ fetch("https://resultados.mininterior.gob.ar/api/menu/periodos")
             .then(res=> res.json(res))
             .then((datosFiltros) => {
                           const selectCrgo = document.getElementById("cargo");
-                          datosFiltros.forEach(eleccion => {
+                          while(selectCrgo.firstChild){//elimina todos los elementos 
+                            selectCrgo.removeChild(selectCrgo.firstChild);
+                            } 
+                            const nuevaOptionCargo = document.createElement("option");
+                            nuevaOptionCargo.textContent = "Cargo";
+                            nuevaOptionCargo.value = "Cargo";
+                            selectCrgo.appendChild(nuevaOptionCargo);
+                            datosFiltros.forEach(eleccion => {
+
                             if (eleccion.IdEleccion == tipoEleccion){
                                 eleccion.Cargos.forEach((cargo) => { 
                                     const  nuevaOption= document.createElement("option");
-                                    nuevaOption.textContent = cargo.Cargo ;
                                     nuevaOption.value = cargo.IdCargos;
                                     selectCrgo.appendChild(nuevaOption);
                                     nuevaOption.innerHTML = `
-                                    ${cargo.Cargo}
-                                    `;
+                                                                ${cargo.Cargo}
+                                                            `;
                                     console.log(cargo);
                                 });
                             }
