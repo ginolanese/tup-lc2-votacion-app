@@ -1,4 +1,4 @@
-@import "csscommon.css";
+@import "css/common.css";
 
 button{
   background-color:var(--gris-claro);
