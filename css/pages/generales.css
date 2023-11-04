@@ -2,11 +2,21 @@
 
 
 /* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
+.agregar-informe{
+  white-space: nowrap;
+  border: none;
+  width: 300px;
+}
+
+.elecciones-generales{
+  margin-bottom: 0%;
+  padding-bottom: 0%;
+}
 
 .btn-votacion {
   display: grid;
   grid-template-columns: repeat(5, 1fr );
-  gap: 15px;
+  gap: 0px;
 }
 
 button {
@@ -45,9 +55,10 @@ button:hover {
   align-items: center;
   color: white;
   border-radius: 14px;
-  margin: 40px 20px;
+  margin: 40px 10px;
   display: grid;
   grid-template-columns: auto auto;
+
 }
 /* _________________Fin Botones______________________ */
 /* Carteles para el usuario */

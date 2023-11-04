@@ -42,8 +42,8 @@ button:hover {
 .escrutado {
   border-radius: 5px;
   margin: 2px;
-  width: 160px;
-  height: 80px;
+  width: 140px;
+  height: 70px;
   font-size: 10px;
   display: grid;
   grid-template-columns :auto auto;
@@ -53,7 +53,9 @@ button:hover {
 .electores p,
 .escrutado p {
   color: #fff;
+  font-size: x-small
 }
+
 
 .paso-gen {
   display :flex;
