@@ -2,11 +2,20 @@
 
 
 /* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
+.agregar-informe{
+  white-space: nowrap;
+  border: none;
+  width: 300px;
+}
 
 .btn-votacion {
   display: grid;
   grid-template-columns: repeat(5, 1fr );
-  gap: 15px;
+  gap: 0px;
+}
+#filtrar svg {
+  width: 12px;
+  height: 12px;
 }
 
 button {
@@ -39,17 +48,25 @@ button:hover {
 .mesa-comp,
 .electores,
 .escrutado {
-
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   color: white;
   border-radius: 14px;
-  margin: 40px 20px;
+  margin: 40px 10px;
   display: grid;
   grid-template-columns: auto auto;
+
+}
+
+.elecciones-paso{
+  margin-bottom: 0%;
+  padding-bottom: 0%;
 }
 /* _________________Fin Botones______________________ */
+#filtrar{
+  border-radius: 30px;
+}
 /* Carteles para el usuario */
 #carteles {
   display: flex;
@@ -71,8 +88,11 @@ button:hover {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   border-radius: 10px;
+  height: 70px;
 }
+
 #exito {
   background-color: var(--mensaje-usuario-verde);
 }
@@ -339,5 +359,9 @@ svg{
   width: 100%;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+}
+.cuadro-Mapa-centrado svg{
+  margin: auto;
 }
 /*----------------------------------------*/
