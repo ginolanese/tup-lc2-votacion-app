@@ -1,4 +1,7 @@
 @import "css/common.css";
+body{
+  background-color: #fff;
+}
 .paso,
 .generales {
   border-radius: 5px;

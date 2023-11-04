@@ -110,7 +110,6 @@ a{
   flex-direction: row; 
   align-items: center;
   
-  
 }
 
 footer{
@@ -127,6 +126,7 @@ footer{
   height: auto;
   box-sizing:content-box;
   flex: 1;
+  line-height: 1.7;
 }
 footer img{
   width:150px;
@@ -156,7 +156,7 @@ footer img{
 
 
 #filtrar::before {
-  content: "🔍"; /* Puedes utilizar cualquier emoji o símbolo que desees */
+  content: "🔍";
 }
 
 #inicio{
@@ -180,6 +180,15 @@ ul,ol{
 
 #btn-generales{
   background-color: var(--celeste);
+}
+#btn-generales a, #btn-paso a{
+  overflow: hidden;
+  padding:30px;
+  margin:0px;
+  border: 0px;
+}
+#btn-paso a{
+  margin: 15px;
 }
 #btn-paso{
   background-color: var(--magenta);
@@ -208,8 +217,8 @@ select{
 }
 
 .barra-menu ul a{
-  padding-left: 40px;
-  padding-right: 40px ;
+  padding-left: 30px;
+  padding-right: 30px;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-left: 5px;
@@ -220,11 +229,16 @@ select{
   min-height: 77vh;
 }
 .logo{
-  width: 200px;
+  width: 150px;
 }
 #informe{
   border: solid 1px #ffffff;
   border-radius: 15px;
+  width: 60px;
+}
+#informe a{
+  padding: 0px;
+  text-align: right;
 }
 
 .barra-menu li{
