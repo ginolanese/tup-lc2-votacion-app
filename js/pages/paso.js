@@ -25,6 +25,7 @@ const tipoRecuento = 1;
 
 //!! ----------AÑO CON FUNCION ASYNC--------------
 async function seleccionAnio() {
+  console.log(" ----INICIA LA FUN ASYNC DE seleccionAnio---- ")
   try {
     const respuesta = await fetch(periodosURL); //?aca use await para pausar la ejecución del programa hasta que la API devuelva algo, los datos en crudo se guardan en la variable respuesta.
 
@@ -48,10 +49,13 @@ async function seleccionAnio() {
     console.log(error)
 
   }
+  console.log(" ----FINALIZA LA FUN ASYNC DE seleccionAnio---- ")
 }
 
 //!! ------------CARGO CON FUN ASYNC-----------
 async function seleccionCargo() {
+  console.log(" ----INICIA LA FUN ASYNC DE seleccionCargo---- ")
+
   periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final. Creo que habria que validarlo, si realmente tiene un valor, pero creo que no hace falta, talvez el no validar puede dar un error.
   try {
     const respuesta = await fetch(cargoURL + periodosSelect);
@@ -81,13 +85,17 @@ async function seleccionCargo() {
     console.log(error)
 
   }
+  console.log(" ----FINALIZA LA FUN ASYNC DE seleccionCargo---- ")
+
 }
 
 //!!-------------Distrito con fun ASYNC---------------------
 async function seleccionDistrito() {
-  cargoSelect = $selectCargo.value
-  
+  console.log(" ----INICIA LA FUN ASYNC DE seleccionDistrito---- ")
 
+  cargoSelect = $selectCargo.value
+
+  console.log(" ----FINALIZA LA FUN ASYNC DE seleccionDistrito---- ")
 }
 
 
@@ -197,4 +205,8 @@ function borrarHijos(padre) {
   }
 }
 
-
+function borrarTodosLosHijos() {
+  borrarHijos($selectCargo)
+  borrarHijos($selectDistrito)
+  borrarHijos($seccionSelect)
+}
