@@ -15,7 +15,7 @@ const $msjAmarilloAdver = document.getElementById("adver")
 const $mesasComputadasSpan = document.getElementById("mesas-computadas-porsen")
 
 //!Guardamos los datos a medida que se van filtrando en estas Variables
-let periodosSelect =""
+let periodosSelect = ""
 let cargoSelect = ""
 let distritoSelect = ""
 let seccionSeleccionada = ""
@@ -23,28 +23,25 @@ let seccionSeleccionada = ""
 const tipoEleccion = 1;
 const tipoRecuento = 1;
 
-//!! AÑO CON FUNCION ASYNC
-
-async function seleccionAnio(){ 
-  try{
+//!! ----------AÑO CON FUNCION ASYNC--------------
+async function seleccionAnio() {
+  try {
     const respuesta = await fetch(periodosURL); //?aca use await para pausar la ejecución del programa hasta que la API devuelva algo, los datos en crudo se guardan en la variable respuesta.
-    if (respuesta.ok){ 
+    if (respuesta.ok) {
       const anio = await respuesta.json();
-      anio.forEach((anio) =>{ //?se recorre todo el json()
+      anio.forEach((anio) => { //?se recorre todo el json()
         const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto (en este caso el año)
-        nuevaOption.value = anio; 
+        nuevaOption.value = anio;
         nuevaOption.innerHTML = ` ${anio}`;
         $selectAnio.appendChild(nuevaOption); //? <la nueva etiqueta se agrega como hija de <select> de nuesto html.
-        
+
       });
     }
-    else{
+    else {
       mostrarMensaje($msjRojoError);
     }
-
-
   }
-  catch{
+  catch (error) {  //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
     mostrarMensaje($msjRojoError)
     console.log("algo salio mal.. puede que el servico este caido.")
   }
@@ -63,14 +60,14 @@ fetch(periodosURL)
       nuevaOption.value = anio;
       nuevaOption.innerHTML = ` ${anio}`;
       $selectAnio.appendChild(nuevaOption);
-      
+
     });
     // Asigna el elemento select a la variable periodosSelect
     periodosSelect = $selectAnio;
     periodosSelect.addEventListener("change", function () {
       console.log(periodosSelect.value);
       //-------------- Cargo ----------------------------
-    mostrarMensaje($msjVerdeExito)
+      mostrarMensaje($msjVerdeExito)
 
       fetch(cargoURL + periodosSelect.value)
         .then((res) => res.json(res))
