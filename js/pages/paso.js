@@ -40,6 +40,7 @@ fetch(periodosURL)
     periodosSelect.addEventListener("change", function () {
       console.log(periodosSelect.value);
       //-------------- Cargo ----------------------------
+    mostrarMensaje($msjVerdeExito)
 
       fetch(cargoURL + periodosSelect.value)
         .then((res) => res.json(res))
@@ -111,3 +112,10 @@ fetch(periodosURL)
     });
   });
 
+
+function mostrarMensaje(msj) {
+  msj.classList.remove("escondido");
+  setTimeout(() => {
+    msj.classList.add("escondido");
+  }, 4000);
+}
