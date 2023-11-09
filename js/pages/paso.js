@@ -1,17 +1,21 @@
 const periodosURL = "https://resultados.mininterior.gob.ar/api/menu/periodos";
 const cargoURL = "https://resultados.mininterior.gob.ar/api/menu?año=";
 
+const selectAnio = document.getElementById("anio");
+const selectCargo = document.getElementById("cargo");
+const selectDistrito = document.getElementById("distrito");
+const seccionSelect = document.getElementById("seccion");
+
 
 const tipoEleccion = 1;
 const tipoRecuento = 1;
-var periodosSelect; // Declaración de la variable periodosSelect
-var cargoSelect;
+let periodosSelect; // Declaración de la variable periodosSelect
+let cargoSelect;
 fetch(periodosURL)
   .then((res) => res.json())
   .then((res) => {
     console.log(res);
     //-------------- año ----------------------------
-    var selectAnio = document.getElementById("anio");
     res.forEach((anio) => {
       const nuevaOption = document.createElement("option");
       nuevaOption.value = anio;
@@ -31,15 +35,14 @@ fetch(periodosURL)
         .then((res) => res.json(res))
         .then((datosFiltros) => {
           console.log(datosFiltros)
-          const selectCrgo = document.getElementById("cargo");
-          while (selectCrgo.firstChild) {
+          while (selectCargo.firstChild) {
             //elimina todos los elementos
-            selectCrgo.removeChild(selectCrgo.firstChild);
+            selectCargo.removeChild(selectCargo.firstChild);
           }
           const nuevaOptionCargo = document.createElement("option");
           nuevaOptionCargo.textContent = "Cargo";
           nuevaOptionCargo.value = "Cargo";
-          selectCrgo.appendChild(nuevaOptionCargo);
+          selectCargo.appendChild(nuevaOptionCargo);
           datosFiltros.forEach((eleccion) => {
             console.log("ELECCIONES ")
             console.log(eleccion)
@@ -52,18 +55,17 @@ fetch(periodosURL)
                 nuevaOption.value = cargo.IdCargo;
                 nuevaOption.innerHTML = `${cargo.Cargo}`;
                 console.log(cargo);
-                selectCrgo.appendChild(nuevaOption);
+                selectCargo.appendChild(nuevaOption);
               });
             }
           });
 
           //-------------- Distrito ----------------------------
           // corregir no filtra bien
-          cargoSelect = selectCrgo
+          cargoSelect = selectCargo
           cargoSelect.addEventListener("change", function () {
             console.log(cargoSelect.value);
             alert(cargoSelect.value);
-            const selectDistrito = document.getElementById("distrito");
             while (selectDistrito.firstChild) {
               //elimina todos los elementos
               selectDistrito.removeChild(selectDistrito.firstChild);
