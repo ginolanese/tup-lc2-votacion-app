@@ -8,15 +8,21 @@ const $selectDistrito = document.getElementById("distrito");
 const $seccionSelect = document.getElementById("seccion");
 const $inputSeccionProvincial = document.getElementById("hdSeccionProvincial")
 const $botonFiltrar = document.getElementById('filtrar')
-const $mensajeRojoError = document.getElementById("error")
-const $mensajeVerdeExito = document.getElementById("exito")
-const $mensajeAmarilloAdver= document.getElementById("adver")
+const $msjRojoError = document.getElementById("error")
+const $msjVerdeExito = document.getElementById("exito")
+const $msjAmarilloAdver = document.getElementById("adver")
 
+const $mesasComputadasSpan = document.getElementById("mesas-computadas-porsen")
+
+//!Guardamos los datos a medida que se van filtrando en estas Variables
+let periodosSelect =""
+let cargoSelect = ""
+let distritoSelect = ""
+let seccionSeleccionada = ""
 
 const tipoEleccion = 1;
 const tipoRecuento = 1;
-let periodosSelect; // Declaración de la variable periodosSelect
-let cargoSelect;
+
 fetch(periodosURL)
   .then((res) => res.json())
   .then((res) => {
@@ -25,12 +31,10 @@ fetch(periodosURL)
     res.forEach((anio) => {
       const nuevaOption = document.createElement("option");
       nuevaOption.value = anio;
-      nuevaOption.innerHTML = `
-                               ${anio}
-                               `;
+      nuevaOption.innerHTML = ` ${anio}`;
       $selectAnio.appendChild(nuevaOption);
+      
     });
-
     // Asigna el elemento select a la variable periodosSelect
     periodosSelect = $selectAnio;
     periodosSelect.addEventListener("change", function () {
