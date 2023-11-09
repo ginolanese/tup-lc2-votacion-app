@@ -27,14 +27,15 @@ const tipoRecuento = 1;
 async function seleccionAnio() {
   try {
     const respuesta = await fetch(periodosURL); //?aca use await para pausar la ejecución del programa hasta que la API devuelva algo, los datos en crudo se guardan en la variable respuesta.
+    
     if (respuesta.ok) {
-      const anio = await respuesta.json();
-      anio.forEach((anio) => { //?se recorre todo el json()
+      borrarHijos($selectAnio)
+      const anios = await respuesta.json();
+      anios.forEach((anio) => { //?se recorre todo el json()
         const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto (en este caso el año)
         nuevaOption.value = anio;
         nuevaOption.innerHTML = ` ${anio}`;
         $selectAnio.appendChild(nuevaOption); //? <la nueva etiqueta se agrega como hija de <select> de nuesto html.
-
       });
     }
     else {
@@ -47,7 +48,33 @@ async function seleccionAnio() {
   }
 }
 
+//!! ------------CARGO CON FUN ASYNC-----------
+async function seleccionCargo(){
+  periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final.
+  try{
+    const respuesta = await fetch(cargoURL+periodosSelect); 
 
+    if (respuesta.ok) {
+      borrarHijos($selectCargo)
+      const cargos = await respuesta.json();
+      cargos.forEach((cargo) => { //?se recorre todo el json()
+        const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
+        nuevaOption.value = cargo.IdCargo;
+        nuevaOption.innerHTML = `${cargo.Cargo}`;
+        $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
+      });
+    }
+    else {
+      mostrarMensaje($msjRojoError);
+    }
+
+  }
+  
+  catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
+    mostrarMensaje($msjRojoError)
+    console.log("algo salio mal.. puede que el servico este caido.")
+  }
+}
 
 
 fetch(periodosURL)
@@ -73,6 +100,8 @@ fetch(periodosURL)
         .then((res) => res.json(res))
         .then((datosFiltros) => {
           console.log(datosFiltros)
+          console.log("ACAAAA")
+
           while ($selectCargo.firstChild) {
             //elimina todos los elementos
             $selectCargo.removeChild($selectCargo.firstChild);
@@ -146,3 +175,12 @@ function mostrarMensaje(msj) {
     msj.classList.add("escondido");
   }, 4000);
 }
+
+function borrarHijos(padre){
+  let cantHijos = padre.options.length
+  for(let i = 1; i <= cantHijos; i++){
+    padre.remove(1)
+  }
+}
+
+
