@@ -1,10 +1,16 @@
 const periodosURL = "https://resultados.mininterior.gob.ar/api/menu/periodos";
 const cargoURL = "https://resultados.mininterior.gob.ar/api/menu?año=";
 
-const selectAnio = document.getElementById("anio");
-const selectCargo = document.getElementById("cargo");
-const selectDistrito = document.getElementById("distrito");
-const seccionSelect = document.getElementById("seccion");
+//Se usa el $ para poder distingir con mayor facilidad los elementos directos del DOM
+const $selectAnio = document.getElementById("anio");
+const $selectCargo = document.getElementById("cargo");
+const $selectDistrito = document.getElementById("distrito");
+const $seccionSelect = document.getElementById("seccion");
+const $inputSeccionProvincial = document.getElementById("hdSeccionProvincial")
+const $botonFiltrar = document.getElementById('filtrar')
+const $mensajeRojoError = document.getElementById("error")
+const $mensajeVerdeExito = document.getElementById("exito")
+const $mensajeAmarilloAdver= document.getElementById("adver")
 
 
 const tipoEleccion = 1;
@@ -22,11 +28,11 @@ fetch(periodosURL)
       nuevaOption.innerHTML = `
                                ${anio}
                                `;
-      selectAnio.appendChild(nuevaOption);
+      $selectAnio.appendChild(nuevaOption);
     });
 
     // Asigna el elemento select a la variable periodosSelect
-    periodosSelect = selectAnio;
+    periodosSelect = $selectAnio;
     periodosSelect.addEventListener("change", function () {
       console.log(periodosSelect.value);
       //-------------- Cargo ----------------------------
@@ -35,14 +41,14 @@ fetch(periodosURL)
         .then((res) => res.json(res))
         .then((datosFiltros) => {
           console.log(datosFiltros)
-          while (selectCargo.firstChild) {
+          while ($selectCargo.firstChild) {
             //elimina todos los elementos
-            selectCargo.removeChild(selectCargo.firstChild);
+            $selectCargo.removeChild($selectCargo.firstChild);
           }
           const nuevaOptionCargo = document.createElement("option");
           nuevaOptionCargo.textContent = "Cargo";
           nuevaOptionCargo.value = "Cargo";
-          selectCargo.appendChild(nuevaOptionCargo);
+          $selectCargo.appendChild(nuevaOptionCargo);
           datosFiltros.forEach((eleccion) => {
             console.log("ELECCIONES ")
             console.log(eleccion)
@@ -55,25 +61,25 @@ fetch(periodosURL)
                 nuevaOption.value = cargo.IdCargo;
                 nuevaOption.innerHTML = `${cargo.Cargo}`;
                 console.log(cargo);
-                selectCargo.appendChild(nuevaOption);
+                $selectCargo.appendChild(nuevaOption);
               });
             }
           });
 
           //-------------- Distrito ----------------------------
           // corregir no filtra bien
-          cargoSelect = selectCargo
+          cargoSelect = $selectCargo
           cargoSelect.addEventListener("change", function () {
             console.log(cargoSelect.value);
             alert(cargoSelect.value);
-            while (selectDistrito.firstChild) {
+            while ($selectDistrito.firstChild) {
               //elimina todos los elementos
-              selectDistrito.removeChild(selectDistrito.firstChild);
+              $selectDistrito.removeChild($selectDistrito.firstChild);
             }
             const nuevaOptionDistrito = document.createElement("option");
             nuevaOptionDistrito.textContent = "Distrito";
             nuevaOptionDistrito.value = "Distrito";
-            selectDistrito.appendChild(nuevaOptionDistrito);
+            $selectDistrito.appendChild(nuevaOptionDistrito);
             datosFiltros.forEach((eleccion) => {
 
               if (eleccion.IdEleccion == tipoEleccion) {
@@ -89,7 +95,7 @@ fetch(periodosURL)
                     nuevaOption.innerHTML = `${distrito.Distrito}`;
 
                     console.log(cargo);
-                    selectDistrito.appendChild(nuevaOption);
+                    $selectDistrito.appendChild(nuevaOption);
                   });
 
                 });
