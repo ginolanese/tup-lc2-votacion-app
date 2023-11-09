@@ -27,7 +27,7 @@ const tipoRecuento = 1;
 async function seleccionAnio() {
   try {
     const respuesta = await fetch(periodosURL); //?aca use await para pausar la ejecución del programa hasta que la API devuelva algo, los datos en crudo se guardan en la variable respuesta.
-    
+
     if (respuesta.ok) {
       borrarHijos($selectAnio)
       const anios = await respuesta.json();
@@ -45,23 +45,28 @@ async function seleccionAnio() {
   catch (error) {  //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
     mostrarMensaje($msjRojoError)
     console.log("algo salio mal.. puede que el servico este caido.")
+    console.log(error)
+
   }
 }
 
 //!! ------------CARGO CON FUN ASYNC-----------
-async function seleccionCargo(){
-  periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final.
-  try{
-    const respuesta = await fetch(cargoURL+periodosSelect); 
-
+async function seleccionCargo() {
+  periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final. Creo que habria que validarlo, si realmente tiene un valor, pero creo que no hace falta, talvez el no validar puede dar un error.
+  try {
+    const respuesta = await fetch(cargoURL + periodosSelect);
     if (respuesta.ok) {
       borrarHijos($selectCargo)
-      const cargos = await respuesta.json();
-      cargos.forEach((cargo) => { //?se recorre todo el json()
-        const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
-        nuevaOption.value = cargo.IdCargo;
-        nuevaOption.innerHTML = `${cargo.Cargo}`;
-        $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
+      const elecciones = await respuesta.json();
+      elecciones.forEach((cargo) => {
+        if (cargo.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
+          cargo.Cargos.forEach((cargo) => { //?se recorre todo el json()
+            const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
+            nuevaOption.value = cargo.IdCargo;
+            nuevaOption.innerHTML = `${cargo.Cargo}`;
+            $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
+          })
+        }
       });
     }
     else {
@@ -69,11 +74,20 @@ async function seleccionCargo(){
     }
 
   }
-  
+
   catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
     mostrarMensaje($msjRojoError)
     console.log("algo salio mal.. puede que el servico este caido.")
+    console.log(error)
+
   }
+}
+
+//!!-------------Distrito con fun ASYNC---------------------
+async function seleccionDistrito() {
+  cargoSelect = $selectCargo.value
+  
+
 }
 
 
@@ -176,9 +190,9 @@ function mostrarMensaje(msj) {
   }, 4000);
 }
 
-function borrarHijos(padre){
+function borrarHijos(padre) {
   let cantHijos = padre.options.length
-  for(let i = 1; i <= cantHijos; i++){
+  for (let i = 1; i <= cantHijos; i++) {
     padre.remove(1)
   }
 }
