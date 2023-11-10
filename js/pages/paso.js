@@ -94,16 +94,17 @@ async function seleccionDistrito() {
     if (respuesta.ok) {
       borrarHijos($selectDistrito)
       const elecciones = await respuesta.json();
-      elecciones.forEach((cargo) => {
-        if (cargo.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
-          cargo.Cargos.IdCargo[cargoSelect].Distrito.forEach((cargo) => { //se recorre todo el json()//!!!POR ACA MI REY
-            const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
-            nuevaOption.value = cargo.IdCargo;
-            nuevaOption.innerHTML = `${cargo.Cargo}`;
-            $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
-          })
-        }
-      });
+      elecciones.forEach((eleccion) => {
+        if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
+          eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
+            if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
+              cargo.Distritos.forEach((distrito) => { 
+                const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
+                nuevaOption.value = distrito.IdDistritos;
+                nuevaOption.innerHTML = `${distrito.Distrito}`;
+                $selectCargo.appendChild(nuevaOption)})
+            }})
+        }});
     }
     else {
       mostrarMensaje($msjRojoError);
@@ -116,6 +117,17 @@ async function seleccionDistrito() {
 
   }
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionDistrito---- ")
+}
+
+//!!-------------Seccion Provincial fun ASYNC---------------
+async function seleccionSeccionProv(){
+  console.log(" ----INICIA LA FUN ASYNC DE seleccionSeccionProv---- ")
+  distritoSelect = $selectDistrito.value
+
+
+
+
+  console.log(" ----FINALIZA LA FUN ASYNC DE seleccionSeccionProv---- ")
 }
 
 
