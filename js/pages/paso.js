@@ -27,10 +27,13 @@ const tipoRecuento = 1;
 //*---------------Start-----------------------
 
 seleccionAnio()
-seleccionCargo()
-seleccionDistrito()
-seleccionSeccionProv()
-filtrar()
+if(periodosSelect === ""){
+  seleccionCargo()
+  seleccionDistrito()
+  seleccionSeccionProv()
+  filtrar()
+
+}
 
 
 
@@ -67,38 +70,35 @@ async function seleccionAnio() {
 async function seleccionCargo() {
   console.log(" ----INICIA LA FUN ASYNC DE seleccionCargo---- ")
   periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final. Creo que habria que validarlo, si realmente tiene un valor, pero creo que no hace falta, talvez el no validar puede dar un error.
-  if (periodosSelect === ""){
-    try {
-      const respuesta = await fetch(cargoURL + periodosSelect);
-      if (respuesta.ok) {
-        borrarHijos($selectCargo)
-        const elecciones = await respuesta.json();
-        elecciones.forEach((cargo) => {
-          if (cargo.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
-            cargo.Cargos.forEach((cargo) => { //?se recorre todo el json()
-              const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
-              nuevaOption.value = cargo.IdCargo;
-              nuevaOption.innerHTML = `${cargo.Cargo}`;
-              $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
-            })
-          }
-        });
-      }
-      else {
-        mostrarMensaje($msjRojoError);
-      }
+  
+  try {
+    const respuesta = await fetch(cargoURL + periodosSelect);
+    if (respuesta.ok) {
+      borrarHijos($selectCargo)
+      const elecciones = await respuesta.json();
+      elecciones.forEach((cargo) => {
+        if (cargo.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
+          cargo.Cargos.forEach((cargo) => { //?se recorre todo el json()
+            const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
+            nuevaOption.value = cargo.IdCargo;
+            nuevaOption.innerHTML = `${cargo.Cargo}`;
+            $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
+          })
+        }
+      });
     }
-    catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-      mostrarMensaje($msjRojoError)
-      console.log("algo salio mal.. puede que el servico este caido.")
-      console.log(error)
+    else {
+      mostrarMensaje($msjRojoError);
+    }
+  }
+  catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
+    mostrarMensaje($msjRojoError)
+    console.log("algo salio mal.. puede que el servico este caido.")
+    console.log(error)
 
-    }
-    console.log(" ----FINALIZA LA FUN ASYNC DE seleccionCargo---- ")
   }
-  else{
-    mostrarMensaje($msjAmarilloAdver)
-  }
+  console.log(" ----FINALIZA LA FUN ASYNC DE seleccionCargo---- ")
+
 }
 
 //!!-------------Distrito con fun ASYNC---------------------
