@@ -1,4 +1,4 @@
-@import "css/common.css";
+ @import "css/common.css";
 body{
   background-color: #fff;
 }
@@ -82,4 +82,4 @@ main {
 span{
   display: flex;
   align-items: center;
-}
+} 
