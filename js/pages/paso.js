@@ -26,17 +26,6 @@ const tipoRecuento = 1;
 
 //*---------------Start-----------------------
 
-// seleccionAnio()
-// if (periodosSelect !== "") {
-//   seleccionCargo()
-//   if (cargoSelect !== "") {
-//     seleccionDistrito()
-//     if (distritoSelect !== "") {
-//       seleccionSeccionProv()
-//       filtrar()
-//     }
-//   }
-// }
 //?El DOMContentLoaded: significa que la estructura básica de la página, incluyendo el DOM, está disponible para ser manipulada a través de JavaScript
 document.addEventListener('DOMContentLoaded', () => { alert("Ingrese los datos para filtrar.") });//se debe cambiar con un cartel.
 document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
@@ -49,10 +38,10 @@ $botonFiltrar.addEventListener('click', filtrar);
 
 
 //*-------------end--------------
-
 //!! ----------AÑO CON FUNCION ASYNC--------------
 async function seleccionAnio() {
   console.log(" ----INICIA LA FUN ASYNC DE seleccionAnio---- ")
+  borrarTodosLosHijos()
   try {
     const respuesta = await fetch(periodosURL); //?aca use await para pausar la ejecución del programa hasta que la API devuelva algo, los datos en crudo se guardan en la variable respuesta.
 
@@ -170,7 +159,7 @@ async function seleccionSeccionProv() {
     if (respuesta.ok) {
       const elecciones = await respuesta.json();
       borrarHijos($seccionSelect)
-      
+
       elecciones.forEach((eleccion) => {
         if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
           eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
@@ -179,13 +168,14 @@ async function seleccionSeccionProv() {
                 if (distrito.IdDistrito == distritoSelect) {
                   console.log("----Json Distrito para SeccionProv----")
                   console.log(distrito)
+
                   distrito.SeccionesProvinciales.forEach((seccionProv) => {
                     idSeccionProv = seccionProv.IDSeccionProvincial;
-                    $inputSeccionProvincial.value = idSeccionProv; //!! Agrega el avalor id al input oculto.
-                    seccionProv.Secciones.forEach((seccion) => { //!! No recorre el array
+                    $inputSeccionProvincial.value = idSeccionProv; //! agrega el valor al input oculto
+                    seccionProv.Secciones.forEach((seccion) => {
                       console.log("----Json Selecciones Provinciales para Secciones----")
                       console.log(seccion)
-                      const nuevaOption = document.createElement("option");  //!! cambiarlo para selectSeccionProv
+                      const nuevaOption = document.createElement("option");
                       nuevaOption.value = seccion.IdSeccion;
                       nuevaOption.innerHTML = `${seccion.Seccion}`;
                       $seccionSelect.appendChild(nuevaOption)
@@ -213,11 +203,37 @@ async function seleccionSeccionProv() {
 
 //!!-----------Fun Filtrar-------------
 async function filtrar() {
+  if (!$selectAnio.value || !$selectCargo.value || !$selectDistrito.value || !$seccionSelect.value) {
+    mostrarMensaje($msjAmarilloAdver);
+    return;
+  }
   seccionSeleccionadaID = $inputSeccionProvincial.value
   idSeccionProv = $seccionSelect.value
-  url = getResultados + `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${''}&mesaId=${''}`
+
+  let idCircuito = "";
+  let IdMesa = "";
+  console.log(`---año: ${periodosSelect} Cargo: ${cargoSelect} distrito: ${distritoSelect} Seleccion ID(nul):${seccionSeleccionadaID} IDSelecciones Provinciales: ${idSeccionProv}---`)
+
+  let parametros = `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${idCircuito}&mesaId=${IdMesa}`
+  let url = getResultados + parametros
   console.log(url);
-  mostrarMensaje($msjVerdeExito)
+  try {
+    const respuesta = await fetch(url)
+    if (respuesta.ok) {
+      const filtrado = await respuesta.json()
+      console.log(filtrado);
+
+      mostrarMensaje($msjVerdeExito)
+    }
+    else {
+      mostrarMensaje($msjRojoError);
+    }
+  }
+  catch (error) {
+    mostrarMensaje($msjRojoError)
+    console.log("algo salio mal.. puede que el servico este caido.")
+    console.log(error)
+  }
 }
 
 
@@ -321,9 +337,6 @@ function mostrarMensaje(msj) {
     msj.classList.add("escondido");
   }, 4000);
 }
-
-
-
 
 function borrarHijos(padre) {
   let cantHijos = padre.options.length
