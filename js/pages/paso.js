@@ -44,7 +44,7 @@ $selectAnio.addEventListener('change', seleccionCargo); //cuando el <select> cam
 $selectCargo.addEventListener('change', seleccionDistrito); //cuando el <select> cambie se llama a la siguiente fun
 $selectDistrito.addEventListener('change', seleccionSeccionProv); //cuando el <select> cambie se llama a la siguiente fun
 $seccionSelect.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
-$botonFiltrar.addEventListener('click',filtrar);
+$botonFiltrar.addEventListener('click', filtrar);
 
 
 
@@ -59,7 +59,7 @@ async function seleccionAnio() {
     if (respuesta.ok) {
       borrarHijos($selectAnio)
       const anios = await respuesta.json();
-      console.log("----Json ara año----")
+      console.log("----Json, Año para Cargo----")
       console.log(anios)
 
       anios.forEach((anio) => { //?se recorre todo el json()
@@ -92,7 +92,7 @@ async function seleccionCargo() {
     if (respuesta.ok) {
       borrarHijos($selectCargo)
       const elecciones = await respuesta.json();
-      console.log("----Json para elecciones----")
+      console.log("----Json, año para elecciones----")
       console.log(elecciones)
 
       elecciones.forEach((cargo) => {
@@ -129,16 +129,17 @@ async function seleccionDistrito() {
     if (respuesta.ok) {
       borrarHijos($selectDistrito)
       const elecciones = await respuesta.json();
-      console.log("----Json para elecciones----")
-      console.log(elecciones)
 
       elecciones.forEach((eleccion) => {
         if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
           eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
             if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
+              console.log("----Json Cargo para Distrito----")
+              console.log(cargo)
+
               cargo.Distritos.forEach((distrito) => {
                 const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
-                nuevaOption.value = distrito.IdDistritos;
+                nuevaOption.value = distrito.IdDistrito;
                 nuevaOption.innerHTML = `${distrito.Distrito}`;
                 $selectDistrito.appendChild(nuevaOption)
               })
@@ -168,19 +169,19 @@ async function seleccionSeccionProv() {
     const respuesta = await fetch(cargoURL + periodosSelect);
     if (respuesta.ok) {
       const elecciones = await respuesta.json();
-      console.log("----Json para elecciones----")
-      console.log(elecciones)
-      
+      console.log("----?----")
       elecciones.forEach((eleccion) => {
         if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
           eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
             if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
               cargo.Distritos.forEach((distrito) => {
-                if (distrito.IdDistritos == distritoSelect) {
+                if (distrito.IdDistrito == distritoSelect) {
+                  console.log("----Json Distrito para SeccionProv----")
+                  console.log(distrito)
                   distrito.SeccionesProvinciales.forEach((seccionProv) => {
                     idSeccionProv = seccionProv.IDSeccionProvincial;
                     $inputSeccionProvincial.value = idSeccionProv; //!! Agrega el avalor id al input oculto.
-                    seccionProv.Secciones.forEach((seccion) => {
+                    seccionProv.Secciones.forEach((seccion) => { //!! No recorre el array
                       borrarHijos($seccionSelect)
                       const nuevaOption = document.createElement("option");  //!! cambiarlo para selectSeccionProv
                       nuevaOption.value = seccion.IdSeccion;
