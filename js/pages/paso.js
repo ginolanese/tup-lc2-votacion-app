@@ -26,16 +26,29 @@ const tipoRecuento = 1;
 
 //*---------------Start-----------------------
 
-seleccionAnio()
-if(periodosSelect === ""){
-  seleccionCargo()
-  seleccionDistrito()
-  seleccionSeccionProv()
-  filtrar()
+// seleccionAnio()
+// if (periodosSelect !== "") {
+//   seleccionCargo()
+//   if (cargoSelect !== "") {
+//     seleccionDistrito()
+//     if (distritoSelect !== "") {
+//       seleccionSeccionProv()
+//       filtrar()
+//     }
+//   }
+// }
+//?El DOMContentLoaded: significa que la estructura básica de la página, incluyendo el DOM, está disponible para ser manipulada a través de JavaScript
+document.addEventListener('DOMContentLoaded', () => { alert("Ingrese los datos para filtrar.") });//se debe cambiar con un cartel.
+document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
+$selectAnio.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
+$selectCargo.addEventListener('change', seleccionDistrito); //cuando el <select> cambie se llama a la siguiente fun
+$selectDistrito.addEventListener('change', seleccionSeccionProv); //cuando el <select> cambie se llama a la siguiente fun
+$seccionSelect.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
+$botonFiltrar.addEventListener('click',filtrar);
 
-}
 
 
+//*-------------end--------------
 
 //!! ----------AÑO CON FUNCION ASYNC--------------
 async function seleccionAnio() {
@@ -70,7 +83,7 @@ async function seleccionAnio() {
 async function seleccionCargo() {
   console.log(" ----INICIA LA FUN ASYNC DE seleccionCargo---- ")
   periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final. Creo que habria que validarlo, si realmente tiene un valor, pero creo que no hace falta, talvez el no validar puede dar un error.
-  
+
   try {
     const respuesta = await fetch(cargoURL + periodosSelect);
     if (respuesta.ok) {
@@ -184,7 +197,7 @@ async function seleccionSeccionProv() {
 }
 
 //!!-----------Fun Filtrar-------------
-async function filtrar(){
+async function filtrar() {
   seccionSeleccionadaID = $inputSeccionProvincial.value
   idSeccionProv = $seccionSelect.value
   url = getResultados + `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${''}&mesaId=${''}`
