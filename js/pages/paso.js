@@ -1,12 +1,13 @@
 const periodosURL = "https://resultados.mininterior.gob.ar/api/menu/periodos";
 const cargoURL = "https://resultados.mininterior.gob.ar/api/menu?año=";
+const getResultados = "https://resultados.mininterior.gob.ar/api/resultados/getResultados"
 
 //Se usa el $ para poder distingir con mayor facilidad los elementos directos del DOM
 const $selectAnio = document.getElementById("anio");
 const $selectCargo = document.getElementById("cargo");
 const $selectDistrito = document.getElementById("distrito");
 const $seccionSelect = document.getElementById("seccion");
-const $inputSeccionProvincial = document.getElementById("hdSeccionProvincial")
+const $inputSeccionProvincial = document.getElementById("hdSeccionProvincial") //!esta oculto para el usuario y solo guarda IDSecccionProvincial
 const $botonFiltrar = document.getElementById('filtrar')
 const $msjRojoError = document.getElementById("error")
 const $msjVerdeExito = document.getElementById("exito")
@@ -19,7 +20,7 @@ let periodosSelect = ""
 let cargoSelect = ""
 let distritoSelect = ""
 let seccionSeleccionada = ""
-
+let idSeccionProv = ""
 const tipoEleccion = 1;
 const tipoRecuento = 1;
 
@@ -89,7 +90,7 @@ async function seleccionCargo() {
 async function seleccionDistrito() {
   console.log(" ----INICIA LA FUN ASYNC DE seleccionDistrito---- ")
   cargoSelect = $selectCargo.value //!se guarda el cargo elegido anteriormente
-  try { //!!!!! copipaste hay que cambierlo!! 
+  try {
     const respuesta = await fetch(cargoURL + periodosSelect);
     if (respuesta.ok) {
       borrarHijos($selectDistrito)
@@ -98,13 +99,16 @@ async function seleccionDistrito() {
         if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
           eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
             if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
-              cargo.Distritos.forEach((distrito) => { 
+              cargo.Distritos.forEach((distrito) => {
                 const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
                 nuevaOption.value = distrito.IdDistritos;
                 nuevaOption.innerHTML = `${distrito.Distrito}`;
-                $selectCargo.appendChild(nuevaOption)})
-            }})
-        }});
+                $selectDistrito.appendChild(nuevaOption)
+              })
+            }
+          })
+        }
+      });
     }
     else {
       mostrarMensaje($msjRojoError);
@@ -120,15 +124,50 @@ async function seleccionDistrito() {
 }
 
 //!!-------------Seccion Provincial fun ASYNC---------------
-async function seleccionSeccionProv(){
+async function seleccionSeccionProv() {
   console.log(" ----INICIA LA FUN ASYNC DE seleccionSeccionProv---- ")
   distritoSelect = $selectDistrito.value
+  try {
+    const respuesta = await fetch(cargoURL + periodosSelect);
+    if (respuesta.ok) {
+      const elecciones = await respuesta.json();
+      elecciones.forEach((eleccion) => {
+        if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
+          eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
+            if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
+              cargo.Distritos.forEach((distrito) => {
+                if (distrito.IdDistritos == distritoSelect) {
+                  distrito.SeccionesProvinciales.forEach((seccionProv) => {
+                    idSeccionProv = seccionProv.IDSeccionProvincial;
+                    $inputSeccionProvincial.value = idSeccionProv; //!! Agrega el avalor id al input oculto.
+                    seccionProv.Secciones.forEach((seccion) => {
+                      borrarHijos($seccionSelect)
+                      const nuevaOption = document.createElement("option");  //!! cambiarlo para selectSeccionProv
+                      nuevaOption.value = seccion.IdSeccion;
+                      nuevaOption.innerHTML = `${seccion.Seccion}`;
+                      $seccionSelect.appendChild(nuevaOption)
+                    })
+                  })
+                }
+              })
+            }
+          })
+        }
+      })
+    }
 
-
-
-
+    else {
+      mostrarMensaje($msjRojoError);
+    }
+  }
+  catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
+    mostrarMensaje($msjRojoError)
+    console.log("algo salio mal.. puede que el servico este caido.")
+    console.log(error)
+  }
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionSeccionProv---- ")
 }
+
 
 
 fetch(periodosURL)
