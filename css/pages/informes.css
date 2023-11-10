@@ -1,4 +1,4 @@
-@import "css/common.css";
+ @import "css/common.css";
 
 button{
   background-color:var(--gris-claro);
@@ -178,4 +178,4 @@ span {
   display: flex;
   text-align: start;
   align-items: start;
-}
+} 
