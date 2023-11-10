@@ -12,6 +12,10 @@ const $botonFiltrar = document.getElementById('filtrar')
 const $msjRojoError = document.getElementById("error")
 const $msjVerdeExito = document.getElementById("exito")
 const $msjAmarilloAdver = document.getElementById("adver")
+const $cuadros = document.querySelector("#cuadros")
+const $tituloSubTitulo = document.querySelector("#sec-titulo")
+const $contenido = document.querySelector("#sec-contenido")
+
 
 const $mesasComputadasSpan = document.getElementById("mesas-computadas-porsen")
 
@@ -23,16 +27,27 @@ let seccionSeleccionadaID = ""
 let idSeccionProv = ""
 const tipoEleccion = 1;
 const tipoRecuento = 1;
-
+let valorCargo = ""
+let valorDistrito = ""
+let valorSeccion = ""
 //*---------------Start-----------------------
 
-//?El DOMContentLoaded: significa que la estructura básica de la página, incluyendo el DOM, está disponible para ser manipulada a través de JavaScript
-document.addEventListener('DOMContentLoaded', () => { alert("Ingrese los datos para filtrar.") });//se debe cambiar con un cartel.
+document.addEventListener('DOMContentLoaded', () => {
+  mostrarMensaje($msjAmarilloAdver, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`, 90000)
+
+});
+mostrarMensaje($msjAmarilloAdver, "HOlas buenas tardes señores")
+
 document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
 $selectAnio.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
 $selectCargo.addEventListener('change', seleccionDistrito); //cuando el <select> cambie se llama a la siguiente fun
 $selectDistrito.addEventListener('change', seleccionSeccionProv); //cuando el <select> cambie se llama a la siguiente fun
 $seccionSelect.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
+$seccionSelect.addEventListener('change', () => {
+  let opcionSeleccionada = $seccionSelect.options[$seccionSelect.selectedIndex];
+  valorSeccion = opcionSeleccionada.textContent; // el texto de la opción seleccionada
+});
+
 $botonFiltrar.addEventListener('click', filtrar);
 
 
@@ -41,8 +56,10 @@ $botonFiltrar.addEventListener('click', filtrar);
 //!! ----------AÑO CON FUNCION ASYNC--------------
 async function seleccionAnio() {
   console.log(" ----INICIA LA FUN ASYNC DE seleccionAnio---- ")
-  borrarTodosLosHijos()
+
   try {
+    borrarTodosLosHijos() //!Deberia borrar todos los hijos de los select
+    resetFiltro()//!deberia reiniciar el filtro
     const respuesta = await fetch(periodosURL); //?aca use await para pausar la ejecución del programa hasta que la API devuelva algo, los datos en crudo se guardan en la variable respuesta.
 
     if (respuesta.ok) {
@@ -59,11 +76,11 @@ async function seleccionAnio() {
       });
     }
     else {
-      mostrarMensaje($msjRojoError);
+      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
     }
   }
   catch (error) {  //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    mostrarMensaje($msjRojoError)
+    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
     console.log("algo salio mal.. puede que el servico este caido.")
     console.log(error)
 
@@ -96,11 +113,11 @@ async function seleccionCargo() {
       });
     }
     else {
-      mostrarMensaje($msjRojoError);
+      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
     }
   }
   catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    mostrarMensaje($msjRojoError)
+    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
     console.log("algo salio mal.. puede que el servico este caido.")
     console.log(error)
 
@@ -123,6 +140,8 @@ async function seleccionDistrito() {
         if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
           eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
             if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
+              valorCargo = `${cargo.Cargo}`
+
               console.log("----Json Cargo para Distrito----")
               console.log(cargo)
 
@@ -138,11 +157,11 @@ async function seleccionDistrito() {
       });
     }
     else {
-      mostrarMensaje($msjRojoError);
+      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
     }
   }
   catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    mostrarMensaje($msjRojoError)
+    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
     console.log("algo salio mal.. puede que el servico este caido.")
     console.log(error)
 
@@ -166,6 +185,7 @@ async function seleccionSeccionProv() {
             if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
               cargo.Distritos.forEach((distrito) => {
                 if (distrito.IdDistrito == distritoSelect) {
+                  valorDistrito = `${distrito.Distrito}`
                   console.log("----Json Distrito para SeccionProv----")
                   console.log(distrito)
 
@@ -190,11 +210,11 @@ async function seleccionSeccionProv() {
     }
 
     else {
-      mostrarMensaje($msjRojoError);
+      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
     }
   }
   catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    mostrarMensaje($msjRojoError)
+    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
     console.log("algo salio mal.. puede que el servico este caido.")
     console.log(error)
   }
@@ -203,15 +223,17 @@ async function seleccionSeccionProv() {
 
 //!!-----------Fun Filtrar-------------
 async function filtrar() {
-  if (!$selectAnio.value || !$selectCargo.value || !$selectDistrito.value || !$seccionSelect.value) {
-    mostrarMensaje($msjAmarilloAdver);
-    return;
-  }
-  seccionSeleccionadaID = $inputSeccionProvincial.value
   idSeccionProv = $seccionSelect.value
-
+  seccionSeleccionadaID = $inputSeccionProvincial.value
   let idCircuito = "";
   let IdMesa = "";
+
+  if (periodosSelect === "" || cargoSelect === "" || distritoSelect === "" || idSeccionProv === "") {
+    mostrarMensaje($msjAmarilloAdver, "No se encontró información para la consulta realizada");
+    $tituloSubTitulo.classList.remove("escondido");
+    return;
+  }
+
   console.log(`---año: ${periodosSelect} Cargo: ${cargoSelect} distrito: ${distritoSelect} Seleccion ID(nul):${seccionSeleccionadaID} IDSelecciones Provinciales: ${idSeccionProv}---`)
 
   let parametros = `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${idCircuito}&mesaId=${IdMesa}`
@@ -223,16 +245,25 @@ async function filtrar() {
       const filtrado = await respuesta.json()
       console.log(filtrado);
 
-      mostrarMensaje($msjVerdeExito)
+      mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
+      $tituloSubTitulo.classList.remove("escondido");
+      $contenido.classList.remove("escondido");
+      $cuadros.classList.remove("escondido");
+      $tituloSubTitulo.querySelector("h1").textContent = `Elecciones ${periodosSelect} | Paso ${tipoEleccion}`
+      $tituloSubTitulo.querySelector("p").textContent = `${periodosSelect} > Paso ${tipoEleccion} > ${valorCargo} > ${valorDistrito} > ${valorSeccion}`
     }
     else {
-      mostrarMensaje($msjRojoError);
+      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
+      $tituloSubTitulo.classList.remove("escondido");
+
     }
   }
   catch (error) {
-    mostrarMensaje($msjRojoError)
+    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
     console.log("algo salio mal.. puede que el servico este caido.")
     console.log(error)
+    $tituloSubTitulo.classList.remove("escondido");
+
   }
 }
 
@@ -330,12 +361,12 @@ async function filtrar() {
 //     });
 //   });
 
-
-function mostrarMensaje(msj) {
+function mostrarMensaje(msj, cadena, tiempo = 4000) {
+  msj.querySelector(`.mensaje`).textContent = cadena;
   msj.classList.remove("escondido");
   setTimeout(() => {
     msj.classList.add("escondido");
-  }, 4000);
+  }, tiempo);
 }
 
 function borrarHijos(padre) {
@@ -349,4 +380,11 @@ function borrarTodosLosHijos() {
   borrarHijos($selectCargo)
   borrarHijos($selectDistrito)
   borrarHijos($seccionSelect)
+}
+function resetFiltro() {
+  periodosSelect = ""
+  cargoSelect = ""
+  distritoSelect = ""
+  seccionSeleccionadaID = ""
+  idSeccionProv = ""
 }
