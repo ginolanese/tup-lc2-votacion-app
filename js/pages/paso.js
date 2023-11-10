@@ -169,7 +169,8 @@ async function seleccionSeccionProv() {
     const respuesta = await fetch(cargoURL + periodosSelect);
     if (respuesta.ok) {
       const elecciones = await respuesta.json();
-      console.log("----?----")
+      borrarHijos($seccionSelect)
+      
       elecciones.forEach((eleccion) => {
         if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
           eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
@@ -182,7 +183,8 @@ async function seleccionSeccionProv() {
                     idSeccionProv = seccionProv.IDSeccionProvincial;
                     $inputSeccionProvincial.value = idSeccionProv; //!! Agrega el avalor id al input oculto.
                     seccionProv.Secciones.forEach((seccion) => { //!! No recorre el array
-                      borrarHijos($seccionSelect)
+                      console.log("----Json Selecciones Provinciales para Secciones----")
+                      console.log(seccion)
                       const nuevaOption = document.createElement("option");  //!! cambiarlo para selectSeccionProv
                       nuevaOption.value = seccion.IdSeccion;
                       nuevaOption.innerHTML = `${seccion.Seccion}`;
