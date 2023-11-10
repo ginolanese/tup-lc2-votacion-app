@@ -168,7 +168,7 @@ async function seleccionSeccionProv() {
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionSeccionProv---- ")
 }
 
-
+//!!!--> Nada de lo que hice se probo todabia. Asi que hay que ir probando, o primero hacemos la funcion de filtrado
 
 fetch(periodosURL)
   .then((res) => res.json())
@@ -268,6 +268,9 @@ function mostrarMensaje(msj) {
     msj.classList.add("escondido");
   }, 4000);
 }
+
+
+
 
 function borrarHijos(padre) {
   let cantHijos = padre.options.length
