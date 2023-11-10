@@ -19,10 +19,20 @@ const $mesasComputadasSpan = document.getElementById("mesas-computadas-porsen")
 let periodosSelect = ""
 let cargoSelect = ""
 let distritoSelect = ""
-let seccionSeleccionada = ""
+let seccionSeleccionadaID = ""
 let idSeccionProv = ""
 const tipoEleccion = 1;
 const tipoRecuento = 1;
+
+//*---------------Start-----------------------
+
+seleccionAnio()
+seleccionCargo()
+seleccionDistrito()
+seleccionSeccionProv()
+filtrar()
+
+
 
 //!! ----------AÑO CON FUNCION ASYNC--------------
 async function seleccionAnio() {
@@ -57,33 +67,38 @@ async function seleccionAnio() {
 async function seleccionCargo() {
   console.log(" ----INICIA LA FUN ASYNC DE seleccionCargo---- ")
   periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final. Creo que habria que validarlo, si realmente tiene un valor, pero creo que no hace falta, talvez el no validar puede dar un error.
-  try {
-    const respuesta = await fetch(cargoURL + periodosSelect);
-    if (respuesta.ok) {
-      borrarHijos($selectCargo)
-      const elecciones = await respuesta.json();
-      elecciones.forEach((cargo) => {
-        if (cargo.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
-          cargo.Cargos.forEach((cargo) => { //?se recorre todo el json()
-            const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
-            nuevaOption.value = cargo.IdCargo;
-            nuevaOption.innerHTML = `${cargo.Cargo}`;
-            $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
-          })
-        }
-      });
+  if (periodosSelect === ""){
+    try {
+      const respuesta = await fetch(cargoURL + periodosSelect);
+      if (respuesta.ok) {
+        borrarHijos($selectCargo)
+        const elecciones = await respuesta.json();
+        elecciones.forEach((cargo) => {
+          if (cargo.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
+            cargo.Cargos.forEach((cargo) => { //?se recorre todo el json()
+              const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
+              nuevaOption.value = cargo.IdCargo;
+              nuevaOption.innerHTML = `${cargo.Cargo}`;
+              $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
+            })
+          }
+        });
+      }
+      else {
+        mostrarMensaje($msjRojoError);
+      }
     }
-    else {
-      mostrarMensaje($msjRojoError);
-    }
-  }
-  catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    mostrarMensaje($msjRojoError)
-    console.log("algo salio mal.. puede que el servico este caido.")
-    console.log(error)
+    catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
+      mostrarMensaje($msjRojoError)
+      console.log("algo salio mal.. puede que el servico este caido.")
+      console.log(error)
 
+    }
+    console.log(" ----FINALIZA LA FUN ASYNC DE seleccionCargo---- ")
   }
-  console.log(" ----FINALIZA LA FUN ASYNC DE seleccionCargo---- ")
+  else{
+    mostrarMensaje($msjAmarilloAdver)
+  }
 }
 
 //!!-------------Distrito con fun ASYNC---------------------
@@ -168,98 +183,108 @@ async function seleccionSeccionProv() {
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionSeccionProv---- ")
 }
 
-//!!!--> Nada de lo que hice se probo todabia. Asi que hay que ir probando, o primero hacemos la funcion de filtrado
+//!!-----------Fun Filtrar-------------
+async function filtrar(){
+  seccionSeleccionadaID = $inputSeccionProvincial.value
+  idSeccionProv = $seccionSelect.value
+  url = getResultados + `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${''}&mesaId=${''}`
+  console.log(url);
+  mostrarMensaje($msjVerdeExito)
+}
 
-fetch(periodosURL)
-  .then((res) => res.json())
-  .then((res) => {
-    console.log(res);
-    //-------------- año ----------------------------
-    res.forEach((anio) => {
-      const nuevaOption = document.createElement("option");
-      nuevaOption.value = anio;
-      nuevaOption.innerHTML = ` ${anio}`;
-      $selectAnio.appendChild(nuevaOption);
 
-    });
-    // Asigna el elemento select a la variable periodosSelect
-    periodosSelect = $selectAnio;
-    periodosSelect.addEventListener("change", function () {
-      console.log(periodosSelect.value);
-      //-------------- Cargo ----------------------------
-      mostrarMensaje($msjVerdeExito)
 
-      fetch(cargoURL + periodosSelect.value)
-        .then((res) => res.json(res))
-        .then((datosFiltros) => {
-          console.log(datosFiltros)
-          console.log("ACAAAA")
 
-          while ($selectCargo.firstChild) {
-            //elimina todos los elementos
-            $selectCargo.removeChild($selectCargo.firstChild);
-          }
-          const nuevaOptionCargo = document.createElement("option");
-          nuevaOptionCargo.textContent = "Cargo";
-          nuevaOptionCargo.value = "Cargo";
-          $selectCargo.appendChild(nuevaOptionCargo);
-          datosFiltros.forEach((eleccion) => {
-            console.log("ELECCIONES ")
-            console.log(eleccion)
-            if (eleccion.IdEleccion == tipoEleccion) {
-              eleccion.Cargos.forEach((cargo) => {
-                console.log("cargo")
-                console.log(cargo)
+// fetch(periodosURL)
+//   .then((res) => res.json())
+//   .then((res) => {
+//     console.log(res);
+//     //-------------- año ----------------------------
+//     res.forEach((anio) => {
+//       const nuevaOption = document.createElement("option");
+//       nuevaOption.value = anio;
+//       nuevaOption.innerHTML = ` ${anio}`;
+//       $selectAnio.appendChild(nuevaOption);
 
-                const nuevaOption = document.createElement("option");
-                nuevaOption.value = cargo.IdCargo;
-                nuevaOption.innerHTML = `${cargo.Cargo}`;
-                console.log(cargo);
-                $selectCargo.appendChild(nuevaOption);
-              });
-            }
-          });
+//     });
+//     // Asigna el elemento select a la variable periodosSelect
+//     periodosSelect = $selectAnio;
+//     periodosSelect.addEventListener("change", function () {
+//       console.log(periodosSelect.value);
+//       //-------------- Cargo ----------------------------
+//       mostrarMensaje($msjVerdeExito)
 
-          //-------------- Distrito ----------------------------
-          // corregir no filtra bien
-          cargoSelect = $selectCargo
-          cargoSelect.addEventListener("change", function () {
-            console.log(cargoSelect.value);
-            alert(cargoSelect.value);
-            while ($selectDistrito.firstChild) {
-              //elimina todos los elementos
-              $selectDistrito.removeChild($selectDistrito.firstChild);
-            }
-            const nuevaOptionDistrito = document.createElement("option");
-            nuevaOptionDistrito.textContent = "Distrito";
-            nuevaOptionDistrito.value = "Distrito";
-            $selectDistrito.appendChild(nuevaOptionDistrito);
-            datosFiltros.forEach((eleccion) => {
+//       fetch(cargoURL + periodosSelect.value)
+//         .then((res) => res.json(res))
+//         .then((datosFiltros) => {
+//           console.log(datosFiltros)
+//           console.log("ACAAAA")
 
-              if (eleccion.IdEleccion == tipoEleccion) {
-                eleccion.Cargos.forEach((cargo) => {
-                  console.log(cargoSelect.value);
-                  console.log(cargo.value);
-                  cargo.Distritos.forEach((distrito) => {
-                    console.log("distrito ")
-                    console.log(distrito)
-                    const nuevaOption = document.createElement("option");
-                    nuevaOption.value = distrito.IdDistritos;
+//           while ($selectCargo.firstChild) {
+//             //elimina todos los elementos
+//             $selectCargo.removeChild($selectCargo.firstChild);
+//           }
+//           const nuevaOptionCargo = document.createElement("option");
+//           nuevaOptionCargo.textContent = "Cargo";
+//           nuevaOptionCargo.value = "Cargo";
+//           $selectCargo.appendChild(nuevaOptionCargo);
+//           datosFiltros.forEach((eleccion) => {
+//             console.log("ELECCIONES ")
+//             console.log(eleccion)
+//             if (eleccion.IdEleccion == tipoEleccion) {
+//               eleccion.Cargos.forEach((cargo) => {
+//                 console.log("cargo")
+//                 console.log(cargo)
 
-                    nuevaOption.innerHTML = `${distrito.Distrito}`;
+//                 const nuevaOption = document.createElement("option");
+//                 nuevaOption.value = cargo.IdCargo;
+//                 nuevaOption.innerHTML = `${cargo.Cargo}`;
+//                 console.log(cargo);
+//                 $selectCargo.appendChild(nuevaOption);
+//               });
+//             }
+//           });
 
-                    console.log(cargo);
-                    $selectDistrito.appendChild(nuevaOption);
-                  });
+//           //-------------- Distrito ----------------------------
+//           // corregir no filtra bien
+//           cargoSelect = $selectCargo
+//           cargoSelect.addEventListener("change", function () {
+//             console.log(cargoSelect.value);
+//             alert(cargoSelect.value);
+//             while ($selectDistrito.firstChild) {
+//               //elimina todos los elementos
+//               $selectDistrito.removeChild($selectDistrito.firstChild);
+//             }
+//             const nuevaOptionDistrito = document.createElement("option");
+//             nuevaOptionDistrito.textContent = "Distrito";
+//             nuevaOptionDistrito.value = "Distrito";
+//             $selectDistrito.appendChild(nuevaOptionDistrito);
+//             datosFiltros.forEach((eleccion) => {
 
-                });
-              }
-            });
-          });
-        });
+//               if (eleccion.IdEleccion == tipoEleccion) {
+//                 eleccion.Cargos.forEach((cargo) => {
+//                   console.log(cargoSelect.value);
+//                   console.log(cargo.value);
+//                   cargo.Distritos.forEach((distrito) => {
+//                     console.log("distrito ")
+//                     console.log(distrito)
+//                     const nuevaOption = document.createElement("option");
+//                     nuevaOption.value = distrito.IdDistritos;
 
-    });
-  });
+//                     nuevaOption.innerHTML = `${distrito.Distrito}`;
+
+//                     console.log(cargo);
+//                     $selectDistrito.appendChild(nuevaOption);
+//                   });
+
+//                 });
+//               }
+//             });
+//           });
+//         });
+
+//     });
+//   });
 
 
 function mostrarMensaje(msj) {
