@@ -55,7 +55,6 @@ async function seleccionAnio() {
 //!! ------------CARGO CON FUN ASYNC-----------
 async function seleccionCargo() {
   console.log(" ----INICIA LA FUN ASYNC DE seleccionCargo---- ")
-
   periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final. Creo que habria que validarlo, si realmente tiene un valor, pero creo que no hace falta, talvez el no validar puede dar un error.
   try {
     const respuesta = await fetch(cargoURL + periodosSelect);
@@ -76,9 +75,7 @@ async function seleccionCargo() {
     else {
       mostrarMensaje($msjRojoError);
     }
-
   }
-
   catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
     mostrarMensaje($msjRojoError)
     console.log("algo salio mal.. puede que el servico este caido.")
@@ -86,15 +83,38 @@ async function seleccionCargo() {
 
   }
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionCargo---- ")
-
 }
 
 //!!-------------Distrito con fun ASYNC---------------------
 async function seleccionDistrito() {
   console.log(" ----INICIA LA FUN ASYNC DE seleccionDistrito---- ")
+  cargoSelect = $selectCargo.value //!se guarda el cargo elegido anteriormente
+  try { //!!!!! copipaste hay que cambierlo!! 
+    const respuesta = await fetch(cargoURL + periodosSelect);
+    if (respuesta.ok) {
+      borrarHijos($selectDistrito)
+      const elecciones = await respuesta.json();
+      elecciones.forEach((cargo) => {
+        if (cargo.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
+          cargo.Cargos.IdCargo[cargoSelect].Distrito.forEach((cargo) => { //se recorre todo el json()//!!!POR ACA MI REY
+            const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
+            nuevaOption.value = cargo.IdCargo;
+            nuevaOption.innerHTML = `${cargo.Cargo}`;
+            $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
+          })
+        }
+      });
+    }
+    else {
+      mostrarMensaje($msjRojoError);
+    }
+  }
+  catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
+    mostrarMensaje($msjRojoError)
+    console.log("algo salio mal.. puede que el servico este caido.")
+    console.log(error)
 
-  cargoSelect = $selectCargo.value
-
+  }
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionDistrito---- ")
 }
 
