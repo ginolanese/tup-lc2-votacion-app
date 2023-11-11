@@ -150,9 +150,10 @@ async function seleccionDistrito() {
   try {
     const respuesta = await fetch(cargoURL + periodosSelect);
     if (respuesta.ok) {
-      borrarHijos($selectDistrito)
-      const elecciones = await respuesta.json();
+      
 
+      const elecciones = await respuesta.json();
+ borrarHijos($selectDistrito)
       elecciones.forEach((eleccion) => {
         if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
           eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()

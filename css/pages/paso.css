@@ -113,20 +113,22 @@ button:hover {
 /*----------------------------------------*/
 .cuadros {
   display: flex;
+  min-width: 350px; 
+  height: 400px;
 }
 .cuadro-Agrupaciones {
   flex: 2;
-  min-width: 350px; 
-  height: 350px;
+ 
+  height: 100%;
 }
 .cuadro-Mapa {
   justify-self: center;
-  min-width: 350px; 
+  height: 100%;
   flex: 1;
 }
 .cuadro-Resumen {
   flex: 2;
-  min-width: 350px;
+  height: 100%;
 }
 
 .cuadro-Agrupaciones,
@@ -134,7 +136,7 @@ button:hover {
 .cuadro-Resumen {
   border-radius: 25px;
   border: 1px var(--borde-Grilla) solid;
-  box-shadow: 2px 2px 2px 1px black;
+  box-shadow: 2px 2px 2px 1px var(--borde-Grilla);
   margin: 10px;
 }
 .cuadros p {
@@ -146,7 +148,9 @@ button:hover {
 
 .cuadro-Agrupaciones-centrado{
   overflow-y: scroll;
-  height: 290px;
+  height: 85%;
+
+
 }
 
 
@@ -169,7 +173,7 @@ button:hover {
 /* -------------------------barra de progreso*--------------------------------------------*/
 .progress {
   margin-left: 10px;
-  height: 35px;
+  height: 25px;
   width: 97%;
   border-radius: 5px;
   margin-bottom: 15px;
@@ -335,7 +339,11 @@ svg{
     flex: 2;
     
   }
+
+
 }
+
+
 /*----------------- cuadro-Resumen -----------------------*/
 
 .cuadro-Resumen-centrado{
@@ -365,3 +373,7 @@ svg{
   margin: auto;
 }
 /*----------------------------------------*/
+
+#cargo,#distrito,#seccion{
+  max-width:  200px;
+}
