@@ -1,3 +1,5 @@
+import { provinciasSVG } from "./mapas.js";
+
 const periodosURL = "https://resultados.mininterior.gob.ar/api/menu/periodos";
 const cargoURL = "https://resultados.mininterior.gob.ar/api/menu?año=";
 const getResultados = "https://resultados.mininterior.gob.ar/api/resultados/getResultados"
@@ -15,22 +17,36 @@ const $msjAmarilloAdver = document.getElementById("adver")
 const $cuadros = document.querySelector("#cuadros")
 const $tituloSubTitulo = document.querySelector("#sec-titulo")
 const $contenido = document.querySelector("#sec-contenido")
+const $btnAgregarInforme = document.querySelector("#agregar-informe")
 
 
-const $mesasComputadasSpan = document.getElementById("mesas-computadas-porsen")
+//!!span para cambiar con el filtro.
+const $spanMesasComputadas = document.getElementById("mesas-computadas-porsen")
+const $spanElectores = document.getElementById("electores")
+const $spanSobreRecuento = document.getElementById("sobre-recuento")
+
+const $spanMapaSvg = document.querySelector("#svg-mapa")
 
 //!Guardamos los datos a medida que se van filtrando en estas Variables
-let periodosSelect = ""
-let cargoSelect = ""
-let distritoSelect = ""
-let seccionSeleccionadaID = ""
-let idSeccionProv = ""
-const tipoEleccion = 1;
+let periodosSelect = "" //? año seleciconad
+let cargoSelect = "" //? ID de cargo para ir filtrando
+let distritoSelect = "" //? ID de distrito para ir filtrando
+let seccionSeleccionadaID = ""  //? ID SeccionProvincial del Input escondido/invicible. para el filtrado
+let idSeccionProv = "" //? ID de la Seccion probicial del Select para el filtrado
+const tipoEleccion = 1; //? tipo 1 eleccion PASOS
 const tipoRecuento = 1;
 let valorCargo = ""
 let valorDistrito = ""
 let valorSeccion = ""
+let valorTipoEleccion = ""
+let valorSvg = ""
+let valorCantidadElectores = ""
+let valorMesasTotalizadas = ""
+let valorParticipacionPorcentaje = ""
+
+reconoceTipoElecion()
 //*---------------Start-----------------------
+
 
 document.addEventListener('DOMContentLoaded', () => {
   mostrarMensaje($msjAmarilloAdver, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`, 90000)
@@ -49,6 +65,7 @@ $seccionSelect.addEventListener('change', () => {
 });
 
 $botonFiltrar.addEventListener('click', filtrar);
+$btnAgregarInforme.addEventListener("click", agregarAInforme);
 
 
 
@@ -246,11 +263,23 @@ async function filtrar() {
       console.log(filtrado);
 
       mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
-      $tituloSubTitulo.classList.remove("escondido");
+      $tituloSubTitulo.classList.remove("escondido"); //!SE hace vicible
       $contenido.classList.remove("escondido");
       $cuadros.classList.remove("escondido");
-      $tituloSubTitulo.querySelector("h1").textContent = `Elecciones ${periodosSelect} | Paso ${tipoEleccion}`
-      $tituloSubTitulo.querySelector("p").textContent = `${periodosSelect} > Paso ${tipoEleccion} > ${valorCargo} > ${valorDistrito} > ${valorSeccion}`
+      $tituloSubTitulo.querySelector("h1").textContent = `Elecciones ${periodosSelect} | ${valorTipoEleccion}`//!se agrega titulo y subtitulo. 
+      let subTitulo = `${periodosSelect} > ${valorTipoEleccion} > ${valorCargo} > ${valorDistrito} > ${valorSeccion}`
+      $tituloSubTitulo.querySelector("p").textContent = subTitulo
+
+      valorCantidadElectores = filtrado.estadoRecuento.cantidadElectores
+      valorMesasTotalizadas = filtrado.estadoRecuento.mesasTotalizadas
+      valorParticipacionPorcentaje = filtrado.estadoRecuento.participacionPorcentaje
+
+      $spanElectores.textContent = valorCantidadElectores
+      $spanMesasComputadas.textContent = valorMesasTotalizadas
+      $spanSobreRecuento.textContent = valorParticipacionPorcentaje
+      valorSvg = buscaMapa(valorDistrito)
+      $spanMapaSvg.innerHTML = valorSvg
+
     }
     else {
       mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
@@ -267,9 +296,41 @@ async function filtrar() {
   }
 }
 
+function buscaMapa(nombreProvincia) {
+  let ProvEncontrado = provinciasSVG.find(provincia => provincia.provincia.toUpperCase() === nombreProvincia.toUpperCase());
+  return ProvEncontrado.svg
+}
+
+function agregarAInforme() {
+  let nuevaCadenaValores = `{periodosSelect}, {valorTipoEleccion}, {valorCargo}, {valorDistrito}, {valorSeccion}, {valorSvg}, {valorCantidadElectores}, {valorMesasTotalizadas}, {valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
+  const listaInforme = []
+  if (cadenaNuevaLsita. )
+  const LISTA_A_AGREGAR_JSON = JSON.stringify(cadenaLsita) //?combierte la lista en una cadena.
+  localStorage.setItem(`INFORMES`, LISTA_A_AGREGAR_JSON)//?guarda la lista/cadena en la key INFORMES
+//borre la cadena cadena porque ya tengo una
+//!!Coreegir lo de aabajo
+  let informes = [];
+
+  if (localStorage.getItem('INFORMES')) {
+      informes = JSON.parse(localStorage.getItem('INFORMES'));
+  }
+
+  
+
+  if (informes.includes(nuevoInforme)) {
+      mostrarMensaje(mensajeAmarillo, "El informe ya se encuentra añadido.");
+  } else {
+      informes.push(nuevoInforme);
+      localStorage.setItem('INFORMES', JSON.stringify(informes));
+      mostrarMensaje(mensajeVerde, "Informe agregado con éxito");
+  }
+}
 
 
 
+
+
+}
 // fetch(periodosURL)
 //   .then((res) => res.json())
 //   .then((res) => {
@@ -387,4 +448,14 @@ function resetFiltro() {
   distritoSelect = ""
   seccionSeleccionadaID = ""
   idSeccionProv = ""
+}
+
+
+function reconoceTipoElecion() {
+  if (tipoEleccion === 1) {
+    valorTipoEleccion = "Pasos"
+  }
+  else {
+    valorTipoEleccion = "Generales"
+  }
 }

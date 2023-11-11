@@ -76,7 +76,7 @@
 
         <section id="sec-contenido" class="escondido">
             <div class="btn-votacion">
-                <button class="agregar-informe">+ AGREGAR A INFORME</button>
+                <button id="agregar-informe" class="agregar-informe">+ AGREGAR A INFORME</button> <!--!FALTA LA FUNCION DE ESTE BOTON-->
                 <div></div> <!--se puso un div para poder crear el espacio entre los distitnso botones.-->
                 <div class="mesa-comp">
                     <p><span><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +202,7 @@
         c-0.238-0.571-0.797-0.944-1.416-0.944l0,0c-4.601,1.534-7.55-4.364-8.966-9.319c-2.595-10.027-1.18-14.864,0.473-17.105H180.521z">
                         </path>
                     </svg></span></p>
-                    <p>Electores <br/>62.71%</p>
+                    <p>Electores <br/><span id="electores">62.71%</span></p>
                 </div>
                 <div class="escrutado">
                     <p><span><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -257,7 +257,7 @@
         C184.178,409.323,186.501,406.999,189.368,406.999z"></path>
                         <rect x="195.975" y="387.534" fill="#FFFFFF" width="69.013" height="14.393"></rect>
                     </svg></span></p>
-                    <p>Participación <br/>sobre escrutado<br/>62.71%</p>
+                    <p>Participación <br/>sobre escrutado<br/><span id="sobre-recuento">62.71%</span></p>
                 </div>
             </div>
         </section>
@@ -306,13 +306,13 @@
             <div class="cuadro-Mapa">
                 <p>MapaImagen</p>
                 <div class="cuadro-Mapa-centrado" >
-                    <svg height="210" width="800">
+                   <p><span id="svg-mapa"> <svg height="210" width="800">
                         <path class="leaflet-interactive" stroke="#18a0fb" stroke-opacity="1" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" fill="#18a0fb" fill-opacity="1"
                             fill-rule="evenodd"
                             d="M171 55L163 53L150 45L147 50L143 49L133 60L114 60L114 151L116 151L120 155L122 156L126 153L128 149L124 145L126 143L126 138L128 138L129 133L126 129L126 122L134 126L139 126L169 119L179 114L189 97L190 89L189 87L186 87L182 82L185 75L181 69L171 63L170 64L170 58z">
                         </path>
-                    </svg>
+                    </svg></span></p>
                 </div>
             </div>
             <div class="cuadro-Resumen">
@@ -349,7 +349,8 @@
                     Condiciones.</a></p>
         </div>
     </footer>
-    <script src="js/pages/paso.js"></script>
+    <script src="js/pages/mapas.js" type="module"></script>
+    <script src="js/pages/paso.js" type="module"></script>
 </body>
 
 </html>
