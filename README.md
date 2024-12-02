@@ -1,3 +1,4 @@
+
 # Página de Resultados Electorales de Argentina
 
 ## Descripción
@@ -20,5 +21,4 @@ Este proyecto consiste en una página web que muestra los resultados electorales
 
 1. Clona este repositorio en tu máquina local:
 
-   ```bash
-   git clone https://github.com/ginolanese/tup-lc2-votacion-app.git
+  

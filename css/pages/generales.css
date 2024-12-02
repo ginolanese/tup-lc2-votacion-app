@@ -1,15 +1,6 @@
+
 @import "/css/common.css";
 
-/* .barra-menu select {
-
-  max-width: 150px;
- 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-} */
-
-/* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
 .agregar-informe {
   white-space: nowrap;
   border: none;
