@@ -210,9 +210,9 @@ function seleccionSeccion() {
   mostrarValorFiltro()
 
   eleccion_JSON.forEach((eleccion) => {
-    if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
-      eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
-        if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
+    if (eleccion.IdEleccion == tipoEleccion) {
+      eleccion.Cargos.forEach((cargo) => {
+        if (cargo.IdCargo == cargoSelect) {
           cargo.Distritos.forEach((distrito) => {
             if (distrito.IdDistrito == distritoSelect) {
               textoDistrito = `${distrito.Distrito}`
