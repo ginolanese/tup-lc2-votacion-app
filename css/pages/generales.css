@@ -1,22 +1,35 @@
-@import "css/common.css";
+@import "/css/common.css";
 
+/* .barra-menu select {
+
+  max-width: 150px;
+ 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+} */
 
 /* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
-.agregar-informe{
+.agregar-informe {
   white-space: nowrap;
   border: none;
   width: 300px;
 }
 
-.elecciones-generales{
+.elecciones-generales {
   margin-bottom: 0%;
   padding-bottom: 0%;
 }
 
 .btn-votacion {
   display: grid;
-  grid-template-columns: repeat(5, 1fr );
+  grid-template-columns: repeat(5, 1fr);
   gap: 0px;
+}
+
+#filtrar svg {
+  width: 12px;
+  height: 12px;
 }
 
 button {
@@ -30,6 +43,7 @@ button {
   margin: 20%;
 
 }
+
 button:hover {
   color: var(--textos);
 }
@@ -50,7 +64,6 @@ button:hover {
 .electores,
 .escrutado {
 
-  display: flex;
   justify-content: center;
   align-items: center;
   color: white;
@@ -60,6 +73,13 @@ button:hover {
   grid-template-columns: auto auto;
 
 }
+
+
+
+#filtrar {
+  border-radius: 30px;
+}
+
 /* _________________Fin Botones______________________ */
 /* Carteles para el usuario */
 #carteles {
@@ -73,9 +93,11 @@ button:hover {
   font-size: 200px;
   text-align: center;
 }
+
 #carteles div {
   margin: 10px;
 }
+
 #exito,
 #error,
 #adver {
@@ -86,6 +108,7 @@ button:hover {
   align-items: center;
   height: 70px;
 }
+
 #exito {
   background-color: var(--mensaje-usuario-verde);
 }
@@ -97,29 +120,39 @@ button:hover {
 #adver {
   background-color: var(--mensaje-usuario-amarillo);
 }
+
 #exito i,
 #error i,
 #adver i {
   font-size: 24px;
   margin-right: 10px;
 }
+
 /*----------------------------------------*/
 .cuadros {
   display: flex;
+  min-width: auto;
+  height: 450px;
 }
+
 .cuadro-Agrupaciones {
   flex: 2;
-  min-width: 350px; 
-  height: 350px;
+  /* min-width: 350px;
+  height: 350px; */
+  height: 100%;
 }
+
 .cuadro-Mapa {
   justify-self: center;
-  min-width: 350px; 
+  /* min-width: 350px; */
+  height: 100%;
   flex: 1;
 }
+
 .cuadro-Resumen {
   flex: 2;
-  min-width: 350px;
+  /* min-width: 350px; */
+  height: 100%;
 }
 
 .cuadro-Agrupaciones,
@@ -127,9 +160,10 @@ button:hover {
 .cuadro-Resumen {
   border-radius: 25px;
   border: 1px var(--borde-Grilla) solid;
-  box-shadow: 2px 2px 2px 1px black;
+  box-shadow: 2px 2px 2px 1px var(--borde-Grilla);
   margin: 10px;
 }
+
 .cuadros p {
   font-weight: Bold;
   padding: 1.8em 0 0 0;
@@ -137,9 +171,10 @@ button:hover {
   white-space: nowrap;
 }
 
-.cuadro-Agrupaciones-centrado{
+.cuadro-Agrupaciones-centrado {
   overflow-y: scroll;
-  height: 290px;
+  /* cambio */
+  height: 85%;
 }
 
 
@@ -150,11 +185,13 @@ button:hover {
   text-transform: uppercase;
   font-weight: bold;
 }
+
 .Agrupacion p {
   text-align: left;
   margin-left: 10px;
   margin-right: 10px;
 }
+
 .Agrupacion p:first-child {
   border-bottom: 1px solid var(--borde-Grilla);
 }
@@ -195,7 +232,17 @@ button:hover {
   --bar-spacing: 10px;
   font-family: sans-serif;
   width: var(--chart-width);
-  
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+  max-width: 260px;
+
+  overflow: hidden;
+  */
+
 }
 
 .chart-wrap .title {
@@ -225,6 +272,9 @@ button:hover {
   width: 100%;
   border-left: 2px solid var(--grid-color);
   font-size: 10px;
+  /* overflow: hidden;
+
+  width: 100%; */
 }
 
 /* posicionamos el % del gráfico*/
@@ -258,6 +308,15 @@ button:hover {
   margin: var(--bar-spacing) 0;
   background-color: var(--bar-color);
   border-radius: 0 var(--bar-rounded) var(--bar-rounded) 0;
+  /* width: var(--bar-value);
+  
+  max-width: 100%;
+ 
+  height: var(--bar-thickness);
+
+   margin: var(--bar-spacing) 0;
+  background-color: var(--bar-color);
+  border-radius: 0 var(--bar-rounded) var(--bar-rounded) 0;  */
 }
 
 .chart-wrap .bar:hover {
@@ -270,86 +329,133 @@ button:hover {
   padding: 10px;
   display: inline-block;
   white-space: nowrap;
+
+  font-size: 7px;
+  /* content: attr(data-name);
+  margin-left: 10px;
+  display: inline-block;
+  font-size: 12px; */
+
 }
-#partido-uno{
+
+#partido-uno {
   background-color: var(--grafica-amarillo);
 }
-#partido-dos{
+
+#partido-dos {
   background-color: var(--grafica-lila2);
 }
-#partido-tres{
+
+#partido-tres {
   background-color: var(--grafica-bordo);
 }
-#partido-cuatro{
+
+#partido-cuatro {
   background-color: var(--grafica-celeste);
 }
-#partido-cinco{
+
+#partido-cinco {
   background-color: var(--grafica-lila);
 }
-#partido-seis{
+
+#partido-seis {
   background-color: var(--grafica-bordo-claro);
 }
-#partido-siete{
+
+#partido-siete {
   background-color: var(--grafica-verde);
 }
-#otros{
+
+#otros {
   background-color: var(--grafica-gris);
 }
 
 
-main{
+main {
   margin-left: 100px;
   margin-right: 100px;
 }
 
-svg{
-  height:200px;
-  width:300px;
+svg {
+  height: 200px;
+  width: 300px;
 }
 
-#btn-generales{
+#btn-generales {
   border-radius: 7px;
   background-color: var(--celeste);
 }
 
-@media  (max-width:1200px) {
-  .cuadros{
+@media (max-width:1200px) {
+  .cuadros {
     flex-direction: column;
-    
+
   }
+
   .cuadro-Agrupaciones {
     flex: 2;
   }
+
   .cuadro-Mapa {
     flex: 2;
   }
+
   .cuadro-Resumen {
-    
+
     flex: 2;
-    
+    min-height: 500px;
+
   }
 }
-/*----------------- cuadro-Resumen -----------------------*/
 
-.cuadro-Resumen-centrado{
+/*----------------- cuadro-Resumen -----------------------*/
+.cuadro-Resumen-centrado {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 90%;
+  overflow: hidden;
 }
+
 /*----------------------------------------*/
 /*----------------- cuadro-Mapa -----------------------*/
+
 .cuadro-Mapa {
-  display: flex; 
-  flex-direction: column; 
+  display: flex;
+  flex-direction: column;
 }
-.cuadro-Mapa p{
+
+.cuadro-Mapa p {
   justify-content: center;
   align-items: center;
 }
 
-.cuadro-Mapa-centrado{
+.cuadro-Mapa-centrado {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+}
+
+.cuadro-Mapa-centrado svg {
+  margin: auto;
+}
+
+.cuadro-Mapa-centrado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  flex-grow: 1;
+}
+
+
+/*----------------------------------------*/
+
+#cargo,
+#distrito,
+#seccion {
+  max-width: 200px;
 }

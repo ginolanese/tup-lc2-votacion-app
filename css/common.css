@@ -2,42 +2,43 @@
 
 :root {
   --magenta: #ee3d8f;
---celeste: #37bbed;
---morado: #9283be;
---gris-claro: #9e9e9e;
---titulos: #333;
---textos: #333;
---fondo-pantalla: rgb(235, 245, 251);
---fondo-Cabecera: #18a0fb;
---fondo-Footer: #333;
---fondo-Menu: #333;
---texto-footer: #9e9e9e;
---titulo-Grilla: #727272;
---borde-inferior-Grilla: #727272;
---borde-Grilla: #c5c5c5;
---grafica-amarillo: rgb(252, 210, 0);
---grafica-amarillo-claro: rgba(252, 210, 0, 0.3);
---grafica-celeste: rgb(0, 169, 232);
---grafica-celeste-claro: rgba(0, 169, 232, 0.3);
---grafica-bordo: rgb(171, 40, 40);
---grafica-bordo-claro: rgba(171, 40, 40, 0.3);
---grafica-lila: rgb(112, 76, 159);
---grafica-lila-claro: rgba(112, 76, 159, 0.5);
---grafica-lila2: rgb(77, 46, 110);
---grafica-lila2-claro: rgba(77, 46, 110, 0.5);
---grafica-gris: rgb(128, 128, 128);
---grafica-gris-claro: rgb(128, 128, 128, 0.5);
---grafica-verde: rgb(102, 171, 60);
---grafica-verde-claro: rgba(102, 171, 60, 0.5);
---mensaje-usuario-amarillo: #ffc107;
---mensaje-usuario-verde: #28a745;
---mensaje-usuario-rojo: #dc3545;
+  --celeste: #37bbed;
+  --morado: #9283be;
+  --gris-claro: #9e9e9e;
+  --titulos: #333;
+  --textos: #333;
+  --fondo-pantalla: rgb(235, 245, 251);
+  --fondo-Cabecera: #18a0fb;
+  --fondo-Footer: #333;
+  --fondo-Menu: #333;
+  --texto-footer: #9e9e9e;
+  --titulo-Grilla: #727272;
+  --borde-inferior-Grilla: #727272;
+  --borde-Grilla: #c5c5c5;
+  --grafica-amarillo: rgb(252, 210, 0);
+  --grafica-amarillo-claro: rgba(252, 210, 0, 0.3);
+  --grafica-celeste: rgb(0, 169, 232);
+  --grafica-celeste-claro: rgba(0, 169, 232, 0.3);
+  --grafica-bordo: rgb(171, 40, 40);
+  --grafica-bordo-claro: rgba(171, 40, 40, 0.3);
+  --grafica-lila: rgb(112, 76, 159);
+  --grafica-lila-claro: rgba(112, 76, 159, 0.5);
+  --grafica-lila2: rgb(77, 46, 110);
+  --grafica-lila2-claro: rgba(77, 46, 110, 0.5);
+  --grafica-gris: rgb(128, 128, 128);
+  --grafica-gris-claro: rgb(128, 128, 128, 0.5);
+  --grafica-verde: rgb(102, 171, 60);
+  --grafica-verde-claro: rgba(102, 171, 60, 0.5);
+  --mensaje-usuario-amarillo: #ffc107;
+  --mensaje-usuario-verde: #28a745;
+  --mensaje-usuario-rojo: #dc3545;
 }
 
-.escondido{ /* clase que esconde divs*/
+.escondido {
+
   visibility: hidden;
   position: absolute;
-  width:0;
+  width: 0;
   height: 0;
 }
 
@@ -52,73 +53,85 @@ body {
   flex-direction: column;
   margin: 0;
   padding: 0;
-  background-color: rgb(240, 240, 240);/*white*/
-  width:100%;
-  height: 100%;
+  background-color: rgb(240, 240, 240);
+  width: 100%;
   flex: 1;
 }
 
-p{
+p {
   font-size: 12px;
 }
-h1{
+
+h1 {
   font-size: 26px;
-  padding-bottom:20px;
+  padding-bottom: 20px;
 }
-h2{
+
+h2 {
   font-size: 22px;
 }
-h3{
+
+h3 {
   font-size: 18px;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
-.current-page{
+.current-page {
   display: flex;
   flex-direction: column;
   background-color: #18a0fb;
 }
 
 
-.header-page{
-  display:block;
-  padding: 0.5em ;
+.header-page {
+  display: block;
+  padding: 0.5em;
   background-color: var(--fondo-Cabecera);
-  width:90%; 
-  margin: 0px auto auto ;
+  width: 90%;
+  margin: 0px auto auto;
 }
 
-.header-page a{
+.header-page a {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color:white;
+  color: white;
   text-decoration: none;
 }
 
 
-.barra-menu{
+.barra-menu {
   display: flex;
   justify-content: space-between;
   margin-left: 0px;
   margin-right: 0px;
   padding-top: 0px;
   background-color: var(--fondo-Menu);
-  width:100%;
+  width: 100%;
   height: 40px;
+  overflow: hidden;
 }
 
-.barra-menu ul{
+#svg-mapa svg {
+  transform: scale(1.5);
+}
+
+.agranda-resumen {
+  transform: scale(1.2);
+
+}
+
+.barra-menu ul {
   display: flex;
-  flex-direction: row; 
+  flex-direction: row;
   align-items: center;
-  
+
 }
 
-footer{
+footer {
   display: flex;
   flex-direction: row;
   background-color: var(--fondo-Footer);
@@ -126,23 +139,25 @@ footer{
   padding-left: 100px;
   padding-right: 150px;
   padding-top: 30px;
-  padding-bottom: 30px ;
+  padding-bottom: 30px;
   height: 100%;
 }
-footer{
 
-  height: 100%;
-  box-sizing:content-box;
+footer {
+  height: auto;
+
+  box-sizing: content-box;
   flex: 1;
   line-height: 1.7;
 }
-footer img{
-  width:150px;
+
+footer img {
+  width: 150px;
   height: 40px;
   padding-left: 20px;
 }
 
-.active{
+.active {
   border-radius: 5px;
   padding: 5px;
   font-size: 10px;
@@ -152,55 +167,65 @@ footer img{
 }
 
 
-#filtrar{
+#filtrar {
   background-color: white;
-  
+
 }
-#filtrar a{
+
+#filtrar a {
   color: var(--textos);
 
 }
 
-#inicio{
+#inicio {
   display: flex;
   background-color: var(--gris-claro);
   border-radius: 5px;
   margin-right: 15px;
 
 }
+
 .active a,
-#inicio a{
+#inicio a {
   color: white;
 }
 
-#inicio a:hover{
+#inicio a:hover {
   color: var(--textos);
 }
 
-ul,ol{
+ul,
+ol {
   list-style-type: none;
   padding: 0;
 }
 
-#btn-generales{
+#btn-generales {
   background-color: var(--celeste);
 }
-#btn-generales a, #btn-paso a{
+
+#btn-generales a,
+#btn-paso a {
   overflow: hidden;
-  padding:30px;
-  margin:0px;
+  padding: 30px;
+  margin: 0px;
   border: 0px;
 }
-#btn-paso a{
+
+#btn-paso a {
   margin: 15px;
 }
-#btn-paso{
+
+#btn-paso {
   background-color: var(--magenta);
 }
-#btn-paso:hover,#btn-generales:hover{
+
+#btn-paso:hover,
+#btn-generales:hover {
   background-color: var(--gris-claro);
 }
-select{
+
+select {
   background: transparent;
   border: none;
   font-size: 14px;
@@ -208,47 +233,60 @@ select{
   padding: 5px;
   color: var(--celeste);
   font-weight: bold;
+  overflow: hidden
 }
 
-.texto-path{
+.texto-path {
   font-size: 14px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: var(--celeste);
 }
 
-.barra-menu h3{
-  color:#fff;
+.barra-menu h3 {
+  color: #fff;
+
 }
 
-.barra-menu ul a{
-  
+.barra-menu ul a {
+
+  padding-left: 30px;
   padding-right: 40px;
   padding-top: 10px;
   padding-bottom: 10px;
 }
-/* se romper el main cuando agregas lo mapas.*/
- main{
-  /* puede que lo tengas que cambiar cuando agregas los mapas;  */  
 
-  /* min-height: 70vh; 
-    height: 100%;   */
+.barra-menu select,
+.barra-menu option {
+  /* background-color: #ee3d8f; */
 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+main {
+
+
+  min-height: 70vh;
+  height: 100%;
   margin-bottom: 50px;
 }
-.logo{
+
+.logo {
   width: 150px;
 }
-#informe{
+
+#informe {
   border: solid 1px #ffffff;
   border-radius: 15px;
   width: 60px;
 }
-#informe a{
+
+#informe a {
   padding: 0px;
   text-align: center;
 }
 
-.barra-menu li{
+.barra-menu li {
   margin-left: 5px;
-  
-}  
+
+}

@@ -1,225 +1,242 @@
-import { provinciasSVG } from "./mapas.js";
-
+import { provinciasSVG } from "./mapas.js"
+/// COLORES DE ABRUPASIONES ///
+const coloresAgrupaciones = [
+  { idAgrupacion: "1", colorPleno: 'var(--grafica-amarillo)', colorLiviano: ' var(--grafica-amarillo-claro)' }, // --grafica-amarillo
+  { idAgrupacion: "134", colorPleno: 'var(--grafica-celeste)', colorLiviano: 'var(--grafica-celeste-claro)' }, // --grafica-celeste
+  { idAgrupacion: "1", colorPleno: 'var(--grafica-bordo)', colorLiviano: 'var(--grafica-bordo-clar)o' }, // --grafica-bordo
+  { idAgrupacion: "135", colorPleno: 'var(--grafica-lila)', colorLiviano: ' var(--grafica-lila-claro)' }, // --grafica-lila
+  { idAgrupacion: "1", colorPleno: 'var(--grafica-lila2)', colorLiviano: 'var(--grafica-lila2-claro)' }, // --grafica-lila2
+  { idAgrupacion: "1", colorPleno: 'rgb(128, 128, 128)', colorLiviano: 'rgba(128, 128, 128, 0.5)' }, // --grafica-gris
+  { idAgrupacion: "1", colorPleno: 'rgb(102, 171, 60)', colorLiviano: 'rgba(102, 171, 60, 0.5)' }, // --grafica-verde
+];
+///////////////////////////////
 const periodosURL = "https://resultados.mininterior.gob.ar/api/menu/periodos";
 const cargoURL = "https://resultados.mininterior.gob.ar/api/menu?año=";
 const getResultados = "https://resultados.mininterior.gob.ar/api/resultados/getResultados"
+const tipoEleccion = 1; // 1 para PASO, 2 para GENERALES
+const tipoRecuento = 1;
 
-//Se usa el $ para poder distingir con mayor facilidad los elementos directos del DOM
+
+
+let textiCargo = ""
+let textoDistrito = ""
+let textoSeccion = ""
+
+//
+let seccionProvincial
+let seccionProvincialId
+let valoresTotalizadosPositivos
+
+let periodosSelect = "";
+let cargoSelect = "";
+let distritoSelect = ""
+let seccionSelect = ""
+//
+let cantidadElectores
+let mesasTotalizadas
+let participacionPorcentaje
+let guardarSVG
+// ID de cargo para filtrar
 const $selectAnio = document.getElementById("anio");
 const $selectCargo = document.getElementById("cargo");
 const $selectDistrito = document.getElementById("distrito");
-const $seccionSelect = document.getElementById("seccion");
-const $inputSeccionProvincial = document.getElementById("hdSeccionProvincial") //!esta oculto para el usuario y solo guarda IDSecccionProvincial
-const $botonFiltrar = document.getElementById('filtrar')
-const $msjRojoError = document.getElementById("error")
-const $msjVerdeExito = document.getElementById("exito")
-const $msjAmarilloAdver = document.getElementById("adver")
-const $cuadros = document.querySelector("#cuadros")
-const $tituloSubTitulo = document.querySelector("#sec-titulo")
-const $contenido = document.querySelector("#sec-contenido")
-const $btnAgregarInforme = document.querySelector("#agregar-informe")
+const $selectSeccion = document.getElementById("seccion");
+const $inputSeccionProvincial = document.getElementById("hdSeccionProvincial");//!esta oculto para el usuario y solo guarda IDSecccionProvincial
+//mensajes
+const $mensajeRojo = document.getElementById("error");
+const $mesajeVerde = document.getElementById("exito");
+const $mesajeAmarillo = document.getElementById("adver");
 
+// Subtitulos - Contenido - 
+const $tituloSubTitulo = document.querySelector("#sec-titulo");
+const $seccionContenido = document.getElementById("sec-contenido");
+//Mesas - Electores - Escrutiados
+const $mesasComputadas = document.getElementById("mesas-computadas-porsen");
+const $cajaElectores = document.getElementById("electores");
+const $participacion = document.getElementById("sobre-recuento");
 
-//!!span para cambiar con el filtro.
-const $spanMesasComputadas = document.getElementById("mesas-computadas-porsen")
-const $spanElectores = document.getElementById("electores")
-const $spanSobreRecuento = document.getElementById("sobre-recuento")
+//Filtrar
+const $botonFiltrar = document.getElementById('filtrar');
+//SVG
+const $spanMapaSvg = document.querySelector("#svg-mapa");
+const $cuadros = document.querySelector(".cuadros");
 
-const $spanMapaSvg = document.querySelector("#svg-mapa")
-
-//!Guardamos los datos a medida que se van filtrando en estas Variables
-let periodosSelect = "" //? año seleciconad
-let cargoSelect = "" //? ID de cargo para ir filtrando
-let distritoSelect = "" //? ID de distrito para ir filtrando
-let seccionSeleccionadaID = ""  //? ID SeccionProvincial del Input escondido/invicible. para el filtrado
-let idSeccionProv = "" //? ID de la Seccion probicial del Select para el filtrado
-const tipoEleccion = 1; //? tipo 1 eleccion PASOS
-const tipoRecuento = 1;
-let valorCargo = ""
-let valorDistrito = ""
-let valorSeccion = ""
-let valorTipoEleccion = ""
-let valorSvg = ""
-let valorCantidadElectores = ""
-let valorMesasTotalizadas = ""
-let valorParticipacionPorcentaje = ""
-
-reconoceTipoElecion()
-//*---------------Start-----------------------
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  mostrarMensaje($msjAmarilloAdver, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`, 90000)
-
-});
-mostrarMensaje($msjAmarilloAdver, "HOlas buenas tardes señores")
-
-document.addEventListener('DOMContentLoaded', seleccionAnio); //cuando sudeda este evento se llama automaticamente la funcion async
-$selectAnio.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
-$selectCargo.addEventListener('change', seleccionDistrito); //cuando el <select> cambie se llama a la siguiente fun
-$selectDistrito.addEventListener('change', seleccionSeccionProv); //cuando el <select> cambie se llama a la siguiente fun
-$seccionSelect.addEventListener('change', seleccionCargo); //cuando el <select> cambie se llama a la siguiente fun
-$seccionSelect.addEventListener('change', () => {
-  let opcionSeleccionada = $seccionSelect.options[$seccionSelect.selectedIndex];
-  valorSeccion = opcionSeleccionada.textContent; // el texto de la opción seleccionada
+//AGREGAR INFORME
+const $btnAgregarInforme = document.querySelector(".agregar-informe");
+//"cuadros"
+const $cuadroAgrupaciones = document.getElementById('cuadroAgrupaciones');
+//BARRAS
+const $cuadroBarras = document.getElementById("barras");
+//
+document.addEventListener("DOMContentLoaded", () => {
+  mostrarMensaje($mesajeAmarillo, `Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR`);
+  seleccionAnio();  // Llamar directamente a la función al cargar el DOM
 });
 
+// Event Listeners
+
+$selectAnio.addEventListener("change", seleccionCargo);
+$selectCargo.addEventListener("change", seleccionDistrito);
+$selectDistrito.addEventListener("change", seleccionSeccion)
+$selectSeccion.addEventListener('change', () => {
+  let opcionSeleccionada = $selectSeccion.options[$selectSeccion.selectedIndex];
+  textoSeccion = opcionSeleccionada.textContent; // el texto de la opción seleccionada
+  console.log(`AÑO: ${periodosSelect} | CARGO: ${textiCargo} | DISTRITO: ${textoDistrito} | SECCION:${textoSeccion}`);
+});
 $botonFiltrar.addEventListener('click', filtrar);
-$btnAgregarInforme.addEventListener("click", agregarAInforme);
+let guardado_datos = []
+let eleccion_JSON
+// Cargar años
+function seleccionAnio() {
+  console.log(" ----INICIA LA FUNCIÓN DE seleccionAnio---- ");
 
+  borrarHijos($selectAnio);
+  periodosSelect = "";
+  cargoSelect = "";
+  distritoSelect = "";
+  seccionSelect = "";
 
-
-//*-------------end--------------
-//!! ----------AÑO CON FUNCION ASYNC--------------
-async function seleccionAnio() {
-  console.log(" ----INICIA LA FUN ASYNC DE seleccionAnio---- ")
-
-  try {
-    borrarTodosLosHijos() //!Deberia borrar todos los hijos de los select
-    resetFiltro()//!deberia reiniciar el filtro
-    const respuesta = await fetch(periodosURL); //?aca use await para pausar la ejecución del programa hasta que la API devuelva algo, los datos en crudo se guardan en la variable respuesta.
-
-    if (respuesta.ok) {
-      borrarHijos($selectAnio)
-      const anios = await respuesta.json();
-      console.log("----Json, Año para Cargo----")
-      console.log(anios)
-
-      anios.forEach((anio) => { //?se recorre todo el json()
-        const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto (en este caso el año)
+  textiCargo = ""
+  textoDistrito = ""
+  textoSeccion = ""
+  mostrarValorFiltro()
+  fetch(periodosURL)
+    .then((respuesta) => {
+      if (respuesta.ok) {
+        console.log("----Json, Año para Año----");
+        return respuesta.json();
+      } else {
+        mostrarMensaje($mensajeRojo, "Error al cargar los periodos");
+        throw new Error("Error al cargar los periodos");
+      }
+    })
+    .then((anios) => {
+      //console.log(anios);
+      anios.forEach((anio) => {
+        const nuevaOption = document.createElement("option");
         nuevaOption.value = anio;
         nuevaOption.innerHTML = ` ${anio}`;
-        $selectAnio.appendChild(nuevaOption); //? <la nueva etiqueta se agrega como hija de <select> de nuesto html.
+        $selectAnio.appendChild(nuevaOption);
       });
-    }
-    else {
-      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
-    }
-  }
-  catch (error) {  //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
-    console.log("algo salio mal.. puede que el servico este caido.")
-    console.log(error)
 
-  }
-  console.log(" ----FINALIZA LA FUN ASYNC DE seleccionAnio---- ")
+    })
+    .catch((error) => {
+      console.log(error);
+      mostrarMensaje($mensajeRojo, "Error al cargar los periodos");
+    });
 }
 
-//!! ------------CARGO CON FUN ASYNC-----------
-async function seleccionCargo() {
-  console.log(" ----INICIA LA FUN ASYNC DE seleccionCargo---- ")
-  periodosSelect = $selectAnio.value //!!YA se selecciona para el filtro final. Creo que habria que validarlo, si realmente tiene un valor, pero creo que no hace falta, talvez el no validar puede dar un error.
+// Cargar cargos según el año seleccionado
+function seleccionCargo() {
+  console.log(" ----INICIA LA FUNCIÓN DE seleccionCargo---- ");
+  borrarHijos($selectCargo);
+  borrarHijos($selectDistrito)
+  borrarHijos($selectSeccion)
+  cargoSelect = ""
+  periodosSelect = $selectAnio.value; // Guardamos el año seleccionado
+  console.log(periodosSelect)
 
-  try {
-    const respuesta = await fetch(cargoURL + periodosSelect);
-    if (respuesta.ok) {
-      borrarHijos($selectCargo)
-      const elecciones = await respuesta.json();
-      console.log("----Json, año para elecciones----")
-      console.log(elecciones)
-
-      elecciones.forEach((cargo) => {
-        if (cargo.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
-          cargo.Cargos.forEach((cargo) => { //?se recorre todo el json()
-            const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
-            nuevaOption.value = cargo.IdCargo;
-            nuevaOption.innerHTML = `${cargo.Cargo}`;
-            $selectCargo.appendChild(nuevaOption); //?la nueva etiqueta se agrega como hija de <select> de nuesto html.
-          })
+  mostrarValorFiltro()
+  fetch(cargoURL + periodosSelect)
+    .then((respuesta) => {
+      if (respuesta.ok) {
+        console.log("----Json, Año para Cargos----");
+        return respuesta.json();
+      } else {
+        mostrarMensaje($mensajeRojo, "Error al cargar los cargos");
+        throw new Error("Error al cargar los cargos");
+      }
+    })
+    .then((data) => {
+      // Filtramos los cargos por tipo de elección
+      data.forEach((cargo) => {
+        if (cargo.IdEleccion == tipoEleccion) {
+          cargo.Cargos.forEach((cargoData) => {
+            const nuevaOption = document.createElement("option");
+            nuevaOption.value = cargoData.IdCargo;
+            nuevaOption.innerHTML = `${cargoData.Cargo}`;
+            $selectCargo.appendChild(nuevaOption);
+          });
         }
       });
-    }
-    else {
-      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
-    }
-  }
-  catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
-    console.log("algo salio mal.. puede que el servico este caido.")
-    console.log(error)
-
-  }
-  console.log(" ----FINALIZA LA FUN ASYNC DE seleccionCargo---- ")
-
+      eleccion_JSON = data
+    })
+    .catch((error) => {
+      console.log(error);
+      mostrarMensaje($mensajeRojo, "Error al cargar los cargos");
+    });
 }
 
-//!!-------------Distrito con fun ASYNC---------------------
-async function seleccionDistrito() {
-  console.log(" ----INICIA LA FUN ASYNC DE seleccionDistrito---- ")
-  cargoSelect = $selectCargo.value //!se guarda el cargo elegido anteriormente
-  try {
-    const respuesta = await fetch(cargoURL + periodosSelect);
-    if (respuesta.ok) {
-      
+// Lógica para cargar distritos
+function seleccionDistrito() {
 
-      const elecciones = await respuesta.json();
- borrarHijos($selectDistrito)
-      elecciones.forEach((eleccion) => {
-        if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
-          eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
-            if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
-              valorCargo = `${cargo.Cargo}`
+  borrarHijos($selectDistrito)
+  borrarHijos($selectSeccion)
+  mostrarValorFiltro()
+  cargoSelect = ""
+  cargoSelect = $selectCargo.value
+  //console.log(cargoSelect)
 
-              console.log("----Json Cargo para Distrito----")
-              console.log(cargo)
+  console.log(" ----INICIA el FUN DE seleccionDistrito---- ")
+  eleccion_JSON.forEach(
+    (eleccion) => {
+      if (eleccion.IdEleccion == tipoEleccion) {//?Se selecciona el tipo 2 de todos los cargos
+        eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
+          if (cargo.IdCargo == cargoSelect) {
+            textiCargo = `${cargo.Cargo}`
+            cargo.Distritos.forEach((distrito) => {
+              console.log(distrito);
+              const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
+              nuevaOption.value = distrito.IdDistrito;
+              nuevaOption.innerHTML = `${distrito.Distrito}`;
+              $selectDistrito.appendChild(nuevaOption)
+            })
 
-              cargo.Distritos.forEach((distrito) => {
-                const nuevaOption = document.createElement("option"); //? Se Crea una etiqueta <opcion> se le agrega el value y su texto
-                nuevaOption.value = distrito.IdDistrito;
-                nuevaOption.innerHTML = `${distrito.Distrito}`;
-                $selectDistrito.appendChild(nuevaOption)
-              })
-            }
-          })
+          }
         }
-      });
+        )
+      }
     }
-    else {
-      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
-    }
-  }
-  catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
-    console.log("algo salio mal.. puede que el servico este caido.")
-    console.log(error)
-
-  }
-  console.log(" ----FINALIZA LA FUN ASYNC DE seleccionDistrito---- ")
+  );
+  console.log(" ----FINALIZA la FUN DE seleccionDistrito---- ")
 }
 
-//!!-------------Seccion Provincial fun ASYNC---------------
-async function seleccionSeccionProv() {
-  console.log(" ----INICIA LA FUN ASYNC DE seleccionSeccionProv---- ")
-  distritoSelect = $selectDistrito.value
-  try {
-    const respuesta = await fetch(cargoURL + periodosSelect);
-    if (respuesta.ok) {
-      const elecciones = await respuesta.json();
-      borrarHijos($seccionSelect)
 
-      elecciones.forEach((eleccion) => {
-        if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
-          eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
-            if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
-              cargo.Distritos.forEach((distrito) => {
-                if (distrito.IdDistrito == distritoSelect) {
-                  valorDistrito = `${distrito.Distrito}`
-                  console.log("----Json Distrito para SeccionProv----")
-                  console.log(distrito)
+function seleccionSeccion() {
+  console.log(" ----INICIA LA FUN de seleccionSeccionProv---- ")
+  distritoSelect = $selectDistrito.value;
+  //console.log()
+  borrarHijos($selectSeccion);
+  mostrarValorFiltro()
 
-                  distrito.SeccionesProvinciales.forEach((seccionProv) => {
-                    idSeccionProv = seccionProv.IDSeccionProvincial;
-                    $inputSeccionProvincial.value = idSeccionProv; //! agrega el valor al input oculto
-                    seccionProv.Secciones.forEach((seccion) => {
-                      console.log("----Json Selecciones Provinciales para Secciones----")
-                      console.log(seccion)
-                      const nuevaOption = document.createElement("option");
-                      nuevaOption.value = seccion.IdSeccion;
-                      nuevaOption.innerHTML = `${seccion.Seccion}`;
-                      $seccionSelect.appendChild(nuevaOption)
-                    })
-                  })
-                }
+  eleccion_JSON.forEach((eleccion) => {
+    if (eleccion.IdEleccion == tipoEleccion) {  //?Se selecciona el tipo 1 de todos los cargos
+      eleccion.Cargos.forEach((cargo) => { //se recorre todo el json()
+        if (cargo.IdCargo == cargoSelect) { //? Se selecciona el cargo anteriormente seleccionado.
+          cargo.Distritos.forEach((distrito) => {
+            if (distrito.IdDistrito == distritoSelect) {
+              textoDistrito = `${distrito.Distrito}`
+              // console.log("##################")
+              //console.log(distrito)
+              // console.log("##################")
+              distrito.SeccionesProvinciales.forEach((seccionProv) => {
+
+                seccionProvincial = `${seccionProv.SeccionProvincial}`;
+                // console.log("******* seccionProvincial")
+                // console.log(seccionProvincial);
+                // console.log("******* seccionProvincialId")
+                $inputSeccionProvincial.value = seccionProv.IDSeccionProvincial;
+                //console.log(seccionProvincialId);
+
+                seccionProv.Secciones.forEach((seccion) => {
+                  console.log("----Json Selecciones Provinciales para Secciones----")
+
+
+                  const nuevaOption = document.createElement("option");
+                  nuevaOption.value = seccion.IdSeccion;
+                  nuevaOption.innerHTML = `${seccion.Seccion}`;
+                  $selectSeccion.appendChild(nuevaOption)
+                })
               })
             }
           })
@@ -227,236 +244,253 @@ async function seleccionSeccionProv() {
       })
     }
 
-    else {
-      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
-    }
-  }
-  catch (error) { //!Si en try aparece un error se va a pasar al parametro "error" y entra directamente a catch().
-    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
-    console.log("algo salio mal.. puede que el servico este caido.")
-    console.log(error)
-  }
+  })
+
   console.log(" ----FINALIZA LA FUN ASYNC DE seleccionSeccionProv---- ")
+
 }
 
-//!!-----------Fun Filtrar-------------
-async function filtrar() {
-  idSeccionProv = $seccionSelect.value
-  seccionSeleccionadaID = $inputSeccionProvincial.value
-  let idCircuito = "";
-  let IdMesa = "";
+//Funcion filtrar
+function filtrar() {
+  seccionSelect = ""
+  seccionSelect = $selectSeccion.value;
+  console.log(`AÑO: ${periodosSelect} | CARGO: ${textiCargo} | DISTRITO: ${textoDistrito} | SECCION:${textoSeccion}`);
+  console.log(periodosSelect + " " + cargoSelect + " " + distritoSelect + " " + seccionSelect);
 
-  if (periodosSelect === "" || cargoSelect === "" || distritoSelect === "" || idSeccionProv === "") {
-    mostrarMensaje($msjAmarilloAdver, "No se encontró información para la consulta realizada");
-    $tituloSubTitulo.classList.remove("escondido");
-    return;
-  }
+  // Validación de los campos
+  if (!periodosSelect || !cargoSelect || !distritoSelect || seccionSelect === "none") {
+    // Nota: Aquí se asegura que seccionSelect no sea vacío
+    mostrarMensaje($mesajeAmarillo, "Por favor seleccione todos los campos requeridos.");
 
-  console.log(`---año: ${periodosSelect} Cargo: ${cargoSelect} distrito: ${distritoSelect} Seleccion ID(nul):${seccionSeleccionadaID} IDSelecciones Provinciales: ${idSeccionProv}---`)
 
-  let parametros = `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}seccionProvincialId=${seccionSeleccionadaID}&seccionId=${idSeccionProv}&circuitoId=${idCircuito}&mesaId=${IdMesa}`
-  let url = getResultados + parametros
-  console.log(url);
-  try {
-    const respuesta = await fetch(url)
-    if (respuesta.ok) {
-      const filtrado = await respuesta.json()
-      console.log(filtrado);
-
-      mostrarMensaje($msjVerdeExito, "Se agrego con éxito el resultado al informe")
-      $tituloSubTitulo.classList.remove("escondido"); //!SE hace vicible
-      $contenido.classList.remove("escondido");
-      $cuadros.classList.remove("escondido");
-      $tituloSubTitulo.querySelector("h1").textContent = `Elecciones ${periodosSelect} | ${valorTipoEleccion}`//!se agrega titulo y subtitulo. 
-      let subTitulo = `${periodosSelect} > ${valorTipoEleccion} > ${valorCargo} > ${valorDistrito} > ${valorSeccion}`
-      $tituloSubTitulo.querySelector("p").textContent = subTitulo
-
-      valorCantidadElectores = filtrado.estadoRecuento.cantidadElectores
-      valorMesasTotalizadas = filtrado.estadoRecuento.mesasTotalizadas
-      valorParticipacionPorcentaje = filtrado.estadoRecuento.participacionPorcentaje
-
-      $spanElectores.textContent = valorCantidadElectores
-      $spanMesasComputadas.textContent = valorMesasTotalizadas
-      $spanSobreRecuento.textContent = valorParticipacionPorcentaje
-      valorSvg = buscaMapa(valorDistrito)
-      $spanMapaSvg.innerHTML = valorSvg
-
+  } else {
+    console.log(`ANIO =  ${periodosSelect} - TIPO RECUENTO = ${tipoRecuento} - TIPO ELECCION =  ${tipoEleccion} - CARGO = ${cargoSelect} - DISTRITO = ${distritoSelect} - Seccion Provincial ID = ${$inputSeccionProvincial.value} - Sesscon ID = ${seccionSelect} `)
+    console.log(`?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}&seccionProvincialId=${$inputSeccionProvincial.value}&seccionId=${seccionSelect}&circuitoId=&mesaId=`)
+    let consultaCompleta
+    if (!$inputSeccionProvincial.value) {
+      consultaCompleta = getResultados + `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}&seccionProvincialId=${$inputSeccionProvincial.value}&seccionId=${seccionSelect}&circuitoId=&mesaId=`
+      alert("VERDE")
     }
     else {
-      mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe");
-      $tituloSubTitulo.classList.remove("escondido");
-
+      alert("ROJO")
+      consultaCompleta = getResultados + `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}&seccionProvincialId=&seccionId=${seccionSelect}&circuitoId=&mesaId=`
     }
-  }
-  catch (error) {
-    mostrarMensaje($msjRojoError, "Error: Se pordujo un error al intentar agregar reusultados al informe")
-    console.log("algo salio mal.. puede que el servico este caido.")
-    console.log(error)
-    $tituloSubTitulo.classList.remove("escondido");
+    fetch(consultaCompleta)
+      .then((respuesta) => {
+        if (respuesta.ok) {
+          console.log("----Json, Año para Cargos----");
+          return respuesta.json();
+        }
+      })
+      .then((datos) => {
+        // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        // console.log(datos);
 
+
+        // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        $tituloSubTitulo.querySelector("h1").textContent = `Elecciones ${periodosSelect} | ${tipoEleccion == 1 ? "Pasos" : "Generales"}`;
+        $tituloSubTitulo.querySelector("p").textContent = `${periodosSelect} > ${tipoEleccion == 1 ? "Pasos" : "Generales"} > ${textiCargo} > ${textoDistrito} > ${textoSeccion}`;
+
+        //  console.log("CANTIDAD DE ELECTORES ");
+        // console.log(datos.estadoRecuento);
+        cantidadElectores = datos.estadoRecuento.cantidadElectores
+        mesasTotalizadas = datos.estadoRecuento.mesasTotalizadas
+        participacionPorcentaje = datos.estadoRecuento.participacionPorcentaje
+        $cajaElectores.textContent = cantidadElectores;
+        $mesasComputadas.textContent = mesasTotalizadas;
+        $participacion.textContent = participacionPorcentaje + "%";
+
+        valoresTotalizadosPositivos = datos.valoresTotalizadosPositivos
+        // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        // console.log(valoresTotalizadosPositivos)
+        // console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+
+
+        // console.log("------------------- MAPAS -----------------------");
+        // console.log(provinciasSVG);
+        // console.log("DISTRITO A COMPARAR = " + textoDistrito);
+        let svgEncontrado = provinciasSVG.find(provinciaSVG => provinciaSVG.provincia.toUpperCase() == textoDistrito.toUpperCase());
+        let svgEncontradoProvincia = svgEncontrado.provincia
+        console.log(svgEncontradoProvincia)
+
+        // Opcional: Mostrar la sección o realizar alguna acción
+        guardarSVG = svgEncontrado.svg
+        $spanMapaSvg.innerHTML = guardarSVG
+        //console.log(svgEncontrado.svg)
+        //console.log($spanMapaSvg)
+        $seccionContenido.classList.remove("escondido");
+        $tituloSubTitulo.classList.remove("escondido");
+        $cuadros.classList.remove("escondido")
+        mostrarMensaje($mesajeVerde, "¡Todos los campos fueron seleccionados correctamente!");
+        segundaParte(datos)
+      }).catch(() =>
+        mostrarMensaje($mensajeRojo, "Error: El servicio se a caido. Intente mas tarde")
+      )
   }
 }
 
-function buscaMapa(nombreProvincia) {
-  let ProvEncontrado = provinciasSVG.find(provincia => provincia.provincia.toUpperCase() === nombreProvincia.toUpperCase());
-  return ProvEncontrado.svg
-}
-
-function agregarAInforme() {
-  let nuevaCadenaValores = `{periodosSelect}, {valorTipoEleccion}, {valorCargo}, {valorDistrito}, {valorSeccion}, {valorSvg}, {valorCantidadElectores}, {valorMesasTotalizadas}, {valorParticipacionPorcentaje}`//? Crea la lista de todosl lso valores filtrados.
-  const listaInforme = []
-  if (cadenaNuevaLsita. )
-  const LISTA_A_AGREGAR_JSON = JSON.stringify(cadenaLsita) //?combierte la lista en una cadena.
-  localStorage.setItem(`INFORMES`, LISTA_A_AGREGAR_JSON)//?guarda la lista/cadena en la key INFORMES
-//borre la cadena cadena porque ya tengo una
-//!!Coreegir lo de aabajo
-  let informes = [];
-
-  if (localStorage.getItem('INFORMES')) {
-      informes = JSON.parse(localStorage.getItem('INFORMES'));
-  }
-
-  
-
-  if (informes.includes(nuevoInforme)) {
-      mostrarMensaje(mensajeAmarillo, "El informe ya se encuentra añadido.");
-  } else {
-      informes.push(nuevoInforme);
-      localStorage.setItem('INFORMES', JSON.stringify(informes));
-      mostrarMensaje(mensajeVerde, "Informe agregado con éxito");
+// Limpiar opciones del select
+function borrarHijos(padre) {
+  while (padre.options.length > 1) {
+    padre.remove(1);
   }
 }
 
-
-
-
-
-}
-// fetch(periodosURL)
-//   .then((res) => res.json())
-//   .then((res) => {
-//     console.log(res);
-//     //-------------- año ----------------------------
-//     res.forEach((anio) => {
-//       const nuevaOption = document.createElement("option");
-//       nuevaOption.value = anio;
-//       nuevaOption.innerHTML = ` ${anio}`;
-//       $selectAnio.appendChild(nuevaOption);
-
-//     });
-//     // Asigna el elemento select a la variable periodosSelect
-//     periodosSelect = $selectAnio;
-//     periodosSelect.addEventListener("change", function () {
-//       console.log(periodosSelect.value);
-//       //-------------- Cargo ----------------------------
-//       mostrarMensaje($msjVerdeExito)
-
-//       fetch(cargoURL + periodosSelect.value)
-//         .then((res) => res.json(res))
-//         .then((datosFiltros) => {
-//           console.log(datosFiltros)
-//           console.log("ACAAAA")
-
-//           while ($selectCargo.firstChild) {
-//             //elimina todos los elementos
-//             $selectCargo.removeChild($selectCargo.firstChild);
-//           }
-//           const nuevaOptionCargo = document.createElement("option");
-//           nuevaOptionCargo.textContent = "Cargo";
-//           nuevaOptionCargo.value = "Cargo";
-//           $selectCargo.appendChild(nuevaOptionCargo);
-//           datosFiltros.forEach((eleccion) => {
-//             console.log("ELECCIONES ")
-//             console.log(eleccion)
-//             if (eleccion.IdEleccion == tipoEleccion) {
-//               eleccion.Cargos.forEach((cargo) => {
-//                 console.log("cargo")
-//                 console.log(cargo)
-
-//                 const nuevaOption = document.createElement("option");
-//                 nuevaOption.value = cargo.IdCargo;
-//                 nuevaOption.innerHTML = `${cargo.Cargo}`;
-//                 console.log(cargo);
-//                 $selectCargo.appendChild(nuevaOption);
-//               });
-//             }
-//           });
-
-//           //-------------- Distrito ----------------------------
-//           // corregir no filtra bien
-//           cargoSelect = $selectCargo
-//           cargoSelect.addEventListener("change", function () {
-//             console.log(cargoSelect.value);
-//             alert(cargoSelect.value);
-//             while ($selectDistrito.firstChild) {
-//               //elimina todos los elementos
-//               $selectDistrito.removeChild($selectDistrito.firstChild);
-//             }
-//             const nuevaOptionDistrito = document.createElement("option");
-//             nuevaOptionDistrito.textContent = "Distrito";
-//             nuevaOptionDistrito.value = "Distrito";
-//             $selectDistrito.appendChild(nuevaOptionDistrito);
-//             datosFiltros.forEach((eleccion) => {
-
-//               if (eleccion.IdEleccion == tipoEleccion) {
-//                 eleccion.Cargos.forEach((cargo) => {
-//                   console.log(cargoSelect.value);
-//                   console.log(cargo.value);
-//                   cargo.Distritos.forEach((distrito) => {
-//                     console.log("distrito ")
-//                     console.log(distrito)
-//                     const nuevaOption = document.createElement("option");
-//                     nuevaOption.value = distrito.IdDistritos;
-
-//                     nuevaOption.innerHTML = `${distrito.Distrito}`;
-
-//                     console.log(cargo);
-//                     $selectDistrito.appendChild(nuevaOption);
-//                   });
-
-//                 });
-//               }
-//             });
-//           });
-//         });
-
-//     });
-//   });
-
+// Función para mostrar mensajes
 function mostrarMensaje(msj, cadena, tiempo = 4000) {
-  msj.querySelector(`.mensaje`).textContent = cadena;
+  msj.querySelector(".mensaje").textContent = cadena;
   msj.classList.remove("escondido");
   setTimeout(() => {
     msj.classList.add("escondido");
   }, tiempo);
 }
 
-function borrarHijos(padre) {
-  let cantHijos = padre.options.length
-  for (let i = 1; i <= cantHijos; i++) {
-    padre.remove(1)
-  }
+function mostrarValorFiltro() {
+  console.log("Filtros:  " + periodosSelect + " " + cargoSelect + " " + distritoSelect + " " + seccionSelect)
 }
 
-function borrarTodosLosHijos() {
-  borrarHijos($selectCargo)
-  borrarHijos($selectDistrito)
-  borrarHijos($seccionSelect)
-}
-function resetFiltro() {
-  periodosSelect = ""
-  cargoSelect = ""
-  distritoSelect = ""
-  seccionSeleccionadaID = ""
-  idSeccionProv = ""
+$btnAgregarInforme.addEventListener("click", () => {
+  let nuevoArrayLS = `|${periodosSelect}|${tipoRecuento}|${tipoEleccion}|${cargoSelect}|${distritoSelect}|${$inputSeccionProvincial.value}|${seccionSelect}|${""}|${""}| ${textiCargo}|${textoDistrito}|${textoSeccion}|${tipoEleccion == 1 ? "Pasos" : "Generales"}|${guardarSVG}|${cantidadElectores}|${mesasTotalizadas}|${participacionPorcentaje}`
+  console.log(nuevoArrayLS)
+  if (localStorage.getItem('INFORMES')) {
+    guardado_datos = JSON.parse(localStorage.getItem('INFORMES'));
+  }
+  if (guardado_datos.includes(nuevoArrayLS)) {
+    mostrarMensaje($mesajeAmarillo, "El informe ya se encuentra añadido.");
+  } else {
+    guardado_datos.push(nuevoArrayLS);
+    localStorage.setItem('INFORMES', JSON.stringify(guardado_datos));
+    mostrarMensaje($mesajeVerde, "Informe agregado con exito");
+  }
+});
+
+/// #######################################              PARTE 2             ##############################################################
+
+
+function segundaParte(data) {
+  // console.log("/\/\/\/\/\/\/\/\/\   PARTE 2 /\/\/\/\/\/\/\/\/\/");
+  // console.log(data);
+  // console.log($cuadroAgrupaciones);
+  // console.log($cuadroBarras);
+  // console.log(data.valoresTotalizadosPositivos);
+  // console.log(coloresAgrupaciones)
+
+  let creandoAgrupaciones = "";
+  let creandoBarras = "";
+  let contadorBarras = 0;
+  let creandoAgrupacionesLista = ""
+  data.valoresTotalizadosPositivos.forEach((dato) => {
+    // console.log(dato);
+    // console.log("#############");
+
+    let id_aux = dato.idAgrupacion;
+    let lor = coloresAgrupaciones.find(col => col.idAgrupacion == id_aux);
+    //console.log(lor);
+    let creandoAgrupacionesLista = ""
+    if (lor == undefined) {
+      // console.log("LOR NO ENCONTRADO");
+      // console.log(dato.listas);
+
+      dato.listas.forEach((datoLista) => {
+        //console.log(datoLista)
+        creandoAgrupacionesLista += `
+                         <p>${datoLista.nombre} </p> 
+                        <div class="progress" style="background: var(--grafica-gris-claro);">
+                            <div class="progress-bar" style="width:${((datoLista.votos * 100) / dato.votos).toFixed(2)}%; background: var(--grafica-gris);">
+                                <span class="progress-bar-text">${((datoLista.votos * 100) / dato.votos).toFixed(2)}%</span>
+                            </div>
+                        </div>`
+      }
+
+      )
+      //console.log(creandoAgrupacionesLista)
+      creandoAgrupaciones += `<div class="Agrupacion">
+                              <p>${dato.nombreAgrupacion}</p>
+                              ${creandoAgrupacionesLista}
+              </div> `
+
+    }
+    else {
+
+      dato.listas.forEach((datoLista) => {
+        //console.log(datoLista)
+        creandoAgrupacionesLista += `
+                      
+                      <p>${datoLista.nombre} </p> 
+                        <div class="progress" style="background: ${lor.colorLiviano};">
+                            <div class="progress-bar" style="width:${((datoLista.votos * 100) / dato.votos).toFixed(2)}%; background: ${lor.colorPleno};">
+                                <span class="progress-bar-text">${((datoLista.votos * 100) / dato.votos).toFixed(2)}%</span>
+                            </div>
+                        </div>`
+
+      }
+
+      )
+      //console.log(creandoAgrupacionesLista)
+      creandoAgrupaciones += `<div class="Agrupacion">
+                              <p>${dato.nombreAgrupacion}</p>
+                                ${creandoAgrupacionesLista}
+              </div> `
+
+
+    }
+
+
+    $cuadroAgrupaciones.innerHTML = ` ${creandoAgrupaciones} `;
+
+  }
+  )
+
+
+  cuadroBarrasOrdenado(data);
+
+
 }
 
 
-function reconoceTipoElecion() {
-  if (tipoEleccion === 1) {
-    valorTipoEleccion = "Pasos"
-  }
-  else {
-    valorTipoEleccion = "Generales"
-  }
+
+
+function cuadroBarrasOrdenado(data) {
+  let ordenarPorVotos = data.valoresTotalizadosPositivos.sort((a, b) => b.votos - a.votos);
+  let creandoBarras = "";
+  let contadorBarras = 0;
+  let ultmaBarraOtros = 0
+  let ultimaBarra = ""
+  console.log(ordenarPorVotos);
+  ordenarPorVotos.forEach((dato) => {
+
+    // console.log("################## DATO ORDENADO   ##################")
+    //console.log(dato)
+    let id_aux = dato.idAgrupacion;
+    let lor = coloresAgrupaciones.find(col => col.idAgrupacion == id_aux);
+    if (lor == undefined) {
+      if (contadorBarras < 6) {
+        contadorBarras += 1
+        creandoBarras += `<div class="bar"  style="--bar-value:${dato.votosPorcentaje}%;background: var(--grafica-gris-claro)" data-name="${dato.nombreAgrupacion}"
+                                     title="Your Blog ${dato.nombreAgrupacion}"></div>`;
+      }
+      else {
+
+        ultimaBarra = `<div class="bar"  style="--bar-value:${ultmaBarraOtros += dato.votosPorcentaje}%;background: var(--grafica-gris-claro)" data-name="Otros"
+                                        title="Your Blog Otros"></div>`
+      }
+    }
+    else {
+      if (contadorBarras < 6) {
+        contadorBarras += 1
+        creandoBarras += `<div class="bar"  style="--bar-value:${dato.votosPorcentaje}%;background:${lor.colorPleno}" data-name="${dato.nombreAgrupacion}"
+                                        title="Your Blog ${dato.nombreAgrupacion}"></div>`;
+      }
+      else {
+        ultimaBarra = `<div class="bar"  style="--bar-value:${ultmaBarraOtros += dato.votosPorcentaje}%;background: var(--grafica-gris-claro)" data-name="Otros"
+                                        title="Your Blog Otros"></div>`
+      }
+    }
+
+    $cuadroBarras.innerHTML = `${creandoBarras}    ${ultimaBarra}`
+  })
 }

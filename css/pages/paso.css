@@ -1,8 +1,8 @@
-@import "css/common.css";
+@import "/css/common.css";
 
 
 /* _______________seccion btn agregar informe, Mesas, electores y participacion__________________ */
-.agregar-informe{
+.agregar-informe {
   white-space: nowrap;
   border: none;
   width: 300px;
@@ -10,9 +10,10 @@
 
 .btn-votacion {
   display: grid;
-  grid-template-columns: repeat(5, 1fr );
+  grid-template-columns: repeat(5, 1fr);
   gap: 0px;
 }
+
 #filtrar svg {
   width: 12px;
   height: 12px;
@@ -29,6 +30,7 @@ button {
   margin: 20%;
 
 }
+
 button:hover {
   color: var(--textos);
 }
@@ -59,14 +61,16 @@ button:hover {
 
 }
 
-.elecciones-paso{
+.elecciones-paso {
   margin-bottom: 0%;
   padding-bottom: 0%;
 }
+
 /* _________________Fin Botones______________________ */
-#filtrar{
+#filtrar {
   border-radius: 30px;
 }
+
 /* Carteles para el usuario */
 #carteles {
   display: flex;
@@ -79,9 +83,11 @@ button:hover {
   font-size: 200px;
   text-align: center;
 }
+
 #carteles div {
   margin: 10px;
 }
+
 #exito,
 #error,
 #adver {
@@ -104,28 +110,33 @@ button:hover {
 #adver {
   background-color: var(--mensaje-usuario-amarillo);
 }
+
 #exito i,
 #error i,
 #adver i {
   font-size: 24px;
   margin-right: 10px;
 }
+
 /*----------------------------------------*/
 .cuadros {
   display: flex;
-  min-width: 350px; 
-  height: 400px;
+  min-width: auto;
+  height: 500px;
 }
+
 .cuadro-Agrupaciones {
   flex: 2;
- 
+
   height: 100%;
 }
+
 .cuadro-Mapa {
   justify-self: center;
   height: 100%;
   flex: 1;
 }
+
 .cuadro-Resumen {
   flex: 2;
   height: 100%;
@@ -139,6 +150,7 @@ button:hover {
   box-shadow: 2px 2px 2px 1px var(--borde-Grilla);
   margin: 10px;
 }
+
 .cuadros p {
   font-weight: Bold;
   padding: 1.8em 0 0 0;
@@ -146,7 +158,7 @@ button:hover {
   white-space: nowrap;
 }
 
-.cuadro-Agrupaciones-centrado{
+.cuadro-Agrupaciones-centrado {
   overflow-y: scroll;
   height: 85%;
 
@@ -161,11 +173,13 @@ button:hover {
   text-transform: uppercase;
   font-weight: bold;
 }
+
 .Agrupacion p {
   text-align: left;
   margin-left: 10px;
   margin-right: 10px;
 }
+
 .Agrupacion p:first-child {
   border-bottom: 1px solid var(--borde-Grilla);
 }
@@ -206,7 +220,7 @@ button:hover {
   --bar-spacing: 10px;
   font-family: sans-serif;
   width: var(--chart-width);
-  
+
 }
 
 .chart-wrap .title {
@@ -281,63 +295,79 @@ button:hover {
   padding: 10px;
   display: inline-block;
   white-space: nowrap;
+
+  font-size: 7px;
 }
-#partido-uno{
+
+#partido-uno {
   background-color: var(--grafica-amarillo);
 }
-#partido-dos{
+
+#partido-dos {
   background-color: var(--grafica-lila2);
 }
-#partido-tres{
+
+#partido-tres {
   background-color: var(--grafica-bordo);
 }
-#partido-cuatro{
+
+#partido-cuatro {
   background-color: var(--grafica-celeste);
 }
-#partido-cinco{
+
+#partido-cinco {
   background-color: var(--grafica-lila);
 }
-#partido-seis{
+
+#partido-seis {
   background-color: var(--grafica-bordo-claro);
 }
-#partido-siete{
+
+#partido-siete {
   background-color: var(--grafica-verde);
 }
-#otros{
+
+#otros {
   background-color: var(--grafica-gris);
 }
 
 
-main{
+main {
   margin-left: 100px;
   margin-right: 100px;
 }
 
-svg{
-  height:200px;
-  width:300px;
+svg {
+  height: 200px;
+  width: 300px;
 }
 
-#btn-generales{
+#btn-generales {
   border-radius: 7px;
   background-color: var(--celeste);
 }
 
-@media  (max-width:1200px) {
-  .cuadros{
+@media (max-width:1200px) {
+  .cuadros {
     flex-direction: column;
-    
+
   }
+
   .cuadro-Agrupaciones {
     flex: 2;
+
   }
+
   .cuadro-Mapa {
     flex: 2;
+
   }
+
   .cuadro-Resumen {
-    
+
     flex: 2;
-    
+    min-height: 500px;
+
   }
 
 
@@ -346,34 +376,51 @@ svg{
 
 /*----------------- cuadro-Resumen -----------------------*/
 
-.cuadro-Resumen-centrado{
+.cuadro-Resumen-centrado {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 90%;
+  overflow: hidden;
 }
+
 /*----------------------------------------*/
 /*----------------- cuadro-Mapa -----------------------*/
 .cuadro-Mapa {
-  display: flex; 
-  flex-direction: column; 
+  display: flex;
+  flex-direction: column;
 }
-.cuadro-Mapa p{
+
+.cuadro-Mapa p {
   justify-content: center;
   align-items: center;
 }
 
-.cuadro-Mapa-centrado{
+.cuadro-Mapa-centrado {
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
-.cuadro-Mapa-centrado svg{
+
+.cuadro-Mapa-centrado svg {
   margin: auto;
 }
+
+.cuadro-Mapa-centrado {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  flex-grow: 1;
+}
+
 /*----------------------------------------*/
 
-#cargo,#distrito,#seccion{
-  max-width:  200px;
+#cargo,
+#distrito,
+#seccion {
+  max-width: 200px;
 }
