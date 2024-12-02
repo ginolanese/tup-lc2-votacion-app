@@ -1,3 +1,97 @@
+
+@import "css/common.css";
+
+body {
+  background-color: #fff;
+}
+
+.paso,
+.generales {
+  border-radius: 5px;
+  margin: 25px;
+  height: 100px;
+  width: 500px;
+  padding: 5px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.paso {
+  background-color: var(--magenta);
+}
+
+.generales {
+  background-color: var(--celeste);
+}
+
+.paso a,
+.generales a {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  text-decoration: none;
+  color: #fff;
+}
+
+.paso span,
+.generales span {
+  font-size: 28px;
+}
+
+.paso:hover,
+.generales:hover {
+  background-color: var(--gris-claro);
+}
+
+.imagen {
+  margin: 15px;
+  width: 350px;
+}
+
+.paso-gen {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+}
+
+#sec-titulo {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 50px;
+  margin-top: 15px;
+}
+
+main {
+  margin-right: 100px;
+  margin-left: 100px;
+}
+
+#informes {
+  display: flex;
+  flex-direction: row;
+}
+
+#informes:last-child {
+  justify-content: right;
+}
+
+#consultar {
+  text-decoration: none;
+  border: none;
+}
+
+#consultar:hover {
+  background-color: transparent;
+
+}
+
+span {
+  display: flex;
+  align-items: center;
+}
+=======
 @import "/css/common.css";
 .paso,
 .generales {
@@ -80,3 +174,4 @@ span{
   display: flex;
   align-items: center;
 }
+
