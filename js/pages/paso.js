@@ -1,13 +1,13 @@
 import { provinciasSVG } from "./mapas.js"
 /// COLORES DE ABRUPASIONES ///
 const coloresAgrupaciones = [
-  { idAgrupacion: "1", colorPleno: 'var(--grafica-amarillo)', colorLiviano: ' var(--grafica-amarillo-claro)' }, // --grafica-amarillo
+  { idAgrupacion: "132", colorPleno: 'var(--grafica-amarillo)', colorLiviano: ' var(--grafica-amarillo-claro)' }, // --grafica-amarillo
   { idAgrupacion: "134", colorPleno: 'var(--grafica-celeste)', colorLiviano: 'var(--grafica-celeste-claro)' }, // --grafica-celeste
-  { idAgrupacion: "1", colorPleno: 'var(--grafica-bordo)', colorLiviano: 'var(--grafica-bordo-clar)o' }, // --grafica-bordo
+  { idAgrupacion: "136", colorPleno: 'var(--grafica-bordo)', colorLiviano: 'var(--grafica-bordo-claro)' }, // --grafica-bordo
   { idAgrupacion: "135", colorPleno: 'var(--grafica-lila)', colorLiviano: ' var(--grafica-lila-claro)' }, // --grafica-lila
-  { idAgrupacion: "1", colorPleno: 'var(--grafica-lila2)', colorLiviano: 'var(--grafica-lila2-claro)' }, // --grafica-lila2
-  { idAgrupacion: "1", colorPleno: 'rgb(128, 128, 128)', colorLiviano: 'rgba(128, 128, 128, 0.5)' }, // --grafica-gris
-  { idAgrupacion: "1", colorPleno: 'rgb(102, 171, 60)', colorLiviano: 'rgba(102, 171, 60, 0.5)' }, // --grafica-verde
+  { idAgrupacion: "133", colorPleno: 'var(--grafica-lila2)', colorLiviano: 'var(--grafica-lila2-claro)' }, // --grafica-lila2
+  { idAgrupacion: "1", colorPleno: 'var(--grafica-verde)', colorLiviano: 'var(--grafica-verde-claro)' }, // --grafica-gris
+  { idAgrupacion: "131", colorPleno: 'rgb(102, 171, 60)', colorLiviano: 'rgba(102, 171, 60, 0.5)' }, // --grafica-verde
 ];
 ///////////////////////////////
 const periodosURL = "https://resultados.mininterior.gob.ar/api/menu/periodos";
@@ -269,10 +269,10 @@ function filtrar() {
     let consultaCompleta
     if (!$inputSeccionProvincial.value) {
       consultaCompleta = getResultados + `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}&seccionProvincialId=${$inputSeccionProvincial.value}&seccionId=${seccionSelect}&circuitoId=&mesaId=`
-      alert("VERDE")
+      //alert("VERDE")
     }
     else {
-      alert("ROJO")
+      //alert("ROJO")
       consultaCompleta = getResultados + `?anioEleccion=${periodosSelect}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccion}&categoriaId=${cargoSelect}&distritoId=${distritoSelect}&seccionProvincialId=&seccionId=${seccionSelect}&circuitoId=&mesaId=`
     }
     fetch(consultaCompleta)
